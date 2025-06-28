@@ -1,10 +1,16 @@
 import Image from "next/image";
 import { Triangle, FileText, Monitor, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-4 pb-8 gap-8 sm:p-8 font-sans">
+    <div className="relative grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-4 pb-8 gap-8 sm:p-8 font-sans">
+      {/* Mode Toggle in top right corner */}
+      <div className="absolute top-4 right-4 sm:top-8 sm:right-8 z-10">
+        <ModeToggle />
+      </div>
+      
       <main className="flex flex-col gap-6 row-start-2 items-start">
         <Image
           className="dark:invert"
