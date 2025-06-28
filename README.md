@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Next.js Base
 
-## Getting Started
+**A modern Next.js 15 starter with shadcn/ui, TypeScript, and modern tooling.** Clone, install, and start building immediately.
 
-First, run the development server:
+## ✨ Features
+
+### ✅ Ready Now
+- **Next.js 15** with App Router & React 19
+- **TypeScript** for type safety
+- **Tailwind CSS 4** for utility-first styling
+- **shadcn/ui** components with stone theme
+- **Lucide React** icon library
+- **ESLint** & **Turbopack** for development
+
+### 🚧 Coming Soon
+- **Clerk Authentication**
+- **Dark Mode Toggle**
+- **Centralized Theming**
+
+## ⚡ Quick Start
+
+**Requirements:** Node.js 18.18+
 
 ```bash
+# Clone with your project name
+git clone https://github.com/michellepace/nextjs-base my-app-name
+cd my-app-name
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**🎉 Open [localhost:3000](http://localhost:3000) to see your app!**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Edit `src/app/page.tsx` to start building your application.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Available Scripts
 
-## Learn More
+```bash
+npm run dev     # Development server (with Turbopack)
+npm run build   # Production build
+npm run start   # Production server
+npm run lint    # Code quality check
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+nextjs-base/
+├── src/app/              # App Router pages & layouts
+│   ├── layout.tsx        # Root layout component
+│   ├── page.tsx          # Homepage component
+│   └── globals.css       # Global styles & Tailwind
+├── src/components/ui/    # shadcn/ui components
+├── src/lib/              # Shared utilities
+├── public/               # Static assets
+└── package.json          # Dependencies & scripts
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Key Files:**
+- `src/app/page.tsx` - Your homepage component (start editing here!)
+- `src/app/layout.tsx` - Root layout that wraps all pages (header, footer, etc.)
+- `src/app/globals.css` - Global styles, Tailwind CSS imports, and CSS variables
+- `src/components/ui/` - Pre-built UI components from shadcn/ui
+- `src/lib/utils.ts` - Helper functions (including `cn` for merging CSS classes)
+- `package.json` - Project dependencies, scripts, and metadata
+- `components.json` - Configuration for shadcn/ui component installation
+- `next.config.ts` - Next.js configuration and build settings
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Next.js** | 15.3.4 | React framework that handles routing, server-side rendering, and builds |
+| **React** | 19.1.0 | JavaScript (TypeScript) library that makes websites interactive |
+| **TypeScript** | 5.8.3 | Catches errors while coding and gives better autocomplete |
+| **Tailwind CSS** | 4.1.11 | Style with classes like `text-center` instead of writing CSS |
+| **ESLint** | 9.30.0 | Catches coding mistakes and keeps your code style consistent |
+| **shadcn/ui** | Latest | Copy-paste beautiful components (buttons, forms, modals, etc.) |
+| **Radix UI** | 1.2.3 | Provides accessible foundation that shadcn/ui is built on |
+| **Lucide React** | 0.525.0 | Clean, consistent icon library with 1000+ SVG icons |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 What Makes This Special
+
+- **Zero Configuration** - Everything pre-configured and ready to use
+- **Modern Stack** - Latest versions of Next.js, React, and TypeScript
+- **Developer Experience** - ESLint, TypeScript, and Turbopack for fast development
+- **Production Ready** - Optimised build settings and best practices
+- **Extensible** - Easy to add authentication, database, and other features
+
+---
+
+**Happy coding! 🎉** Start building your next great project with this modern, type-safe foundation.
