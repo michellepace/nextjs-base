@@ -11,11 +11,13 @@
 - **shadcn/ui** components with stone theme
 - **Lucide React** icon library
 - **ESLint** & **Turbopack** for development
+- **Centralised Theming** for consistency & maintainability
+- **Light/Dark Mode**
 
 ### 🚧 Coming Soon
 - **Clerk Authentication**
-- **Dark Mode Toggle**
-- **Centralized Theming**
+
+
 
 ## ⚡ Quick Start
 
@@ -82,6 +84,7 @@ nextjs-base/
 | **shadcn/ui** | Latest | Copy-paste beautiful components (buttons, forms, modals, etc.) |
 | **Radix UI** | 1.2.3 | Provides accessible foundation that shadcn/ui is built on |
 | **Lucide React** | 0.525.0 | Clean, consistent icon library with 1000+ SVG icons |
+| **next-themes** | 0.4.6 | Theme switching and persistence for light/dark mode |
 
 ## 🎯 What Makes This Special
 
@@ -94,3 +97,9 @@ nextjs-base/
 ---
 
 **Happy coding! 🎉** Start building your next great project with this modern, type-safe foundation.
+
+---
+
+## What is Centralised Theming
+
+See [about-centralised-theming.md](/docs/about-centralised-theming.md) for details for Tailwind 4 together with shadcn/ui.
