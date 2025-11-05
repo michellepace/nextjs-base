@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:biomejs.dev)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:tailwindcss.com)",
+      "WebFetch(domain:vercel.com)",
+
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)"
+    ],
+
+    "deny": ["Read(**/.env)", "Read(**/.envrc)"],
+
+    "ask": []
+  }
+}
