@@ -1,0 +1,18 @@
+# Refer for explanations to https://lefthook.dev/configuration/
+
+pre-commit:
+  parallel: true
+  commands:
+    # Markdownlint: fix markdown files (warnings only, never fails commit)
+    markdown-lint:
+      glob: "*.md"
+      run: npx markdownlint-cli2 --fix {staged_files} || true
+
+    # TypeScript type checking (full project)
+    type-check:
+      run: npx tsc --noEmit
+
+    # Biome: format, lint, organise imports, apply safe fixes (staged files)
+    biome-check:
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
