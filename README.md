@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# nextjs-base
 
-## Getting Started
+*WORK IN PROGRESS: Next.js 16 template repo with modern tooling, automated testing, CI/CD to Vercel with GitHub Actions*
 
-First, run the development server:
+## 📦 Next.js Initial Installation
+
+This template was initialised with the following options:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Installed on 2025-11-05
+$ npx create-next-app@latest
+
+Would you like to use TypeScript? Yes
+Which linter would you like to use? Biome
+Would you like to use React Compiler? Yes
+Would you like to use Tailwind CSS? Yes
+Would you like your code inside a src/ directory? Yes
+Would you like to use App Router? (recommended) Yes
+Would you like to customise the import alias (@/* by default)? No
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+What this gives you:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Category | Technology | Why |
+|----------|-----------|---------|
+| ✔️ React Framework | Next.js 16 + App Router | Core |
+| ✔️ Type Checking | TypeScript | Catch errors before runtime |
+| ✔️ UI Styling | Tailwind 4 | Great for centralised theming |
+| ✔️ Compiler | React Compiler  | Reduces re-renders, faster ux |
+| ✔️ Source Directory | `/src` | Clear project organisation |
+| ❓ UI Library | (to be decided) | ([TW UI kit](https://tailwindcss.com/plus/ui-kit) or shadcn/ui) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Added Development Tools
 
-## Learn More
+Tools added for automated code quality.
 
-To learn more about Next.js, take a look at the following resources:
+| Tool | Purpose | Why This Choice | Config File |
+|------|---------|-----------------| ------------|
+| 🎯 Markdownlint | Markdown linting | Reduces CodeRabbit comments | [.markdownlint.yaml](.markdownlint.yaml) |
+| 🎯 Biome | Formatter + Linter | Replaces ESLint + Prettier | [biome.json](biome.json) |
+| 🎯 Lefthook | Git hooks manager | Automate quality checks before commit | [lefthook.yml](lefthook.yml) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Pre-commit hooks (Lefthook runs before every `git commit`):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ✓ Markdownlint → auto-fixes markdown
+- ✓ Biome → auto-fixes code formatting
+- ✓ TypeScript → blocks on type errors (via `tsc`)
 
-## Deploy on Vercel
+## 📂 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Key project files and directories:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+nextjs-base/
+├── .claude/            # Claude Code commands and settings
+├── .vscode/            # VSCode settings & recommended extensions
+├── src/
+│   └── app/
+│       └── globals.css # Tailwind v4 config (via @theme)
+├── public/             # Static assets
+├── package.json        # Dependencies and scripts
+├── tsconfig.json       # TypeScript configuration
+├── next.config.ts      # Next.js configuration
+├── postcss.config.mjs  # PostCSS for Tailwind CSS
+├── lefthook.yml        # Git hooks configuration
+├── .markdownlint.yaml  # Markdown linting rules
+└── biome.json          # Biome formatter/linter config
+```
+
+Available Scripts ([package.json](package.json)):
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Lint, format, and organise imports with Biome |
+| `npm run type-check` | Run TypeScript type checker |
+| `npm run lint:md` | Lint and format markdown files |

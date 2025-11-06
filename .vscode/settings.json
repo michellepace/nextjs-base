@@ -1,0 +1,33 @@
+{
+  // General editor settings
+  "window.commandCenter": true,
+  "editor.colorDecorators": true,
+
+  // Markdownlint: Markdown linting (matches CodeRabbit)
+  "[markdown]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    }
+  },
+
+  // Tailwind CSS IntelliSense: autocomplete, hover previews, linting
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.showPixelEquivalents": true,
+  "tailwindCSS.hovers": true,
+  "tailwindCSS.suggestions": true,
+  "tailwindCSS.validate": true,
+  "tailwindCSS.lint.cssConflict": "warning",
+  "tailwindCSS.lint.suggestCanonicalClasses": "warning",
+  "tailwindCSS.experimental.configFile": null,
+
+  // Biome: formatting, linting, import organization
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  }
+}
