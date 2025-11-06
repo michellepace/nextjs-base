@@ -5,7 +5,7 @@ pre-commit:
   commands:
     # Markdownlint: fix markdown files, auto-restage, block on unfixable errors
     markdown-lint:
-      glob: "*.md"
+      glob: "**/*.md"
       run: npx markdownlint-cli2 --fix {staged_files}
       stage_fixed: true
 
