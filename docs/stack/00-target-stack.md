@@ -12,7 +12,7 @@ React framework with Turbopack as default bundler (5-10x faster builds than Webp
 **🎨 Tailwind CSS 4.1**  
 Utility-first CSS framework with performance engine providing 5x faster builds. Supplies pre-built CSS classes for rapid UI development. Version 4.1 adds text shadows, mask utilities, and improved browser compatibility.
 
-**💎 Tailwind UI (Plus License)**  
+**💎 Tailwind UI (Plus Licence)**  
 Component library with production-ready, accessible UI components. Reduces development time for common interface patterns.
 
 **📘 TypeScript**  

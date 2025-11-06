@@ -190,6 +190,6 @@ You still get all of Tailwind's defaults (`bg-red-500`, `text-lg`, `p-4`, etc.) 
 
 ### **shadcn/ui Integration**
 
-shadcn/ui components are pre-built to use this exact pattern. Install any component and it automatically respects your centralized theme.
+shadcn/ui components are pre-built to use this exact pattern. Install any component and it automatically respects your centralised theme.
 
 **The result:** A maintainable, consistent, performant design system where one change updates everything. Your design tokens cascade automatically through Tailwind's utility classes to create a cohesive user interface that's effortless to maintain and delightful to use.

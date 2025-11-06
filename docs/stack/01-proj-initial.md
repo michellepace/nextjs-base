@@ -33,7 +33,7 @@ None installed yet
 
 **Context for Testing Framework Choice:** This is a Next.js + Turbopack project with TypeScript and Biome already configured for code quality. No Vite in the stack.
 
-## Initial Nextjs Installation
+## Initial Next.js Installation
 
 ```bash
 ~/projects/nextjs 

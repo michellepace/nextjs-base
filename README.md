@@ -16,7 +16,7 @@ Would you like to use React Compiler? Yes
 Would you like to use Tailwind CSS? Yes
 Would you like your code inside a src/ directory? Yes
 Would you like to use App Router? (recommended) Yes
-Would you like to customize the import alias (@/* by default)? No
+Would you like to customise the import alias (@/* by default)? No
 ```
 
 What this gives you:
