@@ -1,8 +1,10 @@
 ---
-description: Create a git commit with template
+description: Create a git commit of STAGED changes with template
 ---
 
-# Create a clear and accurate Git commit message
+# Create a clear and accurate Git commit message for Staged changes
+
+Analyse staged changes:
 
 <commit_context>
 
