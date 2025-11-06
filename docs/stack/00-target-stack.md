@@ -32,8 +32,8 @@ Rust-based linter and formatter replacing ESLint and Prettier. Single unified co
 **🐻 Zustand**  
 Lightweight React state management library with localStorage persistence. Minimal boilerplate. Useful for prototyping before moving state to database.
 
-**🔷 Prisma**  
-Type-safe ORM generating TypeScript types from database schema. Includes schema-first design, VS Code integration, and Prisma Studio GUI for database management.
+**🔷 Prisma**
+Type-safe ORM, generating TypeScript types from database schema. Includes schema-first design, VS Code integration, and Prisma Studio GUI for database management.
 
 **🐘 Neon Postgres**  
 Serverless PostgreSQL via Vercel Marketplace. Replaced "Vercel Postgres" branding in 2025. Features: auto-scaling, scale-to-zero, connection pooling, database branching. Free tier: 20 projects, 100 CU-hours/project/month, 0.5 GB storage per branch, 5 GB egress. Billing through Vercel matches direct Neon pricing.
