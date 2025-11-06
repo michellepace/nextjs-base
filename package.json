@@ -2,13 +2,22 @@
   "name": "nextjs-base",
   "version": "0.1.0",
   "private": true,
+  "markdownlint-cli2": {
+    "config": ".markdownlint.yaml",
+    "ignores": [
+      "node_modules",
+      ".next",
+      "dist",
+      "build"
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check --write",
     "type-check": "tsc --noEmit",
-    "lint:md": "markdownlint-cli2 --fix",
+    "lint:md": "markdownlint-cli2 --fix \"**/*.md\"",
     "prepare": "lefthook install"
   },
   "dependencies": {
