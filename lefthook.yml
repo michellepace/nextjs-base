@@ -1,11 +1,10 @@
-# Refer for explanations to https://lefthook.dev/configuration/
+# Refer for explanations to <https://lefthook.dev/configuration/>
 
 pre-commit:
   parallel: true
   commands:
     # Markdownlint: fix markdown files, auto-restage, block on unfixable errors
     markdown-lint:
-      glob: "**/*.md"
       run: npx markdownlint-cli2 --fix {staged_files}
       stage_fixed: true
 
