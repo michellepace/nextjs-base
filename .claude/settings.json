@@ -8,7 +8,12 @@
 
       "Bash(cat:*)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(git log:*)",
+      "Bash(git config:*)",
+
+      "Bash(npx lefthook run pre-commit)",
+      "Bash(npx playwright:*)"
     ],
 
     "deny": ["Read(**/.env)", "Read(**/.envrc)"],
