@@ -3,17 +3,23 @@
 pre-commit:
   parallel: true
   commands:
-    # Markdownlint: fix markdown files, auto-restage, block on unfixable errors
-    markdown-lint:
-      glob: "*.md"
-      run: npx markdownlint-cli2 --fix {staged_files}
-      stage_fixed: true
-
     # TypeScript type checking (full project)
     type-check:
       run: npx tsc --noEmit
 
-    # Biome: format, lint, organise imports, apply safe fixes (staged files)
+    # Biome: format, lint, organise imports, apply safe fixes
     biome-check:
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-      stage_fixed: true
+      stage_fixed: true # auto-restage fixes
+
+    # Markdownlint: lint, apply safe fixes
+    markdown-lint:
+      glob: "*.md"
+      run: npx markdownlint-cli2 --fix {staged_files}
+      stage_fixed: true # auto-restage fixes
+
+pre-push:
+  commands:
+    # Playwright: E2E tests before pushing
+    playwright-tests:
+      run: npx playwright test

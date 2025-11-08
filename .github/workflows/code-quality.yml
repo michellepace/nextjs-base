@@ -1,0 +1,50 @@
+name: Code Quality Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  code-quality-job:
+    name: Code Quality Job
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+    # Setup phase
+    - uses: actions/checkout@v5
+
+    # Biome CI check (using official action)
+    - name: Setup Biome
+      uses: biomejs/setup-biome@v2
+      with:
+        version: latest
+    - name: Run Biome CI
+      run: biome ci .
+      continue-on-error: true
+      id: biome
+
+    # Node.js setup (for TypeScript and markdownlint)
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+
+    # Quality checks (run all, collect failures)
+    - name: Type Check
+      run: npx tsc --noEmit
+      continue-on-error: true
+      id: type-check
+    - name: Markdown Lint
+      run: npm run lint:md:check
+      continue-on-error: true
+      id: markdown
+
+    # Verification: fail if any quality check failed
+    - name: Verify all checks passed
+      if: steps.biome.outcome == 'failure' || steps.type-check.outcome == 'failure' || steps.markdown.outcome == 'failure'
+      run: exit 1
