@@ -14,39 +14,32 @@
       "build"
     ]
   },
-
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
     "test:e2e:codegen": "playwright codegen http://localhost:3000",
-
     "lint": "biome check --write",
     "format": "biome format --write .",
     "type-check": "tsc --noEmit",
     "lint:md": "markdownlint-cli2 --fix",
     "lint:md:check": "markdownlint-cli2",
-
     "check": "biome check && tsc --noEmit && markdownlint-cli2",
     "fix": "biome check --write && markdownlint-cli2 --fix",
-
     "prepare": "lefthook install"
   },
-
   "dependencies": {
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
-
   "devDependencies": {
-    "@biomejs/biome": "2.2.0",
+    "@biomejs/biome": "^2.3.4",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
