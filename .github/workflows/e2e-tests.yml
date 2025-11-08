@@ -23,7 +23,11 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install chromium webkit --with-deps
-    
+
+    # Build production
+    - name: Build Next.js production
+      run: npm run build
+
     # Run E2E tests
     - name: Run Playwright tests
       run: npx playwright test
