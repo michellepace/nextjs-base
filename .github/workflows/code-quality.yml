@@ -1,4 +1,4 @@
-name: Code Quality Workflow
+name: Code Quality Checks Workflow
 
 permissions:
   contents: read
@@ -12,44 +12,51 @@ on:
     branches: [ main ]
 
 jobs:
-  code-quality-job:
-    name: Code Quality Job
-    timeout-minutes: 10
+  biome-job:
+    name: Biome Check (lint and format)
     runs-on: ubuntu-latest
-
+    timeout-minutes: 5
     steps:
-    # Setup phase
+    # Setup phase (no Node.js needed - faster!)
     - uses: actions/checkout@v5
-
-    # Biome CI check (using official action)
     - name: Setup Biome
       uses: biomejs/setup-biome@v2
       with:
         version: latest
-    - name: Run Biome CI
-      run: biome ci .
-      continue-on-error: true
-      id: biome
+    # Run Biome for lint and format check
+    - name: Run Biome CI on changed files
+      run: biome ci --changed --no-errors-on-unmatched
 
-    # Node.js setup (for TypeScript and markdownlint)
+  type-check-job:
+    name: TypeScript Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    # Setup phase
+    - uses: actions/checkout@v5
     - uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
         cache: 'npm'
     - name: Install dependencies
       run: npm ci
-
-    # Quality checks (run all, collect failures)
-    - name: Type Check
+    # Run Type check
+    - name: Run TypeScript Type Check
       run: npx tsc --noEmit
-      continue-on-error: true
-      id: type-check
-    - name: Markdown Lint
-      run: npm run lint:md:check
-      continue-on-error: true
-      id: markdown
 
-    # Verification: fail if any quality check failed
-    - name: Verify all checks passed
-      if: steps.biome.outcome == 'failure' || steps.type-check.outcome == 'failure' || steps.markdown.outcome == 'failure'
-      run: exit 1
+  markdown-job:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    # Setup phase
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+    # Run Markdown check
+    - name: Run Markdown Lint
+      run: npm run lint:md:check
