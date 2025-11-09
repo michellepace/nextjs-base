@@ -2,6 +2,12 @@
 
 pre-commit:
   parallel: true
+  # Skip pre-commit hooks in these situations to avoid duplicate work:
+  skip:
+    - merge    # Merge commits combine already-tested code
+    - rebase   # Avoid conflicts during rebase operations
+    - run: test "$CI" = "true"  # Skip in CI (GitHub Actions runs checks explicitly)
+
   commands:
     # TypeScript type checking (full project)
     type-check:
