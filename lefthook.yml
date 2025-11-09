@@ -13,6 +13,10 @@ pre-commit:
     type-check:
       run: npx tsc --noEmit
 
+    # Vitest: run unit tests
+    unit-tests:
+      run: npx vitest run
+
     # Biome: format, lint, organise imports, apply safe fixes
     biome-check:
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}

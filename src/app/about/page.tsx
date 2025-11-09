@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatPageTitle } from "./utils";
 
 export default function Page() {
   return (
@@ -7,6 +8,9 @@ export default function Page() {
         <h1 className="text-3xl font-semibold text-black dark:text-zinc-50">
           About
         </h1>
+        <p className="text-sm font-medium tracking-wider text-zinc-500 dark:text-zinc-400">
+          {formatPageTitle("page information")}
+        </p>
         <div className="max-w-lg text-center">
           <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400 mb-4">
             This page exists as an example for Playwright end-to-end testing.

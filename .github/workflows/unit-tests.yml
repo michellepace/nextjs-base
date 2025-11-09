@@ -27,13 +27,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    # STILL TO BE IMPLEMENTED!
-    - name: Placeholder - Unit tests not yet implemented
-      run: |
-        echo "⚠️ Unit tests workflow is configured but tests not yet implemented"
-        echo "📋 Next steps:"
-        echo "   1. Install Vitest: npm install -D vitest"
-        echo "   2. Add test script to package.json"
-        echo "   3. Replace this step with: npm run test:unit"
-        echo ""
-        echo "✅ Infrastructure ready (checkout, node setup, npm ci all working)"
+    # Run unit tests
+    - name: Run unit tests
+      run: npx vitest run

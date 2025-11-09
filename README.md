@@ -37,7 +37,7 @@ Tools for code quality and formatting.
 | 🎯 Biome | Formatter + Linter | Replaces ESLint + Prettier | [biome.json](biome.json) |
 | 🎯 Lefthook | Git hooks manager | Automate quality checks before commit | [lefthook.yml](lefthook.yml) |
 | 🧪 Playwright | E2E browser testing | Chromium, WebKit, Mobile Safari | [playwright.config.ts](playwright.config.ts) |
-| 🧪 Vitest | Unit testing (fast) | (to be implemented) | (TBD) |
+| 🧪 Vitest | Unit testing | Modern, fast Jest alternative | [vitest.config.mts](vitest.config.mts) |
 | ❔ UI Library | UI component library | (to be decided) | ([TW UI kit](https://tailwindcss.com/plus/ui-kit) or shadcn/ui) |
 
 ## ✅ CI/CD Quality Pipeline
@@ -47,7 +47,7 @@ Automated checks run at two stages: locally before commit/push, and remotely on 
 ```text
 ┌──────────────────────────────────────────────────────┐
 │  LOCAL (Lefthook)                                    │
-│  • Pre-commit: Lint, format, type-check              │
+│  • Pre-commit: Lint, format, type-check, unit tests  │
 │  • Pre-push: E2E tests                               │
 │  • Skipped for merge commits, rebase, CI environment │
 │  • Can be bypassed (git commit/push --no-verify)     │
@@ -57,8 +57,8 @@ Automated checks run at two stages: locally before commit/push, and remotely on 
 ┌──────────────────────────────────────────────────────┐
 │  REMOTE (GitHub Actions)                             │
 │  • Code Quality: Lint Check, Type Check              │
+│  • Unit Tests: Vitest                                │
 │  • E2E Tests: Playwright (production build)          │
-│  • Unit Tests: Vitest (still to be implemented)      │
 │  • Cannot be bypassed - required for merge           │
 └──────────────────────────────────────────────────────┘
 ```
@@ -69,10 +69,11 @@ Local hooks (Lefthook) run before commits and pushes, auto-fixing issues where p
 |:------|:---------|:--------------|:------|:-----|:---------|
 | **Local** | Lefthook | [pre-commit](lefthook.yml) | Code format & lint | Biome | Auto-fixes |
 | | | | Type checking | TypeScript | Blocks on errors |
+| | | | Unit tests | Vitest | Blocks on failures |
 | | | [pre-push](lefthook.yml) | E2E tests | Playwright | Runs tests |
 | **Remote** | GitHub Workflow | [code-quality.yml](.github/workflows/code-quality.yml) | Code quality | Biome, TypeScript | Check only |
 | | | [e2e-tests.yml](.github/workflows/e2e-tests.yml) | E2E tests | Playwright (production build) | Check only |
-| | | [unit-tests.yml](.github/workflows/unit-tests.yml) | Unit tests | (TBD) | (TBD) |
+| | | [unit-tests.yml](.github/workflows/unit-tests.yml) | Unit tests | Vitest | Check only |
 
 ## 📂 Project Structure
 
@@ -97,7 +98,9 @@ nextjs-base/
 ├── package-lock.json    # Dependency locking of versions
 ├── playwright.config.ts # Playwright E2E test configuration
 ├── postcss.config.mjs   # PostCSS for Tailwind CSS
-└── tsconfig.json        # TypeScript configuration
+├── tsconfig.json        # TypeScript configuration
+├── vitest.config.mts    # Vitest unit test configuration
+└── vitest.setup.ts      # Testing Library setup & cleanup
 ```
 
 Available Scripts ([package.json](package.json)):
@@ -109,6 +112,8 @@ Available Scripts ([package.json](package.json)):
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
 | **Testing** | |
+| `npm test` | Run unit tests (watch mode) |
+| `npm run test:unit:run` | Run unit tests once (for CI) |
 | `npm run test:e2e` | Run E2E tests (headless) |
 | `npm run test:e2e:ui` | Run tests with UI mode |
 | `npm run test:e2e:headed` | Run tests in headed browser |
