@@ -22,7 +22,8 @@ jobs:
     - name: Setup Biome
       uses: biomejs/setup-biome@v2
       with:
-        version: latest
+        # Pin to match package.json (^2.3.4) for reproducible builds
+        version: ^2.3.4
     # Run Biome for lint and format check
     - name: Run Biome CI on changed files
       run: biome ci --changed --no-errors-on-unmatched
