@@ -12,7 +12,7 @@ on:
     branches: [ main ]
 
 jobs:
-  biome-job:
+  lint-check-job:
     name: Biome Check (lint and format)
     runs-on: ubuntu-latest
     timeout-minutes: 5
