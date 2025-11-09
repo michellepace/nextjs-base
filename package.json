@@ -2,12 +2,34 @@
   "name": "nextjs-base",
   "version": "0.1.0",
   "private": true,
+  "markdownlint-cli2": {
+    "config": ".markdownlint.yaml",
+    "globs": [
+      "**/*.md"
+    ],
+    "ignores": [
+      "node_modules",
+      ".next",
+      "dist",
+      "build"
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "vitest",
+    "test:unit:run": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:codegen": "playwright codegen http://localhost:${PORT:-3000}",
+    "test:e2e:report": "playwright show-report",
+    "format": "biome format --write .",
     "lint": "biome check --write",
     "type-check": "tsc --noEmit",
+    "check": "biome ci . && tsc --noEmit",
     "lint:md": "markdownlint-cli2 --fix",
     "prepare": "lefthook install"
   },
@@ -17,15 +39,23 @@
     "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.0",
+    "@biomejs/biome": "^2.3.4",
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.10.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "jsdom": "^27.1.0",
     "lefthook": "^2.0.2",
     "markdownlint-cli2": "^0.18.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.8"
   }
 }

@@ -5,10 +5,20 @@
       "WebFetch(domain:nextjs.org)",
       "WebFetch(domain:tailwindcss.com)",
       "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:playwright.dev)",
 
       "Bash(cat:*)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(git log:*)",
+      "Bash(git config:*)",
+
+      "Bash(npx lefthook:*)",
+      "Bash(npx playwright:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run type-check)",
+      "Bash(npm run build)"
     ],
 
     "deny": ["Read(**/.env)", "Read(**/.envrc)"],

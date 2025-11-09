@@ -1,0 +1,46 @@
+name: Code Quality Checks Workflow
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-check-job:
+    name: Check linting (biome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    # Setup phase (no Node.js needed - faster!)
+    - uses: actions/checkout@v5
+    - name: Setup Biome
+      uses: biomejs/setup-biome@v2
+      with:
+        # Pin to match package.json (^2.3.4) for reproducible builds
+        version: ^2.3.4
+    # Run Biome for lint and format check
+    - name: Run Biome CI on changed files
+      run: biome ci --changed --no-errors-on-unmatched
+
+  type-check-job:
+    name: Check types (tsc)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    # Setup phase
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+    # Run Type check
+    - name: Run TypeScript Type Check
+      run: npx tsc --noEmit

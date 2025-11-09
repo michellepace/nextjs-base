@@ -1,18 +1,29 @@
-# Refer for explanations to <https://lefthook.dev/configuration/>
+# Refer for explanations to https://lefthook.dev/configuration/
 
 pre-commit:
   parallel: true
-  commands:
-    # Markdownlint: fix markdown files, auto-restage, block on unfixable errors
-    markdown-lint:
-      run: npx markdownlint-cli2 --fix {staged_files}
-      stage_fixed: true
+  # Skip pre-commit hooks in these situations to avoid duplicate work:
+  skip:
+    - merge    # Merge commits combine already-tested code
+    - rebase   # Avoid conflicts during rebase operations
+    - run: test "$CI" = "true"  # Skip in CI (GitHub Actions runs checks explicitly)
 
+  commands:
     # TypeScript type checking (full project)
     type-check:
       run: npx tsc --noEmit
 
-    # Biome: format, lint, organise imports, apply safe fixes (staged files)
+    # Vitest: run unit tests
+    unit-tests:
+      run: npx vitest run
+
+    # Biome: format, lint, organise imports, apply safe fixes
     biome-check:
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-      stage_fixed: true
+      stage_fixed: true # auto-restage fixes
+
+pre-push:
+  commands:
+    # Playwright: E2E tests before pushing
+    playwright-tests:
+      run: npx playwright test

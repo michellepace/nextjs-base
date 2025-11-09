@@ -2,6 +2,7 @@
   "recommendations": [
     "davidanson.vscode-markdownlint", // Markdown linter (same as CodeRabbit)
     "bradlc.vscode-tailwindcss", // Tailwind CSS IntelliSense
-    "biomejs.biome" // Fast formatter and linter for JS/TS/JSON
+    "biomejs.biome", // Fast formatter and linter for JS/TS/JSON
+    "ms-playwright.playwright" // Playwright Test for VS Code
   ]
 }
