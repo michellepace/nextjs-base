@@ -13,7 +13,7 @@ on:
 
 jobs:
   lint-check-job:
-    name: Biome Check (lint and format)
+    name: Check linting (biome)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -29,7 +29,7 @@ jobs:
       run: biome ci --changed --no-errors-on-unmatched
 
   type-check-job:
-    name: TypeScript Type Check
+    name: Check types (tsc)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
