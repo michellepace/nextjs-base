@@ -117,14 +117,12 @@ Available Scripts ([package.json](package.json)):
 | `npm run test:e2e` | Run E2E tests (headless) |
 | `npm run test:e2e:ui` | Run tests with UI mode |
 | `npm run test:e2e:headed` | Run tests in headed browser |
-| `npm run test:e2e:debug` | Debug tests with Playwright Inspector |
-| `npm run test:e2e:codegen` | Generate tests using Playwright Codegen |
+| `npm run test:e2e:debug` | Debug tests with PW Inspector |
+| `npm run test:e2e:codegen` | Generate tests using PW Codegen |
 | `npm run test:e2e:report` | View HTML test report |
 | **Code Quality** | |
 | `npm run format` | Format code with Biome |
-| `npm run lint` | Lint, format, and organise imports with Biome |
+| `npm run lint` | Lint, format, and fix imports with Biome |
 | `npm run type-check` | Run TypeScript type checker |
-| `npm run check` | Run all checks (Biome + TypeScript) |
-| `npm run fix` | Auto-fix all issues (Biome) |
-| `npm run ci:local` | Run CI checks locally (mirrors GitHub Actions) |
+| `npm run check` | All checks (Biome CI mode + TypeScript) |
 | `npm run lint:md` | Lint and auto-fix markdown files (optional) |

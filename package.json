@@ -29,9 +29,7 @@
     "format": "biome format --write .",
     "lint": "biome check --write",
     "type-check": "tsc --noEmit",
-    "check": "biome check && tsc --noEmit",
-    "fix": "biome check --write",
-    "ci:local": "biome ci . && tsc --noEmit",
+    "check": "biome ci . && tsc --noEmit",
     "lint:md": "markdownlint-cli2 --fix",
     "prepare": "lefthook install"
   },
