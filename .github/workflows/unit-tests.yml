@@ -9,7 +9,7 @@ concurrency:
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   unit-tests-job:
