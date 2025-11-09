@@ -8,15 +8,13 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
   e2e-tests-job:
     name: E2E Tests Job
-    timeout-minutes: 60
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     
     steps:
