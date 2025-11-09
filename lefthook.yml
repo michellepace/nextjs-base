@@ -18,12 +18,6 @@ pre-commit:
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true # auto-restage fixes
 
-    # Markdownlint: lint, apply safe fixes
-    markdown-lint:
-      glob: "**/*.md"
-      run: npx markdownlint-cli2 --fix {staged_files}
-      stage_fixed: true # auto-restage fixes
-
 pre-push:
   commands:
     # Playwright: E2E tests before pushing

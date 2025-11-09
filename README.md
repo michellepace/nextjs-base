@@ -33,7 +33,6 @@ Tools for code quality and formatting.
 
 | Tool | Purpose | Why This Choice | Config File |
 |:-----|:--------|:----------------|:------------|
-| 🎯 Markdownlint | Markdown linting | Reduces CodeRabbit comments | [.markdownlint.yaml](.markdownlint.yaml) |
 | 🎯 TypeScript | Type checking | Static type safety | [tsconfig.json](tsconfig.json) |
 | 🎯 Biome | Formatter + Linter | Replaces ESLint + Prettier | [biome.json](biome.json) |
 | 🎯 Lefthook | Git hooks manager | Automate quality checks before commit | [lefthook.yml](lefthook.yml) |
@@ -57,7 +56,7 @@ Automated checks run at two stages: locally before commit/push, and remotely on 
                        ▼
 ┌──────────────────────────────────────────────────────┐
 │  REMOTE (GitHub Actions)                             │
-│  • Code Quality: Biome, TypeScript, Markdown         │
+│  • Code Quality: Lint Check, Type Check              │
 │  • E2E Tests: Playwright (production build)          │
 │  • Unit Tests: Vitest (still to be implemented)      │
 │  • Cannot be bypassed - required for merge           │
@@ -68,11 +67,10 @@ Local hooks (Lefthook) run before commits and pushes, auto-fixing issues where p
 
 | Stage | Runs Via | Hook/Workflow | Check | Tool | Behavior |
 |:------|:---------|:--------------|:------|:-----|:---------|
-| **Local** | Lefthook | [pre-commit](lefthook.yml) | Markdown lint | Markdownlint | Auto-fixes |
-| | | | Code format & lint | Biome | Auto-fixes |
+| **Local** | Lefthook | [pre-commit](lefthook.yml) | Code format & lint | Biome | Auto-fixes |
 | | | | Type checking | TypeScript | Blocks on errors |
 | | | [pre-push](lefthook.yml) | E2E tests | Playwright | Runs tests |
-| **Remote** | GitHub Workflow | [code-quality.yml](.github/workflows/code-quality.yml) | Code quality | Biome, TypeScript, Markdown | Check only |
+| **Remote** | GitHub Workflow | [code-quality.yml](.github/workflows/code-quality.yml) | Code quality | Biome, TypeScript | Check only |
 | | | [e2e-tests.yml](.github/workflows/e2e-tests.yml) | E2E tests | Playwright (production build) | Check only |
 | | | [unit-tests.yml](.github/workflows/unit-tests.yml) | Unit tests | (TBD) | (TBD) |
 
@@ -80,26 +78,26 @@ Local hooks (Lefthook) run before commits and pushes, auto-fixing issues where p
 
 Key project files and directories:
 
-```
+```text
 nextjs-base/
-├── .claude/            # Claude Code commands and settings
-├── .github/workflows/  # GitHub Actions CI/CD workflows
-├── .vscode/            # VSCode settings & recommended extensions
-├── docs/notes/         # Reference documentation
-├── e2e/                # Playwright E2E tests
+├── .claude/             # Claude Code commands and settings
+├── .github/workflows/   # GitHub Actions CI/CD workflows
+├── .vscode/             # VSCode settings & recommended extensions
+├── docs/notes/          # Reference documentation
+├── e2e/                 # Playwright E2E tests
+├── public/              # Static assets
 ├── src/
 │   └── app/
-│       └── globals.css # Tailwind v4 config (via @theme)
-├── public/             # Static assets
-├── .nvmrc              # Node version pinning (24.11.0)
-├── package.json        # Dependencies and scripts
-├── tsconfig.json       # TypeScript configuration
+│       └── globals.css  # Tailwind v4 config (via @theme)
+├── .nvmrc               # Node version pinning (24.11.0)
+├── biome.json           # Biome formatter/linter config
+├── lefthook.yml         # Git hooks configuration
+├── next.config.ts       # Next.js configuration
+├── package.json         # Dependencies and scripts
+├── package-lock.json    # Dependency locking of versions
 ├── playwright.config.ts # Playwright E2E test configuration
-├── next.config.ts      # Next.js configuration
-├── postcss.config.mjs  # PostCSS for Tailwind CSS
-├── lefthook.yml        # Git hooks configuration
-├── .markdownlint.yaml  # Markdown linting rules
-└── biome.json          # Biome formatter/linter config
+├── postcss.config.mjs   # PostCSS for Tailwind CSS
+└── tsconfig.json        # TypeScript configuration
 ```
 
 Available Scripts ([package.json](package.json)):
@@ -115,14 +113,13 @@ Available Scripts ([package.json](package.json)):
 | `npm run test:e2e:ui` | Run tests with UI mode |
 | `npm run test:e2e:headed` | Run tests in headed browser |
 | `npm run test:e2e:debug` | Debug tests with Playwright Inspector |
-| `npm run test:e2e:report` | View HTML test report |
 | `npm run test:e2e:codegen` | Generate tests using Playwright Codegen |
+| `npm run test:e2e:report` | View HTML test report |
 | **Code Quality** | |
 | `npm run format` | Format code with Biome |
 | `npm run lint` | Lint, format, and organise imports with Biome |
 | `npm run type-check` | Run TypeScript type checker |
-| `npm run lint:md` | Lint and auto-fix markdown files |
-| `npm run lint:md:check` | Check markdown (no auto-fix) |
-| `npm run check` | Run all checks (Biome + TypeScript + Markdown) |
-| `npm run fix` | Auto-fix all issues (Biome + Markdown) |
+| `npm run check` | Run all checks (Biome + TypeScript) |
+| `npm run fix` | Auto-fix all issues (Biome) |
 | `npm run ci:local` | Run CI checks locally (mirrors GitHub Actions) |
+| `npm run lint:md` | Lint and auto-fix markdown files (optional) |

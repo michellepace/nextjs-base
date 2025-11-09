@@ -25,17 +25,16 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
-    "test:e2e:report": "playwright show-report",
     "test:e2e:codegen": "playwright codegen http://localhost:3000",
+    "test:e2e:report": "playwright show-report",
 
     "format": "biome format --write .",
-    "type-check": "tsc --noEmit",
     "lint": "biome check --write",
+    "type-check": "tsc --noEmit",
+    "check": "biome check && tsc --noEmit",
+    "fix": "biome check --write",
+    "ci:local": "biome ci . && tsc --noEmit",
     "lint:md": "markdownlint-cli2 --fix",
-    "lint:md:check": "markdownlint-cli2",
-    "check": "biome check && tsc --noEmit && markdownlint-cli2",
-    "fix": "biome check --write && markdownlint-cli2 --fix",
-    "ci:local": "biome ci . && tsc --noEmit && markdownlint-cli2",
 
     "prepare": "lefthook install"
   },
