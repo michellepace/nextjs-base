@@ -1,6 +1,6 @@
-# README: Next.js Base
-
 ![Next.js 16 - a modern template repo](docs/images/github-social-thin.jpg)
+
+*WORK IN PROGRESS - TARGET: Next.js 16 template repo using modern tooling and CI/CD automation. For continuous integration: code quality checks (linting, formatting, type checking, testing) run automatically via Lefthook (locally) and GitHub Actions (on PRs). For continuous deployment: uses Vercel (handles deployments across environments: Preview for PRs, Production for main).*
 
 ## 📦 Next.js Initial Installation
 
@@ -26,15 +26,16 @@ npm install                 # Install updated versions
 
 ## ⚙️ Config Files Explained
 
-| File | What | Generally In This Template |
+| File | What | Generally In This Project Template |
 | :----- | :----- | :------------------ |
-| 🌺 [.claude/commands/*.md](.claude/commands) | Claude Code repeatable prompts | Project-level commands like /commit for structured Git workflows |
-| 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Controls which commands, domains, and files Claude Code can access |
-| [.gitattributes](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
-| [.gitignore](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
-| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP server configuration | Connects Claude Code to external tools (currently: Playwright for browser testing) |
-| [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
-| [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
+| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Repeatable prompts like /commit |
+| 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
+| ⚆ [.gitattributes](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
+| ⚆ [.gitignore](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
+| [.markdownlint.yaml](.markdownlint.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing |
+| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | e.g. Playwright MCP so Claude Code can "see" app and adjust |
+| ⚆ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
+| ⚆ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | 🧪 [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
 | 🌺 [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
 | 🧪 [lefthook.yml](lefthook.yml) | Git hooks manager configuration | Runs Biome and TypeScript checks on pre-commit |
@@ -42,8 +43,8 @@ npm install                 # Install updated versions
 | 🇳 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
 | 🇳 [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
 | 🧪 [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
-| 🧪 [vitest.config.ts](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references vitest.setup.ts |
-| 🧪 [vitest.setup.ts](vitest.setup.ts) | Global test setup (loaded by vitest.config.ts) | Adds helpful test assertions like `expect(element).toBeVisible()` |
+| 🧪 [vitest.config.ts](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references [vitest.setup.ts](vitest.setup.ts) |
+| 🧪 [vitest.setup.ts](vitest.setup.ts) | Global test setup | Adds helpful test assertions like `expect(element).toBeVisible()` |
 
 ---
 
