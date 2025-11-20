@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# README: Next.js Base
 
-## Getting Started
+![Next.js 16 - a modern template repo](docs/images/github-social-thin.jpg)
 
-First, run the development server:
+## 📦 Next.js Initial Installation
+
+This template was initialised with the following options and then updated:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Next.js installer
+$ npx create-next-app@latest
+
+Would you like to use TypeScript? ✔️Yes
+Which linter would you like to use? ✔️Biome
+Would you like to use React Compiler? ✔️Yes
+Would you like to use Tailwind CSS? ✔️Yes
+Would you like your code inside a src/ directory? ❌ No
+Would you like to use App Router? (recommended) ✔️Yes
+Would you like to customise the import alias (@/* by default)? ❌ No
+
+# Update all dependencies to latest versions
+npm outdated                # Check outdated packages (2025-11-20)
+npx npm-check-updates -u    # Rewrite package.json with latest
+npm install                 # Install updated versions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Config Files Explained
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| File | What | Generally In This Template |
+|:-----|:-----|:-----------------|
+| [.claude/commands/*.md](.claude/commands) | Claude Code repeatable prompts | Project-level commands like /commit for structured Git workflows |
+| [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Controls which commands, domains, and files Claude Code can access |
+| [.gitattributes](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
+| [.gitignore](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
+| [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
+| [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
+| [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
+| [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
+| [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
+| [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
+| [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins configuration for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
+| [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
