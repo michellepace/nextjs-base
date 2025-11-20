@@ -41,3 +41,19 @@ npm install                 # Install updated versions
 | [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
 | [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins configuration for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
 | [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
+| [vitest.config.ts](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references vitest.setup.ts |
+| [vitest.setup.ts](vitest.setup.ts) | Global test setup (loaded by vitest.config.ts) | Adds helpful test assertions like `expect(element).toBeVisible()` |
+
+---
+
+## Quick Notes
+
+How Vitest Pieces Work Together
+
+```markdown
+1. When you run npm test, Vitest loads vitest.config.ts
+2. The config tells Vitest to use jsdom and load `vitest.setup.ts`
+3. Your test files can use global test functions and extended matchers
+4. The @/* import alias works in tests thanks to `vite-tsconfig-paths`
+5. React components are compiled with React Compiler (matching prod)
+```

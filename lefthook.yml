@@ -1,9 +1,12 @@
 # Lefthook configuration for Git hooks
 # https://lefthook.dev/
 
+# Use doublestar glob matcher for standard glob behaviour (** matches 0 or more directories)
+glob_matcher: doublestar
+
 pre-commit:
   parallel: true
-  
+
   skip: # Skip pre-commit hooks in these situations
     - merge   # Merge commits combine already-tested code
     - rebase  # Commits are replayed during rebase, already tested
@@ -18,4 +21,15 @@ pre-commit:
     type-check: # TypeScript type checking (config in tsconfig.json)
       run: npx tsc --noEmit
 
-
+    unit-tests: # Vitest: run unit tests (when code or configs change)
+      glob:
+        - "**/*.{ts,tsx,js,jsx}"
+        - "package.json"
+        - "package-lock.json"
+        - "tsconfig.json"
+        - "next.config.ts"
+        - "vitest.setup.ts"
+        - "vitest.config.ts"
+        - "middleware.ts"       # Next.js Edge middleware
+        - "instrumentation.ts"  # Next.js observability hooks
+      run: npx vitest run
