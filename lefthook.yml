@@ -5,7 +5,7 @@
 glob_matcher: doublestar
 
 pre-commit:
-  parallel: true
+  parallel: false # Sequential: type-check and tests must run on biome-fixed code
 
   skip: # Skip pre-commit hooks in these situations
     - merge   # Merge commits combine already-tested code
@@ -14,14 +14,20 @@ pre-commit:
 
   commands:
 
+    npm-install: # Sync package-lock.json when package.json changes
+      glob: "package.json"
+      run: npm install && git add package-lock.json
+
     biome-check: # Biome: lint, format, import organisation (config in biome.json)
+      # NB: runs on every commit, optimise when it gets slow
       run: npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true # Include fixes in commit (--write applies safe fixes)
 
     type-check: # TypeScript type checking (config in tsconfig.json)
+      # NB: runs on every commit, optimise when it gets slow
       run: npx tsc --noEmit
 
-    unit-tests: # Vitest: run unit tests (when code or configs change)
+    unit-tests: # Vitest: run unit tests (when matching files change)
       glob:
         - "**/*.{ts,tsx,js,jsx}"
         - "package.json"
