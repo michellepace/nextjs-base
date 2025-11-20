@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "mcp__ide__getDiagnostics",
+      "mcp__playwright__browser_navigate",
 
       "Bash(cat:*)",
       "Bash(claude mcp list)",
@@ -9,8 +10,11 @@
       "Bash(echo:*)",
       "Bash(find:*)",
       "Bash(glob:*)",
+      "Bash(lsof:*)",
       "Bash(sed:*)",
       "Bash(wc:*)",
+      "Bash(xargs:*)",
+
       "Bash(gh run list:*)",
       "Bash(gh run view:*)",
       "Bash(git log:*)",

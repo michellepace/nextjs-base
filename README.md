@@ -27,22 +27,23 @@ npm install                 # Install updated versions
 ## ⚙️ Config Files Explained
 
 | File | What | Generally In This Template |
-|:-----|:-----|:-----------------|
-| [.claude/commands/*.md](.claude/commands) | Claude Code repeatable prompts | Project-level commands like /commit for structured Git workflows |
-| [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Controls which commands, domains, and files Claude Code can access |
+| :----- | :----- | :------------------ |
+| 🌺 [.claude/commands/*.md](.claude/commands) | Claude Code repeatable prompts | Project-level commands like /commit for structured Git workflows |
+| 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Controls which commands, domains, and files Claude Code can access |
 | [.gitattributes](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
 | [.gitignore](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
+| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP server configuration | Connects Claude Code to external tools (currently: Playwright for browser testing) |
 | [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
-| [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
-| [lefthook.yml](lefthook.yml) | Git hooks manager configuration | Runs Biome and TypeScript checks on pre-commit |
-| [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
-| [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
-| [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins configuration for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
-| [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
-| [vitest.config.ts](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references vitest.setup.ts |
-| [vitest.setup.ts](vitest.setup.ts) | Global test setup (loaded by vitest.config.ts) | Adds helpful test assertions like `expect(element).toBeVisible()` |
+| 🧪 [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
+| 🌺 [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
+| 🧪 [lefthook.yml](lefthook.yml) | Git hooks manager configuration | Runs Biome and TypeScript checks on pre-commit |
+| 🇳 [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
+| 🇳 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
+| 🇳 [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
+| 🧪 [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
+| 🧪 [vitest.config.ts](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references vitest.setup.ts |
+| 🧪 [vitest.setup.ts](vitest.setup.ts) | Global test setup (loaded by vitest.config.ts) | Adds helpful test assertions like `expect(element).toBeVisible()` |
 
 ---
 
@@ -56,4 +57,12 @@ How Vitest Pieces Work Together
 3. Your test files can use global test functions and extended matchers
 4. The @/* import alias works in tests thanks to `vite-tsconfig-paths`
 5. React components are compiled with React Compiler (matching prod)
+```
+
+Use Ngrok to Test App From Phone
+
+```markdown
+1. Sign up and follow https://dashboard.ngrok.com/get-started/setup/linux
+2. Then: (Terminal 1: `npm run dev`) + (Terminal 2: `ngrok http 3000`)
+3. Ngork gives a url to connect from phone (shareable)
 ```
