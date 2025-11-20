@@ -1,0 +1,21 @@
+# Lefthook configuration for Git hooks
+# https://lefthook.dev/
+
+pre-commit:
+  parallel: true
+  
+  skip: # Skip pre-commit hooks in these situations
+    - merge   # Merge commits combine already-tested code
+    - rebase  # Commits are replayed during rebase, already tested
+    - run: test "$CI" = "true" # Skip in GitHub Actions; pre-commit hooks ran locally
+
+  commands:
+
+    biome-check: # Biome: lint, format, import organisation (config in biome.json)
+      run: npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true # Include fixes in commit (--write applies safe fixes)
+
+    type-check: # TypeScript type checking (config in tsconfig.json)
+      run: npx tsc --noEmit
+
+

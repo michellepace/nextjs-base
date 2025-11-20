@@ -36,6 +36,7 @@ npm install                 # Install updated versions
 | [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
 | [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
+| [lefthook.yml](lefthook.yml) | Git hooks manager configuration | Runs Biome and TypeScript checks on pre-commit |
 | [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
 | [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
 | [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins configuration for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
