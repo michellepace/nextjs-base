@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ide__getDiagnostics",
+
+      "Bash(cat:*)",
+      "Bash(claude mcp list)",
+      "Bash(claude mcp get:*)",
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(glob:*)",
+      "Bash(sed:*)",
+      "Bash(wc:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(git log:*)",
+      "Bash(git config:*)",
+
+      "Bash(npx @biomejs/biome:*)",
+      "Bash(npx lefthook:*)",
+      "Bash(npx playwright:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npm run build)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run type-check)",
+
+      "WebFetch(domain:biomejs.dev)",
+      "WebFetch(domain:docs.github.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:lefthook.dev)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:playwright.dev)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:tailwindcss.com)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:vitest.dev)"
+    ],
+
+    "deny": ["Read(**/.env)", "Read(**/.envrc)"],
+
+    "ask": []
+  }
+}
