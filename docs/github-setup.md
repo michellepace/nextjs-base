@@ -1,26 +1,10 @@
 ## 🍑 GitHub - Protect Branch
 
-```markdown
-Create GitHub Branch Ruleset:
-- name: "Protect main branch"
-- enforced status: Active
-- target branch: include default branch (main)
-- Rules:
-    - Restrict deletions
-    - Require a pull request before merging
-    - Require status checks to pass
-        - Require branches to be up to date before merging
-        - Add check: "Lint & Type (biome, tsc) / lint-type"
-        - Add check: "Unit Tests (vitest) / unit"
-        - Add check: "E2E Tests (playwright) / e2e"
-    - Block force pushes
-    - Require deployments to succeed [LATER after setting up for Vercel!]
-```
-
 Vercel notes:
 
-- Add "Require deployments to success" for rulset
+- Add "Require deployments to success" for "Protect main branch rulset
 - Do this <https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment>
+- update readme for both
 
 ## 🍑 How to keep my Dependencies at Latest Stable Version
 

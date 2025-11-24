@@ -158,6 +158,30 @@ This diagram shows how CI automation integrates into a typical development workf
 
 ## Quick Notes
 
+GitHub - Protect branch and check GitHub Workflows (ie jobs!) passed before allowing to merge the PR
+
+```markdown
+# Go Do This In GitHub on Repo
+
+Create GitHub Branch Ruleset:
+- name: "Protect main branch"
+- enforced status: Active
+- target branch: include default branch (main)
+- Rules:
+    - Restrict deletions
+    - Require a pull request before merging
+        - Allowed merge methods: Merge (only)
+    - Require status checks to pass 🔥
+        - Require branches to be up to date before merging
+        - Status Checks that are required
+          - Search to add "Run Lint & Type Checks" job
+          - Search to add "Run Unit Tests" job
+          - Search to add "Run E2E Tests" job
+    - Block force pushes
+
+    - 👉 [LATER when Vercel]: Require deployments to succeed
+```
+
 How Vitest Pieces Work Together
 
 ```markdown
