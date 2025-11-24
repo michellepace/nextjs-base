@@ -8,9 +8,11 @@ export default defineConfig({
     react({ babel: { plugins: [["babel-plugin-react-compiler"]] } }),
   ],
   test: {
+    allowOnly: !process.env.CI, // Block .only() in CI (explicit, matches Playwright forbidOnly)
     environment: "jsdom",
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
-    coverage: { exclude: [".next/", "**/.{biome,lefthook}/**"] },
+    // Exclude e2e tests (Playwright handles those)
+    exclude: ["**/node_modules/**", "**/e2e/**", "**/.next/**"],
   },
 });

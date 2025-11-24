@@ -10,10 +10,15 @@
     "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules' --fix",
     "typecheck": "tsc --noEmit --pretty",
     "check": "npm run lint && npm run typecheck",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:unit:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:codegen": "playwright codegen http://localhost:3000",
+    "test:e2e:report": "playwright show-report .playwright/playwright-report"
   },
   "dependencies": {
     "next": "16.0.3",
@@ -22,6 +27,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.6",
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
