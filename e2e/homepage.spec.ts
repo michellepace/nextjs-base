@@ -18,7 +18,7 @@ test("documentation link", async ({ page }) => {
   await expect(docLink).toBeVisible();
 
   // Verify correct href (points to Next.js docs)
-  await expect(docLink).toHaveAttribute("href", /nextjs.org\/docs/);
+  await expect(docLink).toHaveAttribute("href", /^https:\/\/nextjs\.org\/docs/);
 
   // Verify opens in new tab (security best practice)
   await expect(docLink).toHaveAttribute("target", "_blank");
