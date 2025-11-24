@@ -1,0 +1,39 @@
+name: Unit Tests (vitest)
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  # Triggers: PR opened, updated (new commits), or reopened
+  # 1. Runs on remote GitHub Actions server (fresh environment, not local cache)
+  # 2. Required to pass before PR can be merged to main (enforced by branch protection)
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit:
+    name: Run Unit Tests
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Step: Checkout code
+    - uses: actions/checkout@v5
+
+    # Step: Setup Node.js
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+
+    # Step: Install dependencies
+    - name: Install dependencies
+      run: npm ci
+
+    # Step: Run unit tests
+    - name: Run unit tests
+      run: npx vitest run

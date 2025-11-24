@@ -7,35 +7,46 @@ glob_matcher: doublestar
 pre-commit:
   parallel: false # Sequential: type-check and tests must run on biome-fixed code
 
-  skip: # Skip pre-commit hooks in these situations
+  skip:
+  # Skip pre-commit hooks in these situations
     - merge   # Merge commits combine already-tested code
     - rebase  # Commits are replayed during rebase, already tested
-    - run: test "$CI" = "true" # Skip in GitHub Actions; pre-commit hooks ran locally
 
   commands:
 
-    npm-install: # Sync package-lock.json when package.json changes
+    npm-install:
+    # Sync and add package-lock.json (when package.json changes)
       glob: "package.json"
       run: npm install && git add package-lock.json
 
-    biome-check: # Biome: lint, format, import organisation (config in biome.json)
-      # NB: runs on every commit, optimise when it gets slow
+    biome-check:
+    # Biome: lint, format, imports, apply safe fixes (every commit)
+    # config: biome.json
       run: npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-      stage_fixed: true # Include fixes in commit (--write applies safe fixes)
+      stage_fixed: true
 
-    type-check: # TypeScript type checking (config in tsconfig.json)
-      # NB: runs on every commit, optimise when it gets slow
-      run: npx tsc --noEmit
+    type-check:
+    # TypeScript type checking (every commit)
+    # config: tsconfig.json
+      run: npx tsc --noEmit --pretty
 
-    unit-tests: # Vitest: run unit tests (when matching files change)
+    unit-tests:
+    # Vitest: run unit tests (when matching files change)
       glob:
-        - "**/*.{ts,tsx,js,jsx}"
-        - "package.json"
-        - "package-lock.json"
-        - "tsconfig.json"
-        - "next.config.ts"
-        - "vitest.setup.ts"
-        - "vitest.config.ts"
-        - "middleware.ts"       # Next.js Edge middleware
-        - "instrumentation.ts"  # Next.js observability hooks
+        - "**/*.{ts,tsx}" # code in folders
+        - "!e2e/**/*" # Exclude e2e tests
+        - "package-lock.json" # Dependency changes
+        - "vitest.config.ts" # Config
       run: npx vitest run
+
+pre-push:
+  commands:
+    playwright-tests:
+    # Playwright: E2E tests (when matching files change).
+      glob:
+        - "**/*.{ts,tsx,css}" # code in folders
+        - "!**/*.{test,spec}.{ts,tsx}" # Exclude unit tests
+        - "package-lock.json" # Dependency changes
+        - "postcss.config.mjs" # CSS processing
+        - "playwright.config.ts" # Config
+      run: npx playwright test
