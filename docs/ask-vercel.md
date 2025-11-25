@@ -104,7 +104,7 @@ Both systems work in parallel:
 Vercel provides **three environments** (`environments.md:5-9`):
 
 | Environment | Trigger | Purpose |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **Local** | `npm run dev` | Development on your machine |
 | **Preview** | Any branch except `main` / PR | Testing before production |
 | **Production** | Merge to `main` | Live user-facing site |
@@ -194,7 +194,7 @@ jobs:
 From <https://github.com/michellepace/docs-for-ai/vercel/>:
 
 | Topic | File |
-|:---|:---|
+| :--- | :--- |
 | Platform overview | `getting-started-with-vercel.md` |
 | Projects & deployments | `projects-and-deployments.md` |
 | Importing projects | `import-an-existing-project.md` |

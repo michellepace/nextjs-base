@@ -1,10 +1,3 @@
-## 🍑 GitHub - Protect Branch
-
-Vercel notes:
-
-- Add "Require deployments to success" for "Protect main branch rulset
-- Do this <https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment>
-- update readme for both
 
 ## 🍑 How to keep my Dependencies at Latest Stable Version
 
