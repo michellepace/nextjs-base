@@ -1,0 +1,38 @@
+# Dependabot: Automated updates
+# - npm:
+#     Version-updates: Weekly on Sundays, minor/patch grouped, major individual
+#     Security-updates: Immediate when vulnerabilities detected, grouped
+# - GitHub Actions: Keeps workflow action versions current (e.g., actions/checkout)
+# Docs: https://docs.github.com/en/code-security/dependabot
+
+version: 2
+updates:
+  # npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    groups:
+      npm-dependencies:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+      npm-security:
+        applies-to: security-updates
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    groups:
+      github-actions:
+        applies-to: version-updates
+        patterns:
+          - "*"
