@@ -45,7 +45,7 @@ jobs:
     steps:
       # Step: Checkout the exact commit that was deployed
       # Uses the SHA from Vercel's payload to ensure we test the right code
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.client_payload.git.sha }}
 
