@@ -24,6 +24,12 @@ on:
     types:
       - "vercel.deployment.success"
 
+# Cancel in-progress runs when a newer deployment succeeds on the same branch.
+# Groups by git.ref (branch name) from Vercel's payload, not URL (which is unique per deploy).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.client_payload.git.ref }}
+  cancel-in-progress: true
+
 # Note: If you have Deployment Protection enabled on Vercel,
 # you'll need to configure Protection Bypass for Automation.
 # See: https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation
