@@ -1,6 +1,6 @@
 ![Next.js 16 - a modern template repo](docs/images/github-social-thin.jpg)
 
-*WORK IN PROGRESS - TARGET: Next.js 16 template repo using modern tooling and CI/CD automation. For continuous integration: code quality checks (linting, formatting, type checking, testing) run automatically via Lefthook (locally) and GitHub Actions (on PRs). For continuous deployment: uses Vercel (handles deployments across environments: Preview for PRs, Production for main).*
+*WORK IN PROGRESS — A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Deployments handled by Vercel: Preview for PRs, Production for main.*
 
 ## 📦 What Was Initially Installed?
 
