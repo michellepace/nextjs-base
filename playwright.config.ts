@@ -10,7 +10,10 @@ import { defineConfig, devices } from "@playwright/test";
 
 // Use process.env.PORT by default and fallback to port 3000
 const PORT = process.env.PORT || 3000;
-const baseURL = `http://localhost:${PORT}`;
+
+// If BASE_URL env var is set (e.g., Vercel preview URL), use it;
+// otherwise fall back to localhost for local/CI testing
+const baseURL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -38,6 +41,17 @@ export default defineConfig({
     baseURL, // Base URL to use in actions like `await page.goto('')`.
     trace: "on-first-retry", // Collect trace on failed test retry https://playwright.dev/docs/trace-viewer
     screenshot: "only-on-failure", // Capture screenshot after each test failure
+
+    // Bypass Vercel Deployment Protection for automation (e.g., E2E tests on preview deployments)
+    // Only applied when the bypass secret is available (set in CI for Vercel preview tests)
+    // See: https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation
+    ...(process.env.VERCEL_AUTOMATION_BYPASS_SECRET && {
+      extraHTTPHeaders: {
+        "x-vercel-protection-bypass":
+          process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+        "x-vercel-set-bypass-cookie": "true",
+      },
+    }),
   },
 
   /* Configure projects for major browsers */
@@ -81,11 +95,16 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: process.env.CI ? "npm start" : "npm run dev",
-    url: baseURL,
-    timeout: 60 * 1000,
-    reuseExistingServer: !process.env.CI,
-  },
+  /* Run local server before starting tests (dev locally, prod build in CI).
+   * When BASE_URL is set (e.g., testing against Vercel preview),
+   * skip starting a local server — we're testing an external deployment.
+   */
+  webServer: process.env.BASE_URL
+    ? undefined // External URL — no local server needed
+    : {
+        command: process.env.CI ? "npm start" : "npm run dev",
+        url: baseURL,
+        timeout: 60 * 1000,
+        reuseExistingServer: !process.env.CI,
+      },
 });

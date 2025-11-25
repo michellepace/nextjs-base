@@ -11,10 +11,9 @@ on:
   # Triggers: PR opened, updated (new commits), or reopened
   # 1. Runs on remote GitHub Actions server (fresh environment, not local cache)
   # 2. Required to pass before PR can be merged to main (enforced by branch protection)
-  # 3. TODO: Vercel deploy setup
-  #    - push to main will trigger Vercel deployment to prod
-  #    - but CAN add GitHub Workflow to first run Playwright tests against preview!
-  #    - see https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
+  #
+  # Note: This workflow tests against localhost (built from source).
+  # For E2E tests against Vercel preview deployments, see: test-e2e-vercel.yml
   pull_request:
     branches: [main]
 

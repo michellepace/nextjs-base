@@ -1,6 +1,6 @@
 ![Next.js 16 - a modern template repo](docs/images/github-social-thin.jpg)
 
-*WORK IN PROGRESS - TARGET: Next.js 16 template repo using modern tooling and CI/CD automation. For continuous integration: code quality checks (linting, formatting, type checking, testing) run automatically via Lefthook (locally) and GitHub Actions (on PRs). For continuous deployment: uses Vercel (handles deployments across environments: Preview for PRs, Production for main).*
+*WORK IN PROGRESS — A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Deployments handled by Vercel: Preview for PRs, Production for main.*
 
 ## 📦 What Was Initially Installed?
 
@@ -49,6 +49,7 @@ npm install                 # Install updated versions
 | 🧪 [vitest.setup.ts](vitest.setup.ts) | Global test setup | Adds helpful test assertions like `expect(element).toBeVisible()` |
 | 🚀 [.github/workflows/check-lint-type.yml](.github/workflows/check-lint-type.yml) | GitHub Actions CI workflow | Runs Biome linting/formatting checks and TypeScript type checking on PRs |
 | 🚀 [.github/workflows/test-e2e.yml](.github/workflows/test-e2e.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests on PRs (builds production, tests browsers, uploads reports) |
+| 🚀 [.github/workflows/test-e2e-vercel.yml](.github/workflows/test-e2e-vercel.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests against Vercel Preview deployments (triggered by Vercel) |
 | 🚀 [.github/workflows/test-unit.yml](.github/workflows/test-unit.yml) | GitHub Actions CI workflow | Runs Vitest unit tests on PRs (uses jsdom environment, React Testing Library) |
 
 ---
@@ -104,6 +105,16 @@ This diagram shows how CI automation integrates into a typical development workf
      ├─ Build Next.js production
      └─ Run Playwright tests                    ✅ Pass
 
+  ── Meanwhile, Vercel deploys Preview ──────────────────────────
+
+  🚀 Vercel: Preview deployment ready
+     └─ Sends repository_dispatch event to GitHub
+
+  └─ 🤖 Workflow 4: E2E Tests on Vercel Preview
+     ├─ Triggered by Vercel (not PR event)
+     ├─ Runs Playwright against live Preview URL
+     └─ Tests real Vercel deployment             ✅ Pass
+
   GITHUB PR Status: ✅ All checks passed
 
   🐰 CodeRabbit AI Review Complete
@@ -156,9 +167,27 @@ This diagram shows how CI automation integrates into a typical development workf
 
 ---
 
-## Quick Notes
+## 📝 Quick Notes
 
-GitHub - Protect branch and check GitHub Workflows (ie jobs!) passed before allowing to merge the PR
+(1) Use Ngrok to Test App From Phone
+
+```markdown
+1. Sign up and follow https://dashboard.ngrok.com/get-started/setup/linux
+2. Then: (Terminal 1: `npm run dev`) + (Terminal 2: `ngrok http 3000`)
+3. Ngork gives a url to connect from phone (shareable)
+```
+
+(2) How Vitest Pieces Work Together
+
+```markdown
+1. When you run npm test, Vitest loads vitest.config.ts
+2. The config tells Vitest to use jsdom and load `vitest.setup.ts`
+3. Your test files can use global test functions and extended matchers
+4. The @/* import alias works in tests thanks to `vite-tsconfig-paths`
+5. React components are compiled with React Compiler (matching prod)
+```
+
+(3) GitHub - Protect branch and check GitHub Workflows (ie jobs!) passed before allowing to merge the PR
 
 ```markdown
 # Go Do This In GitHub on Repo
@@ -178,28 +207,20 @@ Create GitHub Branch Ruleset:
           - Search to add "Run Unit Tests" job
           - Search to add "Run E2E Tests" job
     - Block force pushes
-
-    - 👉 [LATER when Vercel]: Require deployments to succeed
 ```
 
-How Vitest Pieces Work Together
+(4) Vercel For Deploys
 
-```markdown
-1. When you run npm test, Vitest loads vitest.config.ts
-2. The config tells Vitest to use jsdom and load `vitest.setup.ts`
-3. Your test files can use global test functions and extended matchers
-4. The @/* import alias works in tests thanks to `vite-tsconfig-paths`
-5. React components are compiled with React Compiler (matching prod)
+```text
+1. Sign in > New Project > connect to this repo > deploy it
+2. Check Vercel Speed Insights and Web Analytics are enabled (see `layout.tsx`)
+3. [Optional] GitHub > Branch ruleset > Add "Vercel" status check
+   - This requires Vercel deployment to succeed before merge (separate from E2E tests)
+4. E2E tests on Vercel Preview deployments:
+   - Vercel auto-triggers `test-e2e-vercel.yml` via repository_dispatch on each Preview deploy
+   - To bypass Deployment Protection, create the bypass secret:
+     - Vercel → Project Settings → Deployment Protection → Protection Bypass for Automation
+     - GitHub → Repository Settings → Secrets → Actions → New repository secret:
+       Name: VERCEL_AUTOMATION_BYPASS_SECRET
+       Value: (the generated secret from Vercel)
 ```
-
-Use Ngrok to Test App From Phone
-
-```markdown
-1. Sign up and follow https://dashboard.ngrok.com/get-started/setup/linux
-2. Then: (Terminal 1: `npm run dev`) + (Terminal 2: `ngrok http 3000`)
-3. Ngork gives a url to connect from phone (shareable)
-```
-
-Rough - GitHub things to do
-
-- See notes in [docs/github-setup.md](docs/github-setup.md)
