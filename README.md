@@ -167,7 +167,7 @@ This diagram shows how CI automation integrates into a typical development workf
 
 ---
 
-## Quick Notes
+## 📝 Quick Notes
 
 (1) Use Ngrok to Test App From Phone
 
@@ -208,8 +208,6 @@ Create GitHub Branch Ruleset:
           - Search to add "Run E2E Tests" job
     - Block force pushes
 ```
-
-*Rough - GitHub things to do: See notes in [docs/github-setup.md](docs/github-setup.md)*
 
 (4) Vercel For Deploys
 
