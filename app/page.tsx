@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Button } from "@/app/components/button";
-import { Counter } from "@/app/components/counter";
-import { ThemeToggle } from "@/app/components/theme-toggle";
+import { Button } from "@/components/button";
+import { Counter } from "@/components/counter";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
