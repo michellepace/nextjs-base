@@ -6,7 +6,7 @@ The project uses British English - strictly.
 
 ## Tech Stack
 
-- **Next.js 16.0.3** with App Router (not Pages Router)
+- **Next.js 16** with App Router (not Pages Router)
 - **React 19.2.0** (latest with new features like Actions, `use` hook)
 - **TypeScript 5** with strict mode
 - **Tailwind CSS v4** with PostCSS
@@ -19,8 +19,12 @@ The project uses British English - strictly.
 npm run dev        # Start development server (localhost:3000)
 npm run build      # Production build
 npm start          # Start production server
-npm run lint       # Run Biome linter checks
-npm run format     # Auto-format code with Biome
+npm run lint       # Lint and format with Biome (auto-fixes)
+npm run lint:md    # Lint markdown files
+npm run typecheck  # TypeScript type checking
+npm run check      # Run both lint and typecheck
+npm run test:unit  # Run Vitest unit tests
+npm run test:e2e   # Run Playwright e2e tests
 ```
 
 ## Architecture Notes
