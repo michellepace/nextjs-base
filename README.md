@@ -1,4 +1,4 @@
-![Next.js 16 - a modern template repo](docs/images/github-social-thin.jpg)
+![Next.js 16 - a modern template repo](xdocs/images/github-social-thin.jpg)
 
 *WORK IN PROGRESS — A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main.*
 
