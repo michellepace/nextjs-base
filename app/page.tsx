@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Button } from "@/app/components/Button";
-import { Counter } from "@/app/components/Counter";
+import { Button } from "@/app/components/button";
+import { Counter } from "@/app/components/counter";
+import { ThemeToggle } from "@/app/components/theme-toggle";
 
 export default function Home() {
   return (
@@ -14,8 +15,12 @@ export default function Home() {
           height={20}
           priority
         />
+        <ThemeToggle />
         <div className="flex flex-col items-center gap-6 sm:items-start">
-          <h2 className="text-4xl font-bold sm:text-5xl">Hello h2</h2>
+          <div className="flex flex-col items-center gap-2 sm:items-start">
+            <h4 className="text-4xl font-bold sm:text-5xl">hello (h4)</h4>
+            <p>no ui kit or icon library yet</p>
+          </div>
           <Counter unitPrice={25.99} />
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">

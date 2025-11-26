@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/app/components/theme-provider";
 import { geistSans, jetBrainsMono, spaceGrotesk } from "./fonts";
 
 export const metadata: Metadata = {
@@ -17,10 +18,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
     >
       <body className="antialiased">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <SpeedInsights />
         <Analytics />
       </body>
