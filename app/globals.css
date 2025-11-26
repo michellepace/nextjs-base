@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
+/* 1. Define raw CSS variables (can change per context) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Light mode (default) — Colours */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2046 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --border: oklch(0.9 0 0);
+  --destructive: oklch(0.637 0.237 25.331);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.723 0.219 149.579);
+  --success-foreground: oklch(1 0 0);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Light mode (default) — Effects */
+  --logo-filter: none;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Dark mode — Colours */
+    --background: oklch(0.1448 0 0);
+    --foreground: oklch(0.9461 0 0);
+    --muted: oklch(0.2 0 0);
+    --muted-foreground: oklch(0.65 0 0);
+    --border: oklch(0.25 0 0);
+    --destructive: oklch(0.637 0.237 25.331);
+    --destructive-foreground: oklch(1 0 0);
+    --success: oklch(0.723 0.219 149.579);
+    --success-foreground: oklch(1 0 0);
+
+    /* Dark mode — Effects */
+    --logo-filter: invert(1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 2. Wire to Tailwind theme for utility generation */
+@theme inline {
+  /* Set by next/font in layout.tsx (speed) */
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+}
+
+/* 3. Apply defaults in base layer */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+  }
+
+  :is(code, kbd, samp, pre) {
+    font-family: var(--font-mono);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 4. Custom utilities (not built into Tailwind) */
+@utility logo-adaptive {
+  filter: var(--logo-filter);
 }
