@@ -18,12 +18,14 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:codegen": "playwright codegen http://localhost:3000",
-    "test:e2e:report": "playwright show-report .playwright/playwright-report"
+    "test:e2e:report": "playwright show-report .playwright/playwright-report",
+    "test": "npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "next": "16.0.4",
+    "next-themes": "^0.4.6",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
