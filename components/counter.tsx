@@ -23,7 +23,7 @@ export function Counter({ unitPrice }: CounterProps) {
   const totalPrice = quantity * unitPrice;
 
   return (
-    <div className="flex flex-col items-center gap-4 p-6 bg-muted rounded-lg shadow-lg border border-border">
+    <div className="flex flex-col items-center gap-4 p-6 bg-muted rounded-lg shadow-lg border border-border sm:w-[320px]">
       <h2 className="text-2xl font-bold text-foreground">Hello Counter</h2>
       <div className="text-lg text-muted-foreground">Quantity: {quantity}</div>
       <div className="flex gap-3">
