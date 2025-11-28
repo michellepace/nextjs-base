@@ -2,7 +2,7 @@
 
 This guide documents the manual configuration required after creating a repo from the `nextjs-base` template. GitHub settings, secrets, and Vercel connections don't transfer with templates.
 
-## 📦 Part : Clone `nextjs-base` repo
+## 📦 Part 1: Clone `nextjs-base` repo
 
 Assume project is called "devflow", run: `gh repo create devflow --template michellepace/nextjs-base --clone`
 
@@ -61,7 +61,7 @@ Click **Create** to save.
 
 ## 🚀 Part 4: Vercel Setup
 
-### 3.1 Create Vercel Project
+### 4.1 Create Vercel Project
 
 1. Go to [vercel.com/new](https://vercel.com/new)
 2. Import the `devflow` repository
@@ -69,7 +69,7 @@ Click **Create** to save.
 4. Click **Deploy**
 5. Project settings > Analytics (Enable) > Speed Insights (Enable)
 
-### 3.2 Setup E2E Tests on Vercel Previews
+### 4.2 Setup E2E Tests on Vercel Previews
 
 This allows Playwright tests to run against Vercel preview deployments.
 
@@ -86,7 +86,7 @@ This allows Playwright tests to run against Vercel preview deployments.
 3. Name: `VERCEL_AUTOMATION_BYPASS_SECRET`
 4. Value: (paste the secret from Vercel) → **Add secret**
 
-### 3.3 (Optional) Add Vercel Status Check
+### 4.3 (Optional) Add Vercel Status Check
 
 To require Vercel deployment success before merge:
 
@@ -94,9 +94,27 @@ To require Vercel deployment success before merge:
 2. Edit "Require status checks to pass"
 3. Search and add: `Vercel`
 
+### 4.4 Link Vercel CLI (optional)
+
+Install the [Vercel CLI](https://vercel.com/docs/cli) globally and link it to your project:
+
+```bash
+npm i -g vercel   # install globally
+vercel --version  # see version intalled
+vercel link       # link project to vercel
+```
+
+This empowers Claude Code as it can run commands like:
+
+- `vercel ls` — list recent deployments
+- `vercel env ls` — view environment variables
+- `vercel logs <url>` — view serverless function logs
+- `vercel inspect <url>` — check deployment details
+- Claude Code can query your project's deployment status and logs
+
 ---
 
-## 🐰 Part 4: CodeRabbit AI Review
+## 🐰 Part 5: CodeRabbit AI Review
 
 CodeRabbit provides AI-powered code review on pull requests. Run the `/coderabbit` slash command to evaluate and action specfic comments.
 
