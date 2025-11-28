@@ -1,8 +1,39 @@
 ![Next.js 16 - a modern template repo](xdocs/images/github-social-thin.jpg)
 
-*WORK IN PROGRESS — A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main.*
+*A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main. Assumes Claude Code.*
 
-## 📦 What Was Initially Installed?
+---
+
+## 🎯 Use This Template
+
+1. Follow [xdocs/project-setup.md](xdocs/project-setup.md) to clone, setup GitHub, setup Vercel.
+
+2. Install UI components like shadcn/ui
+
+3. Replace page.tsx, layout.tsx, counter.tsx, button.tsx, theme-toggle.tsx (use an icon), globals.css, fonts.ts
+
+## What's Installed?
+
+For exact list see [package.json](package.json)
+
+| Category | Tool | What it does |
+| :------- | :--- | :----------- |
+| Language | [TypeScript 5](https://www.typescriptlang.org) | Static type checking with strict mode enabled |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
+| | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |
+| Linting | [Biome](https://biomejs.dev) | Fast linter and formatter (replaces ESLint + Prettier) |
+| | [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) | Lints markdown files for consistent formatting |
+| Testing | [Vitest](https://vitest.dev) | Fast unit test runner (Vite-native, Jest-compatible) |
+| | [Playwright](https://playwright.dev) | E2E browser testing (Chromium, Firefox, WebKit, Mobile) |
+| | [Testing Library](https://testing-library.com) | React component testing utilities |
+| Git Hooks | [Lefthook](https://lefthook.dev) | Runs checks on commit/push (lint, typecheck, tests) |
+| Optimisation | [React Compiler](https://react.dev/learn/react-compiler) | Automatic memoisation and performance optimisations |
+| Analytics | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) | Real user performance metrics viewable on Vercel |
+| | [Vercel Web Analytics](https://vercel.com/docs/analytics) | Privacy-friendly visitor analytics viewable on Vercel |
+
+![Explained banner](xdocs/images/explained.jpg)
+
+## 📦 Next.js Installation Explained
 
 This template was initialised with the following options and then updated:
 
@@ -10,12 +41,12 @@ This template was initialised with the following options and then updated:
 # Next.js installer
 $ npx create-next-app@latest
 
-Would you like to use TypeScript? ✔️Yes
-Which linter would you like to use? ✔️Biome
-Would you like to use React Compiler? ✔️Yes
-Would you like to use Tailwind CSS? ✔️Yes
-Would you like your code inside a src/ directory? ❌ No
-Would you like to use App Router? (recommended) ✔️Yes
+Would you like to use TypeScript?      ✔️ Yes
+Which linter would you like to use?    ✔️ Biome
+Would you like to use React Compiler?  ✔️ Yes
+Would you like to use Tailwind CSS?    ✔️ Yes
+Would you like your code inside a src/ directory?  ❌ No
+Would you like to use App Router? (recommended)    ✔️ Yes
 Would you like to customise the import alias (@/* by default)? ❌ No
 
 # Update all dependencies to latest versions
@@ -33,7 +64,7 @@ npm install                 # Install updated versions
 | ▢ [.markdownlint.yaml](.markdownlint.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing |
 | ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Repeatable prompts like /commit |
+| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Write commits, evaluate CodeRabbit comments etc. |
 | 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
 | 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | e.g. Playwright MCP so Claude Code can "see" app and adjust |
 | 🌺 [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
@@ -55,7 +86,7 @@ npm install                 # Install updated versions
 
 ---
 
-## 🔄 CI/CD Workflow in Action
+## 🔄 CI/CD Workflow Explained
 
 This diagram shows how CI automation integrates into a typical development workflow:
 
@@ -158,7 +189,7 @@ This diagram shows how CI automation integrates into a typical development workf
   └─ 🚀 Vercel deployment triggered → Production
 ```
 
-🎯 Key CI Takeaways
+Key CI Takeaways
 
 - Local Hooks — Catch issues before commit or reaching GitHub
 - GitHub Actions — Validate every PR with fresh environment (reproducible CI)
@@ -166,7 +197,7 @@ This diagram shows how CI automation integrates into a typical development workf
 - Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
----
+![Quick rough notes](xdocs/images/rough.jpg)
 
 ## 📝 Quick Notes
 
@@ -213,15 +244,15 @@ Create GitHub Branch Ruleset:
 (4) Vercel For Deploys
 
 ```text
-1. Sign in > New Project > connect to this repo > deploy it
+1. Sign in → New Project → connect to this repo → deploy it
 2. Check Vercel Speed Insights and Web Analytics are enabled (see `layout.tsx`)
-3. [Optional] GitHub > Branch ruleset > Add "Vercel" status check
+3. [Optional] GitHub → Branch ruleset → Add "Vercel" status check
    - This requires Vercel deployment to succeed before merge (separate from E2E tests)
 4. E2E tests on Vercel Preview deployments:
    - Vercel auto-triggers `test-e2e-vercel.yml` via repository_dispatch on each Preview deploy
    - To bypass Deployment Protection, create the bypass secret:
-     - Vercel → Project Settings → Deployment Protection → Protection Bypass for Automation
+     - Vercel → Project Settings → Deployment Protection → Protection Bypass for Automation → Add Secret
      - GitHub → Repository Settings → Secrets → Actions → New repository secret:
        Name: VERCEL_AUTOMATION_BYPASS_SECRET
-       Value: (the generated secret from Vercel)
+       Value: (the secret from Vercel)
 ```
