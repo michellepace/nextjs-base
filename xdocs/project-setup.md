@@ -26,7 +26,7 @@ Go to **Settings** → **Advanced Security** → **Dependabot**
 
 - [ ] **Grouped security updates**: ✅ Enable (auto-PRs to fix vulnerabilities)
 
-> **Note:** Note: Version updates work automatically from the yml file. Security alerts/updates are separate GitHub features that scan for known CVEs.
+> **Note:** Version updates work automatically from the yml file. Security alerts/updates are separate GitHub features that scan for known CVEs.
 
 ---
 
@@ -48,7 +48,7 @@ Configure as follows:
 - [ ] ✅ **Require a pull request before merging**
   - Allowed merge methods: `Merge` only (uncheck Squash/Rebase if preferred)
 - [ ] ✅ **Require status checks to pass**
-  - ✅ Require branches to be up to date before merging
+  - ✅ Require branches to be up-to-date before merging
   - Add these required checks (search by name):
     - `Run Lint & Type Checks`
     - `Run Unit Tests`
@@ -116,7 +116,7 @@ This empowers Claude Code as it can run commands like:
 
 ## 🐰 Part 5: CodeRabbit AI Review
 
-CodeRabbit provides AI-powered code review on pull requests. Run the `/coderabbit` slash command to evaluate and action specfic comments.
+CodeRabbit provides AI-powered code review on pull requests. Run the `/coderabbit` slash command to evaluate and action specific comments.
 
 1. Go to [coderabbit.ai](https://coderabbit.ai)
 2. Connect your GitHub account

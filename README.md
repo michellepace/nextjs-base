@@ -33,7 +33,7 @@ For exact list see [package.json](package.json)
 
 ![Explained banner](xdocs/images/explained.jpg)
 
-## 📦 Nextjs Installation Explained
+## 📦 Next.js Installation Explained
 
 This template was initialised with the following options and then updated:
 
