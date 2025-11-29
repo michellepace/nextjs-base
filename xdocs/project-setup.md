@@ -4,16 +4,16 @@ This guide documents the manual configuration required after creating a repo fro
 
 ## 📦 Part 1: Clone `nextjs-base` repo
 
-Assuming the new project is called "devflow", run:
+Assuming the new project is called "my_proj", run:
 
 ```bash
-gh repo create devflow --template michellepace/nextjs-base --clone --public
+gh repo create my_proj --template michellepace/nextjs-base --clone --public
 ```
 
 What does this do?
 
-- Creates `devflow` repo on GitHub (from the template)
-- Clones the repo locally to your machine in folder devflow
+- Creates `my_proj` repo on GitHub (from the template)
+- Clones the repo locally to your machine in folder my_proj
 - Initial commit with template in it
 
 ## 🚀 Part 2: Vercel Setup
@@ -21,7 +21,7 @@ What does this do?
 ### 2.1 Create Vercel Project
 
 1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import the `devflow` repository (default settings)
+2. Import the `my_proj` repository (default settings)
 3. Click **Deploy** → wait for deploy
 4. Click **Continue to Dashboard**: enable Analytics and Speed Insights
 
@@ -71,7 +71,26 @@ Go to **Settings** → **Advanced Security** → **Dependabot**
 
 ---
 
-## 🔒 Part 4: Branch Protection Ruleset
+## 🧪 Part 4: Trigger Initial Workflows
+
+Create a test PR to trigger all workflows. This ensures status check names exist in GitHub before configuring branch protection.
+
+1. Create a branch, make a small change (e.g., edit README), push, open PR
+2. Wait for all workflows to complete:
+   - `Run Lint & Type Checks`
+   - `Run Unit Tests`
+   - `Run E2E Tests`
+   - `Vercel` (preview deployment)
+   - `Run E2E Tests on Preview`
+3. Vercel → project overview → click "Deployment" URL to verify preview
+4. GitHub → Merge the pull request
+5. Vercel → project overview → click "Domains" URL to verify production
+
+---
+
+## 🔒 Part 5: Branch Protection Ruleset
+
+Now that all workflows have run, their check names are available in GitHub.
 
 Go to **Settings** → **Rules** → **Rulesets** → **New ruleset** → **New branch ruleset**
 
@@ -90,6 +109,7 @@ Configure as follows:
   - Allowed merge methods: `Merge` only (uncheck Squash/Rebase if preferred)
 - [ ] ✅ **Require status checks to pass**
   - ✅ Require branches to be up-to-date before merging
+  - ✅ Do not require status checks on creation
   - Add these required checks (search by name):
     - `Run Lint & Type Checks`
     - `Run Unit Tests`
@@ -102,7 +122,7 @@ Click **Create** to save.
 
 ---
 
-## 🐰 Part 5: CodeRabbit AI Review
+## 🐰 Part 6: CodeRabbit AI Review (Optional)
 
 CodeRabbit provides AI-powered code review on pull requests.
 
@@ -113,37 +133,3 @@ CodeRabbit provides AI-powered code review on pull requests.
 Run the `/coderabbit` slash command to evaluate and action specific comments.
 
 ---
-
-## ✅ Verify Setup
-
-Create a test PR to confirm everything works:
-
-1. Create a branch, make a small change, push, open PR
-2. GitHub → Open Pull Request: View "all checks have passed"
-3. Vercel → project overview → click "Deployment" URL (preview)
-4. GitHub → Click "Merge pull request"
-5. Vercel → project overview → click "Domains" URL (prod)
-6. GitHub Settings → Code security: Confirm Dependabot alerts enabled
-
-## Appendix
-
-Another way to do this is giving Claude Code this prompt:
-
-```markdown
-This repo was cloned via: `gh repo create [myproject] --template michellepace/nextjs-base --public --clone`
-
-GitHub templates copy files but NOT repository settings, branch protection, or secrets. I need you to document all manual configuration and setup required for GitHub and Vercel.
-
-**Your task:**
-1. Read `README.md` - it documents some required settings
-2. Check `.github/workflows/` - identify which status checks need to be required
-3. Create `project-setup.md` in root with step-by-step setup guide covering:
-   - GitHub repo settings (description, delete-branch-on-merge)
-   - Branch protection ruleset (required status checks from workflows)
-   - Vercel project setup (new project, Speed Insights, Web Analytics)
-   - `VERCEL_AUTOMATION_BYPASS_SECRET` for E2E tests on preview deploys
-   - Investigate beyond the above should anything else be needed
-
-Use `gh` CLI where helpful, but note that branch rulesets and Vercel
-Deployment Protection require dashboard configuration.
-```

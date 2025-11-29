@@ -17,6 +17,7 @@ name: E2E Tests (Vercel Preview)
 
 permissions:
   contents: read
+  statuses: write
 
 on:
   # Triggered by Vercel when a deployment succeeds
@@ -82,3 +83,22 @@ jobs:
           name: playwright-report-vercel-preview
           path: .playwright/playwright-report/
           retention-days: 30
+
+      # Step: Report status back to the PR commit
+      # Since repository_dispatch runs on main, we must explicitly report status
+      # to the original commit SHA so the PR's required check is satisfied
+      - name: Report status to PR
+        if: always()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const state = '${{ job.status }}' === 'cancelled' ? 'error' : '${{ job.status }}';
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: '${{ github.event.client_payload.git.sha }}',
+              state: state,
+              context: 'Run E2E Tests on Preview',
+              description: 'E2E tests against Vercel preview',
+              target_url: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+            });
