@@ -4,15 +4,58 @@ This guide documents the manual configuration required after creating a repo fro
 
 ## 📦 Part 1: Clone `nextjs-base` repo
 
-Assume project is called "devflow", run: `gh repo create devflow --template michellepace/nextjs-base --clone`
+Assuming the new project is called "devflow", run:
+
+```bash
+gh repo create devflow --template michellepace/nextjs-base --clone --public
+```
+
+What does this do?
 
 - Creates `devflow` repo on GitHub (from the template)
 - Clones the repo locally to your machine in folder devflow
-- Will do the initial commit with template in it
+- Initial commit with template in it
+
+## 🚀 Part 2: Vercel Setup
+
+### 2.1 Create Vercel Project
+
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Import the `devflow` repository (default settings)
+3. Click **Deploy** → wait for deploy
+4. Click **Continue to Dashboard**: enable Analytics and Speed Insights
+
+### 2.2 Set Up E2E Tests on Vercel Previews
+
+This allows Playwright tests to run against Vercel preview deployments.
+
+**Step A: Create bypass secret in Vercel**
+
+1. Vercel → Project → **Settings** → **Deployment Protection**
+2. Scroll to **Protection Bypass for Automation**
+3. Click **Add Secret** and copy the secret name and value
+
+**Step B: Add secret to GitHub**
+
+1. GitHub Repo → **Settings** → **Secrets and variables** → **Actions**
+2. Click **New repository secret** → Add secret name and value from Vercel
+
+### 2.3 Link Vercel CLI (optional)
+
+Install the [Vercel CLI](https://vercel.com/docs/cli) globally and link it to your project:
+
+```bash
+
+npm i -g vercel   # Install vercel globally
+vercel --version  # See installed version
+
+vercel link # Link project (creates .vercel/)
+vercel list # See deployments for linked project
+```
 
 ---
 
-## 📦 Part 2: GitHub Repository Settings
+## 📦 Part 3: GitHub Repository Settings
 
 Go to **Settings** → **General** on your GitHub repo.
 
@@ -26,11 +69,9 @@ Go to **Settings** → **Advanced Security** → **Dependabot**
 
 - [ ] **Grouped security updates**: ✅ Enable (auto-PRs to fix vulnerabilities)
 
-> **Note:** Version updates work automatically from the yml file. Security alerts/updates are separate GitHub features that scan for known CVEs.
-
 ---
 
-## 🔒 Part 3: Branch Protection Ruleset
+## 🔒 Part 4: Branch Protection Ruleset
 
 Go to **Settings** → **Rules** → **Rulesets** → **New ruleset** → **New branch ruleset**
 
@@ -40,7 +81,7 @@ Configure as follows:
 |---------|-------|
 | Ruleset name | `Protect main branch` |
 | Enforcement status | `Active` |
-| Target branches | Add target → Include default branch (ie main) |
+| Target branches | Add target → Include default branch (i.e. main) |
 
 **Rules to enable:**
 
@@ -53,87 +94,36 @@ Configure as follows:
     - `Run Lint & Type Checks`
     - `Run Unit Tests`
     - `Run E2E Tests`
+    - `Vercel` (Preview deployment must succeed)
+    - `Run E2E Tests on Preview`
 - [ ] ✅ **Block force pushes**
 
 Click **Create** to save.
 
 ---
 
-## 🚀 Part 4: Vercel Setup
-
-### 4.1 Create Vercel Project
-
-1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import the `devflow` repository
-3. Keep default settings (Next.js auto-detected)
-4. Click **Deploy**
-5. Project settings > Analytics (Enable) > Speed Insights (Enable)
-
-### 4.2 Setup E2E Tests on Vercel Previews
-
-This allows Playwright tests to run against Vercel preview deployments.
-
-**Step A: Create bypass secret in Vercel**
-
-1. Vercel → Project → **Settings** → **Deployment Protection**
-2. Scroll to **Protection Bypass for Automation**
-3. Click **Add Secret** and copy the secret
-
-**Step B: Add secret to GitHub**
-
-1. GitHub → Repo → **Settings** → **Secrets and variables** → **Actions**
-2. Click **New repository secret**
-3. Name: `VERCEL_AUTOMATION_BYPASS_SECRET`
-4. Value: (paste the secret from Vercel) → **Add secret**
-
-### 4.3 (Optional) Add Vercel Status Check
-
-To require Vercel deployment success before merge:
-
-1. Rules → Ruleset → "Protect main branch" (Part 2)
-2. Edit "Require status checks to pass"
-3. Search and add: `Vercel`
-
-### 4.4 Link Vercel CLI (optional)
-
-Install the [Vercel CLI](https://vercel.com/docs/cli) globally and link it to your project:
-
-```bash
-npm i -g vercel   # install globally
-vercel --version  # see version intalled
-vercel link       # link project to vercel
-```
-
-This empowers Claude Code as it can run commands like:
-
-- `vercel ls` — list recent deployments
-- `vercel env ls` — view environment variables
-- `vercel logs <url>` — view serverless function logs
-- `vercel inspect <url>` — check deployment details
-- Claude Code can query your project's deployment status and logs
-
----
-
 ## 🐰 Part 5: CodeRabbit AI Review
 
-CodeRabbit provides AI-powered code review on pull requests. Run the `/coderabbit` slash command to evaluate and action specific comments.
+CodeRabbit provides AI-powered code review on pull requests.
 
 1. Go to [coderabbit.ai](https://coderabbit.ai)
 2. Connect your GitHub account
 3. Enable for this repository
 
+Run the `/coderabbit` slash command to evaluate and action specific comments.
+
 ---
 
-## ✅ Verification Checklist
+## ✅ Verify Setup
 
-After completing setup, verify:
+Create a test PR to confirm everything works:
 
-- [ ] Vercel deploys preview on PR creation
-- [ ] GitHub Actions run: Lint, Unit Tests, E2E Tests
-- [ ] E2E tests run against Vercel preview (check Actions → "E2E Tests (Vercel Preview)")
-- [ ] Branch protection prevents direct push to main
-- [ ] PR can only merge when all checks pass
-- [ ] Dependabot alerts enabled (Settings → Code security)
+1. Create a branch, make a small change, push, open PR
+2. GitHub → Open Pull Request: View "all checks have passed"
+3. Vercel → project overview → click "Deployment" URL (preview)
+4. GitHub → Click "Merge pull request"
+5. Vercel → project overview → click "Domains" URL (prod)
+6. GitHub Settings → Code security: Confirm Dependabot alerts enabled
 
 ## Appendix
 
@@ -142,8 +132,7 @@ Another way to do this is giving Claude Code this prompt:
 ```markdown
 This repo was cloned via: `gh repo create [myproject] --template michellepace/nextjs-base --public --clone`
 
-GitHub templates copy files but NOT repository settings, branch protection,
-or secrets. I need you to document all manual configuration and setup required for GitHub and Vercel.
+GitHub templates copy files but NOT repository settings, branch protection, or secrets. I need you to document all manual configuration and setup required for GitHub and Vercel.
 
 **Your task:**
 1. Read `README.md` - it documents some required settings
