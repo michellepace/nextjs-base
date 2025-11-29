@@ -6,7 +6,7 @@
 
 ## 🎯 Use This Template
 
-1. Follow [xdocs/project-setup.md](xdocs/project-setup.md) to clone, setup GitHub, setup Vercel.
+1. Follow [xdocs/project-setup.md](xdocs/project-setup.md) to clone, set up GitHub, set up Vercel.
 
 2. Install UI components like shadcn/ui
 
@@ -206,7 +206,7 @@ Key CI Takeaways
 ```markdown
 1. Sign up and follow https://dashboard.ngrok.com/get-started/setup/linux
 2. Then: (Terminal 1: `npm run dev`) + (Terminal 2: `ngrok http 3000`)
-3. Ngork gives a url to connect from phone (shareable)
+3. Ngrok gives a URL to connect from phone (shareable)
 ```
 
 (2) How Vitest Pieces Work Together
@@ -219,7 +219,7 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(3) GitHub - Protect branch and check GitHub Workflows (ie jobs!) passed before allowing to merge the PR
+(3) GitHub - Protect branch and check GitHub Workflows (i.e. jobs!) passed before allowing to merge the PR
 
 ```markdown
 # Go Do This In GitHub on Repo
