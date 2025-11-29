@@ -185,7 +185,7 @@ This diagram shows how CI automation integrates into a typical development workf
   │ ✅ Branch is up to date with main          │
   └─────────────────────────────────────────────┘
 
-  main branch updated with 4 commits (squash merge)
+  main branch updated (merge commit preserves 4 commits)
   └─ 🚀 Vercel deployment triggered → Production
 ```
 
