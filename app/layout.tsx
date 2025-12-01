@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import "./globals.css";
-import { geistSans, jetBrainsMono, spaceGrotesk } from "@/app/fonts";
+import { jetbrainsMono, lora, montserrat } from "@/app/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
@@ -19,15 +19,16 @@ export default function RootLayout({
     <html
       lang="en-GB"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
+      className={`${montserrat.variable} ${lora.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="antialiased">
+      <body className="min-h-screen bg-background antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
+          enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="mx-auto max-w-3xl px-8 py-8">{children}</div>
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />

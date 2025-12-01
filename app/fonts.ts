@@ -1,18 +1,18 @@
-import { Geist, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Lora, Montserrat } from "next/font/google";
 
-export const geistSans = Geist({
-  variable: "--font-geist-sans",
+export const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
 });
 
-export const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+export const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
   display: "swap",
 });
 
-export const jetBrainsMono = JetBrains_Mono({
+export const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",

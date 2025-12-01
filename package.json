@@ -41,6 +41,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.1",
     "babel-plugin-react-compiler": "1.0.0",
+    "baseline-browser-mapping": "^2.8.32",
     "jsdom": "^27.2.0",
     "lefthook": "^2.0.4",
     "markdownlint-cli2": "^0.19.1",
