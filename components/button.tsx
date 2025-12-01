@@ -14,7 +14,7 @@ export function Button({
   children,
 }: ButtonProps) {
   const base =
-    "flex h-12 w-full items-center justify-center rounded-full px-5 transition-colors md:w-[158px]";
+    "flex h-12 w-full items-center justify-center rounded-full px-5 font-display transition-colors md:w-[170px]";
   const styles = {
     primary: "gap-2 bg-foreground text-background hover:bg-foreground/80",
     secondary: "border border-border hover:bg-muted",

@@ -1,12 +1,19 @@
-![Next.js 16 - a modern template repo](xdocs/images/github-social-thin.jpg)
+![Next.js 16 - a modern template repo](x_docs/images/github-social-thin.jpg)
 
 *A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main. Assumes Claude Code.*
+
+<div align="center">
+  <a href="x_docs/images/app_screenshot.jpg" target="_blank">
+    <img src="x_docs/images/app_screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
+  </a>
+  <p><em>Template homepage with theming setup — UI component library still needed</em></p>
+</div>
 
 ---
 
 ## 🎯 Use This Template
 
-1. Follow [xdocs/project-setup.md](xdocs/project-setup.md) to clone, set up GitHub, set up Vercel.
+1. Follow [x_docs/project-setup.md](x_docs/project-setup.md) to clone, set up GitHub, set up Vercel.
 
 2. Install UI components like shadcn/ui
 
@@ -31,7 +38,7 @@ For exact list see [package.json](package.json)
 | Analytics | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) | Real user performance metrics viewable on Vercel |
 | | [Vercel Web Analytics](https://vercel.com/docs/analytics) | Privacy-friendly visitor analytics viewable on Vercel |
 
-![Explained banner](xdocs/images/explained.jpg)
+![Explained banner](x_docs/images/explained.jpg)
 
 ## 📦 Next.js Installation Explained
 
@@ -197,7 +204,7 @@ Key CI Takeaways
 - Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
-![Quick rough notes](xdocs/images/rough.jpg)
+![Quick rough notes](x_docs/images/rough.jpg)
 
 ## 📝 Quick Notes
 
@@ -219,40 +226,6 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(3) GitHub - Protect branch and check GitHub Workflows (i.e. jobs!) passed before allowing to merge the PR
+(3) GitHub - A branch protection ruleset to be setup to protect main. Incldues checks for GitHub workflow jobs to pass before merging PR to main. See [x_docs/project-setup.md](x_docs/project-setup.md).
 
-```markdown
-# Go Do This In GitHub on Repo
-
-Create GitHub Branch Ruleset:
-- name: "Protect main branch"
-- enforced status: Active
-- target branch: include default branch (main)
-- Rules:
-    - Restrict deletions
-    - Require a pull request before merging
-        - Allowed merge methods: Merge (only)
-    - Require status checks to pass 🔥
-        - Require branches to be up to date before merging
-        - Status Checks that are required
-          - Search to add "Run Lint & Type Checks" job
-          - Search to add "Run Unit Tests" job
-          - Search to add "Run E2E Tests" job
-    - Block force pushes
-```
-
-(4) Vercel For Deploys
-
-```text
-1. Sign in → New Project → connect to this repo → deploy it
-2. Check Vercel Speed Insights and Web Analytics are enabled (see `layout.tsx`)
-3. [Optional] GitHub → Branch ruleset → Add "Vercel" status check
-   - This requires Vercel deployment to succeed before merge (separate from E2E tests)
-4. E2E tests on Vercel Preview deployments:
-   - Vercel auto-triggers `test-e2e-vercel.yml` via repository_dispatch on each Preview deploy
-   - To bypass Deployment Protection, create the bypass secret:
-     - Vercel → Project Settings → Deployment Protection → Protection Bypass for Automation → Add Secret
-     - GitHub → Repository Settings → Secrets → Actions → New repository secret:
-       Name: VERCEL_AUTOMATION_BYPASS_SECRET
-       Value: (the secret from Vercel)
-```
+(4) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [x_docs/project-setup.md](x_docs/project-setup.md).

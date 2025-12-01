@@ -1,3 +1,8 @@
+/**
+ * Demo test for CI/CD purposes - can be safely deleted.
+ * This file demonstrates Vitest unit testing setup.
+ */
+
 import { describe, expect, it } from "vitest";
 import { formatPrice } from "@/lib/formatPrice";
 
