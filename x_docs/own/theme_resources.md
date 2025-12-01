@@ -2,6 +2,8 @@
 
 Resources for semantic theming in `globals.css` for Next.js + Tailwind v4 projects.
 
+Tailwind themes that I found later: [https://tailkits.com/](https://tailkits.com/)
+
 ---
 
 ## Official
@@ -63,9 +65,11 @@ Neural network trained on Tailwind palette to generate color shades.
 
 **shadcn-custom-theme**  
 Generate custom themes from Tailwind color names:
+
 ```bash
 npx shadcn-custom-theme primary=COLOR
 ```
+
 Outputs CSS variables to paste into globals.css.
 
 ---
