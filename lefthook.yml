@@ -40,7 +40,7 @@ pre-commit:
       run: npx vitest run
 
 pre-push:
-  parallel: true # Build and E2E tests are independent checks
+  parallel: false # `npm run build` locks, avoid race condition for Playwright
 
   commands:
     build:
