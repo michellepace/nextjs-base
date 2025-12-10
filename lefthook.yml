@@ -40,7 +40,13 @@ pre-commit:
       run: npx vitest run
 
 pre-push:
+  parallel: true # Build and E2E tests are independent checks
+
   commands:
+    build:
+    # Production build catches static generation errors (e.g. missing Suspense)
+      run: npm run build
+
     playwright-tests:
     # Playwright: E2E tests (when matching files change).
       glob:

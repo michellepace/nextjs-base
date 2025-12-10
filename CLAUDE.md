@@ -35,14 +35,8 @@ vercel list         # List project deployments
 ## Breaking Changes
 
 - Tailwind v4 uses `@import "tailwindcss"` syntax (not `@tailwind` directives)
-- Dynamic route `params` is a Promise - must be awaited in page components:
-
-   ```tsx
-   const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
-     const { id } = await params;
-     return <div>ID: {id}</div>;
-   };
-   ```
+- Next.js 16 Dynamic route `params` is a Promise - must await: `{ params }: { params: Promise<{ id: string }> }`
+- Next.js 16 Middleware renamed to Proxy - `middleware.ts` → `proxy.ts`, export `proxy()` not `middleware()`
 
 ## Common Additions for New Projects
 
