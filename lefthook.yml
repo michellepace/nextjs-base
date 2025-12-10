@@ -40,7 +40,13 @@ pre-commit:
       run: npx vitest run
 
 pre-push:
+  parallel: false # `npm run build` locks, avoid race condition for Playwright
+
   commands:
+    build:
+    # Production build catches static generation errors (e.g. missing Suspense)
+      run: npm run build
+
     playwright-tests:
     # Playwright: E2E tests (when matching files change).
       glob:

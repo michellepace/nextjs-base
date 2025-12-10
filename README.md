@@ -33,7 +33,7 @@ For exact list see [package.json](package.json)
 | Testing | [Vitest](https://vitest.dev) | Fast unit test runner (Vite-native, Jest-compatible) |
 | | [Playwright](https://playwright.dev) | E2E browser testing (Chromium, Firefox, WebKit, Mobile) |
 | | [Testing Library](https://testing-library.com) | React component testing utilities |
-| Git Hooks | [Lefthook](https://lefthook.dev) | Runs checks on commit/push (lint, typecheck, tests) |
+| Git Hooks | [Lefthook](https://lefthook.dev) | Runs checks on commit (lint, typecheck, unit tests) and push (build, E2E tests) |
 | Optimisation | [React Compiler](https://react.dev/learn/react-compiler) | Automatic memoisation and performance optimisations |
 | Analytics | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) | Real user performance metrics viewable on Vercel |
 | | [Vercel Web Analytics](https://vercel.com/docs/analytics) | Privacy-friendly visitor analytics viewable on Vercel |
@@ -79,7 +79,7 @@ npm install                 # Install updated versions
 | 🅽 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
 | 🅽 [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
 | 🧪 [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
-| 🧪 [lefthook.yml](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and E2E tests on push |
+| 🧪 [lefthook.yml](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and build + E2E tests on push |
 | 🧪 [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
 | 🧪 [playwright.config.ts](playwright.config.ts) | Playwright E2E test runner configuration | Sets test browsers (desktop + mobile), parallel execution, and base URLs |
 | 🧪 [.playwright/](.playwright/) | Playwright test outputs (custom organisation) | Contains test artifacts in `test-results/` and HTML `playwright-report/` (all Playwright outputs nested under `/.playwright/` for clean structure) |
@@ -114,7 +114,8 @@ This diagram shows how CI automation integrates into a typical development workf
   │
   └─ Commit 3: (some more work here)        ⚡ pre-commit hook runs again
 
-  git push origin feature/add-dark-mode     ⚡ pre-PUSH hook runs
+  git push origin feature/add-dark-mode     ⚡ pre-PUSH hook runs (~20s)
+     ├─ 🏗️  Next.js production build             ✅ Pass
      └─ 🎭 Playwright E2E tests                 ✅ Pass (then pushed to GH)
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -168,7 +169,8 @@ This diagram shows how CI automation integrates into a typical development workf
 
   ├─ Commit 4: Use const instead of let     ⚡ pre-commit hook runs
 
-  git push origin feature/add-dark-mode     ⚡ pre-push hook runs
+  git push origin feature/add-dark-mode     ⚡ pre-push hook runs (~20s)
+     ├─ 🏗️  Next.js production build             ✅ Pass
      └─ 🎭 Playwright E2E tests                 ✅ Pass (then pushed to GH)
 
 ┌─────────────────────────────────────────────────────────────────────────────┐

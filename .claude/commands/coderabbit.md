@@ -12,14 +12,16 @@ Parse `$1` to extract owner, repo, and comment ID.
 # strips analysis chain
 gh api repos/OWNER/REPO/pulls/comments/COMMENT_ID \
   --jq '.body | gsub("<details>\\s*<summary>🧩 Analysis chain</summary>[\\s\\S]*?</details>\\s*"; "")' \
-  > z_comment.md
+  > z_rabbit_comment.md
 ```
+
+**Important:** Write `z_rabbit_comment.md` to the project root (current working directory), not `/tmp/`.
 
 ## 2. Evaluate
 
 CodeRabbit AI is not always right.
 
-Evaluate the comment `z_comment.md` against the context of our codebase and files it references. Assess:
+Evaluate the comment `z_rabbit_comment.md` against the context of our codebase and files it references. Assess:
 
 | Criterion | Question |
 |-----------|----------|
