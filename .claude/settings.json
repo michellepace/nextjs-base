@@ -1,13 +1,26 @@
 {
+  "extraKnownMarketplaces": {
+    "playwright-skill": {
+      "source": {
+        "source": "github",
+        "repo": "lackeyjb/playwright-skill"
+      }
+    }
+  },
   "permissions": {
+    "deny": ["Read(**/.env)", "Read(**/.envrc)"],
+    "ask": [],
+
     "allow": [
       "mcp__ide__getDiagnostics",
 
       "Bash(claude mcp get:*)",
       "Bash(claude mcp list)",
 
+      "mcp__playwright__browser_click",
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_evaluate",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_navigate_back",
       "mcp__playwright__browser_network_requests",
@@ -21,9 +34,10 @@
       "Bash(cat:*)",
       "Bash(echo:*)",
       "Bash(find:*)",
-      "Bash(glob:*)",
       "Bash(lsof:*)",
+      "Bash(ls:*)",
       "Bash(sed:*)",
+      "Bash(tree:*)",
       "Bash(wc:*)",
       "Bash(xargs:*)",
 
@@ -57,10 +71,6 @@
       "WebFetch(domain:ui.shadcn.com)",
       "WebFetch(domain:vercel.com)",
       "WebFetch(domain:vitest.dev)"
-    ],
-
-    "deny": ["Read(**/.env)", "Read(**/.envrc)"],
-
-    "ask": []
+    ]
   }
 }
