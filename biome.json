@@ -24,6 +24,14 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "style": {
+        "useConsistentTypeDefinitions": {
+          "level": "error",
+          "options": {
+            "style": "type"
+          }
+        }
+      },
       "suspicious": {
         "noUnknownAtRules": "off"
       }
