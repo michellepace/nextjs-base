@@ -72,9 +72,10 @@ npm install                 # Install updated versions
 | ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Write commits, evaluate CodeRabbit comments etc. |
+| 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
 | 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
 | 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | e.g. Playwright MCP so Claude Code can "see" app and adjust |
-| 🌺 [CLAUDE.md](CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
+| 🌺 [.claude/CLAUDE.md](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
 | 🅽 [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
 | 🅽 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
 | 🅽 [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
@@ -231,3 +232,14 @@ Key CI Takeaways
 (3) GitHub - A branch protection ruleset to be setup to protect main. Incldues checks for GitHub workflow jobs to pass before merging PR to main. See [x_docs/project-setup.md](x_docs/project-setup.md).
 
 (4) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [x_docs/project-setup.md](x_docs/project-setup.md).
+
+## Common Additions for New Projects
+
+When starting a new project from this template, you'll typically add:
+
+- UI components (shadcn/ui, Radix, Tailwind UI kit, or Headless UI)
+- State management (Zustand, Jotai, or React Context)
+- Data fetching (React Query, SWR, or native fetch with Server Components)
+- Forms (React Hook Form, Zod for validation)
+- Authentication (NextAuth.js, Clerk, or Supabase Auth)
+- Database/ORM (Neon or Supabase with Prisma or Drizzle. Or try Convex!)

@@ -1,15 +1,9 @@
 {
   // General editor settings
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on",
   "window.commandCenter": true,
   "editor.colorDecorators": true,
-  "files.associations": { "*.css": "tailwindcss" }, // recommended by tailwind
-  "editor.quickSuggestions": { "strings": "on" }, // recommended by tailwind
-  "files.exclude": {
-    "**/.next": true, // Hide Next.js build output
-    "**/node_modules": true, // Hide npm installed dependencies
-    "next-env.d.ts": true, // Hide Next.js file (uneditable)
-    "tsconfig.tsbuildinfo": true // Hide TypeScript build info file
-  },
 
   // Markdownlint: Markdown linting (matches CodeRabbit)
   "[markdown]": {
@@ -18,11 +12,20 @@
     }
   },
 
+  // TAILWIND
+  "files.associations": { "*.css": "tailwindcss" }, // recommended by tailwind
+  "editor.quickSuggestions": { "strings": "on" }, // recommended by tailwind
+  "files.exclude": {
+    "**/.next": true, // Hide Next.js build output
+    "**/node_modules": true, // Hide npm installed dependencies
+    "next-env.d.ts": true, // Hide Next.js file (uneditable)
+    "tsconfig.tsbuildinfo": true // Hide TypeScript build info file
+  },
   // Tailwind CSS IntelliSense
   "tailwindCSS.experimental.configFile": "app/globals.css", // required
   "tailwindCSS.validate": true, // linting
 
-  // Biome: formatting, linting, import organization
+  // Biome: formatting, linting, import organisation
   "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

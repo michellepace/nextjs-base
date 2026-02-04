@@ -47,6 +47,7 @@
       "Bash(gh run list:*)",
       "Bash(gh run view:*)",
 
+      "Bash(npm outdated)",
       "Bash(npm run build)",
       "Bash(npm run dev)",
       "Bash(npm run start)",
