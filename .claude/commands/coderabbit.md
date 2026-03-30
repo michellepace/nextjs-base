@@ -9,9 +9,9 @@ allowed-tools: Bash(gh api:*), Read, Glob, Grep
 Parse `$1` to extract owner, repo, and comment ID.
 
 ```bash
-# strips analysis chain
+# strips analysis chain, includes diff context
 gh api repos/OWNER/REPO/pulls/comments/COMMENT_ID \
-  --jq '.body | gsub("<details>\\s*<summary>🧩 Analysis chain</summary>[\\s\\S]*?</details>\\s*"; "")' \
+  --jq '"## Diff context\n\n```diff\n" + .diff_hunk + "\n```\n\n## Comment\n\n" + (.body | gsub("<details>\\s*<summary>🧩 Analysis chain</summary>[\\s\\S]*?</details>\\s*"; ""))' \
   > x_coderabbit_COMMENT_ID.md
 ```
 
@@ -46,7 +46,7 @@ Well structured, use emojis, if using tables keep width <100 chars for readabili
 
 ## Replying to CodeRabbit on GitHub
 
-When you recommend to skip a fix, offer if the user would like to reply back to coderabbit.
+When you recommend skipping a fix, ask whether the user would like to reply to CodeRabbit.
 
 To reply to a PR review comment, use `in_reply_to` on the pull comments endpoint:
 
