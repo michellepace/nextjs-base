@@ -60,18 +60,7 @@
       "Bash(npm run typecheck)",
       "Bash(npx @biomejs/biome:*)",
       "Bash(npx lefthook:*)",
-      "Bash(npx playwright:*)",
-
-      "WebFetch(domain:biomejs.dev)",
-      "WebFetch(domain:docs.github.com)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:lefthook.dev)",
-      "WebFetch(domain:nextjs.org)",
-      "WebFetch(domain:playwright.dev)",
-      "WebFetch(domain:tailwindcss.com)",
-      "WebFetch(domain:ui.shadcn.com)",
-      "WebFetch(domain:vercel.com)",
-      "WebFetch(domain:vitest.dev)"
+      "Bash(npx playwright:*)"
     ]
   }
 }
