@@ -6,22 +6,32 @@
   <a href="x_docs/images/app_screenshot.jpg" target="_blank">
     <img src="x_docs/images/app_screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
   </a>
-  <p><em>Template homepage with theming setup — UI component library still needed</em></p>
+  <p><em>Template homepage with light/dark mode setup — UI component library still needed</em></p>
 </div>
 
 ---
 
 ## 🎯 Use This Template
 
-(1) Follow [x_docs/project-setup.md](x_docs/project-setup.md) to clone, set up GitHub, set up Vercel.
+**(1) Get This Repo.** Click "Use this template" → creates a new repository on your GitHub with no commit history — a fresh start. Then clone it locally:
 
-(2) Choose a UI component approach that supports Tailwind 4, for example:
+```bash
+git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
+cd YOUR-REPO
+npm install
+```
 
-- [shadcn/ui](https://ui.shadcn.com/) (free). Safe choice, LLM friendly, visually common (style!)
-- [Tailwind Plus](https://tailwindcss.com/plus) (paid). Tailwind-made UI components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), ready to use [UI blocks](https://tailwindcss.com/plus/ui-blocks) (think assembled components), and full site [templates](https://tailwindcss.com/plus/templates) but limited.
-- [HeroUI v3](https://heroui.com/) (free, paid coming). Very LLM friendly. An installed component library. A solid shadcn alternative for visual identity and richer defaults.
+**(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [extensions.json](.vscode/extensions.json)
 
-(3) Replace page.tsx, layout.tsx, counter.tsx, button.tsx, theme-toggle.tsx (use an icon), globals.css, fonts.ts
+**(3) GitHub + Vercel Setup.** Follow [x_docs/project-setup.md](x_docs/project-setup.md) to set up GitHub and Vercel.
+
+**(4) Housekeeping.** Recommended to remove [x_docs/](x_docs/) (these are my working files). Modify [CLAUDE.md](.claude/CLAUDE.md), [.mcp.json](.mcp.json), and [commands/](.claude/commands) as preferred.
+
+**(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
+
+**(6) Decide on Icons.** Each UI library above ships with icons — shadcn/ui uses [Lucide React](https://lucide.dev/guide/react/), Tailwind Plus (Catalyst) uses [Heroicons](https://heroicons.com/), HeroUI uses [Iconify](https://iconify.design/). All three let you swap to a different icon library.
+
+**(7) Replace Template Files.** Replace `page.tsx`, `layout.tsx`, `counter.tsx`, `button.tsx`, `globals.css`, (centralised theming), `fonts.ts`, and `theme-toggle.tsx` (use an icon).
 
 ## What's Installed?
 
@@ -43,9 +53,20 @@ For exact list see [package.json](package.json)
 | Analytics | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) | Real user performance metrics viewable on Vercel |
 | | [Vercel Web Analytics](https://vercel.com/docs/analytics) | Privacy-friendly visitor analytics viewable on Vercel |
 
-![Explained banner](x_docs/images/explained.jpg)
+## Common Additions for New Projects
 
-## 📦 Next.js Installation Explained
+When starting a new project from this template, you'll typically add:
+
+- UI components (shadcn/ui, HeroUI v3, Tailwind Plus, etc.)
+- State management (Zustand, Jotai, or React Context)
+- Data fetching (React Query, SWR, or native fetch with Server Components)
+- Forms (React Hook Form, Zod for validation)
+- Authentication (NextAuth.js, Clerk, or Supabase Auth)
+- Database/ORM (Neon or Supabase with Prisma or Drizzle. Or try Convex!)
+
+![Explained banner](x_docs/images/template-explained.png)
+
+## Next.js Installation Explained
 
 This template was initialised with the following options and then updated:
 
@@ -67,7 +88,7 @@ npx npm-check-updates -u    # Rewrite package.json with latest
 npm install                 # Install updated versions
 ```
 
-## ⚙️ Config Files Explained
+## Config Files Explained
 
 | File | What | Generally In This Project Template |
 | :----- | :----- | :------------------ |
@@ -76,10 +97,10 @@ npm install                 # Install updated versions
 | ▢ [.markdownlint.yaml](.markdownlint.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing |
 | ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Write commits, evaluate CodeRabbit comments etc. |
+| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Write commits, evaluate CodeRabbit comments, post-merge cleanup |
 | 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
 | 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
-| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | e.g. Playwright MCP so Claude Code can "see" app and adjust |
+| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Playwright MCP for browser testing, Ref MCP for docs search |
 | 🌺 [.claude/CLAUDE.md](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
 | 🅽 [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
 | 🅽 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
@@ -99,7 +120,7 @@ npm install                 # Install updated versions
 
 ---
 
-## 🔄 CI/CD Workflow Explained
+## CI/CD Workflow Explained
 
 This diagram shows how CI automation integrates into a typical development workflow:
 
@@ -154,12 +175,14 @@ This diagram shows how CI automation integrates into a typical development workf
   ── Meanwhile, Vercel deploys Preview ──────────────────────────
 
   🚀 Vercel: Preview deployment ready
+     ├─ ✅ Vercel deployment status check        (required to merge)
      └─ Sends repository_dispatch event to GitHub
 
-  └─ 🤖 Workflow 4: E2E Tests on Vercel Preview
+  └─ 🤖 Workflow 4: E2E Tests (Vercel Preview)
      ├─ Triggered by Vercel (not PR event)
      ├─ Runs Playwright against live Preview URL
-     └─ Tests real Vercel deployment             ✅ Pass
+     ├─ Tests real Vercel deployment             ✅ Pass
+     └─ Reports status back to PR commit
 
   GITHUB PR Status: ✅ All checks passed
 
@@ -195,9 +218,9 @@ This diagram shows how CI automation integrates into a typical development workf
   Okay I'm ready! [Merge Pull Request] ← Click! 🎉
 
   ┌─────────────────────────────────────────────┐
-  │ Branch Protection Verified:                 │
-  │ ✅ All status checks passed                │
-  │ ✅ Branch is up to date with main          │
+  │ Ruleset Verified: "Protect main branch"     │
+  │ ✅ All 5 required status checks passed      │
+  │ ✅ Branch is up to date with main           │
   └─────────────────────────────────────────────┘
 
   main branch updated (merge commit preserves 4 commits)
@@ -208,13 +231,13 @@ Key CI Takeaways
 
 - Local Hooks — Catch issues before commit or reaching GitHub
 - GitHub Actions — Validate every PR with fresh environment (reproducible CI)
-- Branch Protection — Prevents merging broken code (all checks must pass)
+- GitHub Ruleset — Prevents merging broken code (all checks must pass)
 - Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
-![Quick rough notes](x_docs/images/rough.jpg)
+![Quick rough notes](x_docs/images/rough-notes.png)
 
-## 📝 Quick Notes
+## Quick Notes
 
 (1) Use Ngrok to Test App From Phone
 
@@ -234,17 +257,6 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(3) GitHub - A branch protection ruleset to be setup to protect main. Incldues checks for GitHub workflow jobs to pass before merging PR to main. See [x_docs/project-setup.md](x_docs/project-setup.md).
+(3) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [x_docs/project-setup.md](x_docs/project-setup.md).
 
 (4) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [x_docs/project-setup.md](x_docs/project-setup.md).
-
-## Common Additions for New Projects
-
-When starting a new project from this template, you'll typically add:
-
-- UI components (shadcn/ui, Radix, Tailwind UI kit, or Headless UI)
-- State management (Zustand, Jotai, or React Context)
-- Data fetching (React Query, SWR, or native fetch with Server Components)
-- Forms (React Hook Form, Zod for validation)
-- Authentication (NextAuth.js, Clerk, or Supabase Auth)
-- Database/ORM (Neon or Supabase with Prisma or Drizzle. Or try Convex!)
