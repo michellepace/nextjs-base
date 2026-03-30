@@ -18,7 +18,8 @@
 ```bash
 git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
 cd YOUR-REPO
-npm install
+npm install   # Install dependencies
+npm run dev   # Open http://localhost:3000 to see app running
 ```
 
 **(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [extensions.json](.vscode/extensions.json)
