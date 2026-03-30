@@ -13,11 +13,15 @@
 
 ## 🎯 Use This Template
 
-1. Follow [x_docs/project-setup.md](x_docs/project-setup.md) to clone, set up GitHub, set up Vercel.
+(1) Follow [x_docs/project-setup.md](x_docs/project-setup.md) to clone, set up GitHub, set up Vercel.
 
-2. Install UI components like shadcn/ui
+(2) Choose a UI component approach that supports Tailwind 4, for example:
 
-3. Replace page.tsx, layout.tsx, counter.tsx, button.tsx, theme-toggle.tsx (use an icon), globals.css, fonts.ts
+- [shadcn/ui](https://ui.shadcn.com/) (free). Safe choice, LLM friendly, visually common (style!)
+- [Tailwind Plus](https://tailwindcss.com/plus) (paid). Tailwind-made UI components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), ready to use [UI blocks](https://tailwindcss.com/plus/ui-blocks) (think assembled components), and full site [templates](https://tailwindcss.com/plus/templates) but limited.
+- [HeroUI v3](https://heroui.com/) (free, paid coming). Very LLM friendly. An installed component library. A solid shadcn alternative for visual identity and richer defaults.
+
+(3) Replace page.tsx, layout.tsx, counter.tsx, button.tsx, theme-toggle.tsx (use an icon), globals.css, fonts.ts
 
 ## What's Installed?
 
@@ -25,7 +29,8 @@ For exact list see [package.json](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
-| Language | [TypeScript 5](https://www.typescriptlang.org) | Static type checking with strict mode enabled |
+| Framework | [Next.js 16.2.1](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
+| Language | [TypeScript 6](https://www.typescriptlang.org) | Static type checking with strict mode enabled |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
 | | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |
 | Linting | [Biome](https://biomejs.dev) | Fast linter and formatter (replaces ESLint + Prettier) |
