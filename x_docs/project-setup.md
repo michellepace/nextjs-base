@@ -73,7 +73,7 @@ Go to **Settings** → **Advanced Security** → **Dependabot**
 
 ## 🧪 Part 4: Trigger Initial Workflows
 
-Create a test PR to trigger all workflows. This ensures status check names exist in GitHub before configuring branch protection.
+Create a test PR to trigger all workflows. This ensures status check names exist in GitHub before configuring the branch ruleset.
 
 1. Create a branch, make a small change (e.g., edit README), push, open PR
 2. Wait for all workflows to complete:
@@ -88,7 +88,7 @@ Create a test PR to trigger all workflows. This ensures status check names exist
 
 ---
 
-## 🔒 Part 5: Branch Protection Ruleset
+## 🔒 Part 5: Branch Ruleset
 
 Now that all workflows have run, their check names are available in GitHub.
 
