@@ -1,36 +1,38 @@
 ---
-description: Create git commit for staged changes using template
+description: Create git commit message following template
+argument-hint: "[additional instructions]"
 ---
 
 # Create a clear Git commit message for **staged** changes
 
+Additional user instructions: $ARGUMENTS
+
 1. Analyse staged changes with commands in `<commit_context>` tags
-2. Apply commit template `<template>` with appropriate `<main_prefix>`
-3. Adhere to rules in `<rules>` tags
+2. Read and adhere to these rules in `<rules>` tags
+3. Apply commit template `<template>` with appropriate `<main_prefix>`
 
 <commit_context>
 
 - Branch context: `git branch --show-current`
-- Files changed: `git diff --cached --name-status`
 - Change volume: `git diff --cached --stat`
 - Detailed changes: `git diff --cached`
+- Recent commits: `git log --oneline -4`
 </commit_context>
 
 <template>
 
 [main_prefix]: [brief main summary in imperative mood]
 
-[Logical Group Name 1]:
+[Section heading]:
 
 - [Significant changes and impact over minor details]
-- ["Just enough detail" for collective project evolution]
+- [Write for someone reading this git log in 6 months]
 
-[Logical Group Name n (if needed)]:
+[Additional section (for multi-concern commits)]:
 
 - [etc.]
 
-[2-3 terse sentences of why / benefit / impact. Wrap at 90 characters]
-
+[2-3 terse sentences of why / benefit / impact]
 </template>
 
 <main_prefix>
@@ -44,16 +46,13 @@ description: Create git commit for staged changes using template
 - `refactor:` code changes that neither fix bugs nor add features
 - `style:` code formatting, visual consistency, linting fixes; no functional change
 - `chore:` dev workflow, workspace config, dependency updates, dev tools e.g. `.vscode/**/*`, `pyproject.toml`, `.gitignore`
-- `docs:` documentation changes only e.g. `README.md`, `docs/**/*.md`
-- `feature:` new feature for users (adds functionality)
+- `docs:` documentation changes only e.g. `README.md`, `docs/**/*.md`, `x_docs/**/*.md`
+- `feat:` new feature for users (adds functionality)
 </main_prefix>
 
 <rules>
-
 - Use British spelling
-- Use factual tone, avoid hyperbolic language
-- Avoid marketing adjectives (comprehensive, complete, enhanced, improved, etc.)
-- Use fitting amount of detail proportional to commit scope
-- Wrap the terse sentences so that no line exceeds 90 characters
-
+- Use factual tone - no hyperbole or marketing adjectives
+- Scale detail to commit scope (sections not needed for small changes)
+- Wrap text at 80-90 characters (NOT the git convention of 60-65)
 </rules>
