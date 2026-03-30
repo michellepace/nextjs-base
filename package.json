@@ -44,7 +44,7 @@
     "baseline-browser-mapping": "^2.10.12",
     "jsdom": "^28.1.0",
     "lefthook": "^2.1.4",
-    "markdownlint-cli2": "^0.20.0",
+    "markdownlint-cli2": "^0.22.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^6.1.1",
