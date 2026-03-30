@@ -60,7 +60,18 @@
       "Bash(npm run typecheck)",
       "Bash(npx @biomejs/biome:*)",
       "Bash(npx lefthook:*)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+
+      "Bash(npx vercel:*)",
+      "Bash(vercel --help)",
+      "Bash(vercel env --help)",
+      "Bash(vercel env ls:*)",
+      "Bash(vercel git --help)",
+      "Bash(vercel integration --help)",
+      "Bash(vercel list:*)",
+      "Bash(vercel open)",
+      "Bash(vercel project ls:*)",
+      "Bash(vercel whoami)"
     ]
   }
 }

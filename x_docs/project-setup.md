@@ -4,24 +4,32 @@ This guide documents the manual configuration required after creating a repo fro
 
 ## 📦 Part 1: Clone `nextjs-base` repo
 
-Assuming the new project is called "my_proj", run:
+If you skipped the "Use this template" step in the README and want your new project called "my-project", run:
 
 ```bash
-gh repo create my_proj --template michellepace/nextjs-base --clone --public
+gh repo create my-project --template michellepace/nextjs-base --clone --public
 ```
 
 What does this do?
 
-- Creates `my_proj` repo on GitHub (from the template)
-- Clones the repo locally to your machine in folder my_proj
+- Creates `my-project` repo on GitHub (from the template)
+- Clones the repo locally to your machine in folder my-project
 - Initial commit with template in it
+
+Then:
+
+```bash
+cd my-project # Enter project directory
+npm install   # Install dependencies
+npm run dev   # Open http://localhost:3000 to see app running
+```
 
 ## 🚀 Part 2: Vercel Setup
 
 ### 2.1 Create Vercel Project
 
 1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import the `my_proj` repository (default settings)
+2. Import the `my-project` repository (default settings)
 3. Click **Deploy** → wait for deploy
 4. Click **Continue to Dashboard**: enable Analytics and Speed Insights
 
@@ -33,12 +41,15 @@ This allows Playwright tests to run against Vercel preview deployments.
 
 1. Vercel → Project → **Settings** → **Deployment Protection**
 2. Scroll to **Protection Bypass for Automation**
-3. Click **Add Secret** and copy the secret name and value
+3. Click **Add Secret**, add note: `Playwright E2E tests (preview)`,
+4. Copy the secret name (VERCEL_AUTOMATION_BYPASS_SECRET) and value
 
 **Step B: Add secret to GitHub**
 
 1. GitHub Repo → **Settings** → **Secrets and variables** → **Actions**
 2. Click **New repository secret** → Add secret name and value from Vercel
+
+Alternatively run: `gh secret set VERCEL_AUTOMATION_BYPASS_SECRET`
 
 ### 2.3 Link Vercel CLI (optional)
 
@@ -46,7 +57,8 @@ Install the [Vercel CLI](https://vercel.com/docs/cli) globally and link it to yo
 
 ```bash
 
-npm i -g vercel   # Install vercel globally
+npm i -g vercel   # Install vercel globally if you don't have it
+vercel upgrade    # Otherwise get the latest version
 vercel --version  # See installed version
 
 vercel link # Link project (creates .vercel/)
@@ -69,22 +81,25 @@ Go to **Settings** → **Advanced Security** → **Dependabot**
 
 - [ ] **Grouped security updates**: ✅ Enable (auto-PRs to fix vulnerabilities)
 
+Dependabot will only open PRs — it never merges them. You still review and merge manually.
+
 ---
 
 ## 🧪 Part 4: Trigger Initial Workflows
 
 Create a test PR to trigger all workflows. This ensures status check names exist in GitHub before configuring the branch ruleset.
 
-1. Create a branch, make a small change (e.g., edit README), push, open PR
+1. Create a branch, make a small change (e.g., edit README), commit, push, open PR
 2. Wait for all workflows to complete:
    - `Run Lint & Type Checks`
    - `Run Unit Tests`
    - `Run E2E Tests`
    - `Vercel` (preview deployment)
    - `Run E2E Tests on Preview`
-3. Vercel → project overview → click "Deployment" URL to verify preview
-4. GitHub → Merge the pull request
-5. Vercel → project overview → click "Domains" URL to verify production
+3. Vercel → project overview → click "Deployment" URL to verify preview. Or ask Claude Code: `vercel list — find the most recent Preview deployment URL`
+4. GitHub → Merge the pull request (or again ask Claude Code)
+5. Now run `/merge-cleanup` to ensure clean Git / GitHub status
+6. Vercel → project overview → click "Domains" URL to verify production. Or ask Claude Code: `vercel list — find the most recent Production deployment URL`
 
 ---
 
@@ -119,6 +134,23 @@ Configure as follows:
 - [ ] ✅ **Block force pushes**
 
 Click **Create** to save.
+
+Alternatively, copy this prompt to Claude Code
+
+```markdown
+Create a GitHub branch ruleset called "Protect main branch" for the default branch.
+Use `gh api` to get the exact check names from the most recent PR's head commit
+(both check-runs and statuses endpoints), then create the ruleset via
+`gh api repos/{owner}/{repo}/rulesets --method POST` with these rules:
+- deletion (restrict deletions)
+- pull_request (allowed_merge_methods: ["merge"] only, 0 required approvals)
+- required_status_checks (strict policy, do not enforce on create, include all
+  GitHub Actions checks and the Vercel deploy status — use the exact context
+  strings from the API response)
+- non_fast_forward (block force pushes)
+
+Verify by fetching the rulesets list afterwards. Then double check against: `project-setup.md` section "## 🔒 Part 5: Branch Ruleset".
+```
 
 ---
 
