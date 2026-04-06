@@ -1,12 +1,12 @@
 ---
 description: Evaluate CodeRabbit comment and recommend whether to action it
-argument-hint: <comment-url>
-allowed-tools: Bash(gh api:*), Read, Glob, Grep
+argument-hint: <CodeRabbit comment link (https://github.com/username/repo/pull/3#discussion_r3019655555)>
+allowed-tools: Read, Glob, Grep, Bash(gh api *), Bash(rm x_coderabbit_*)
 ---
 
 ## 1. Fetch
 
-Parse `$1` to extract owner, repo, and comment ID.
+Parse `$1` to extract owner, repo, PR number, and comment ID.
 
 ```bash
 # strips analysis chain, includes diff context
@@ -29,31 +29,68 @@ Evaluate the comment `x_coderabbit_COMMENT_ID.md` against the context of our cod
 | **Valuable** | Worth doing? Good practice? Or is it over-engineering? |
 | **Elegant** | Is the suggested fix pragmatic and clean? |
 
-## 3. Recommend
+## 3. Recommend & Confirm
 
-1. **Summary**: Explain the comment (2-4 simple sentences)
+Follow this output structure:
 
-2. **Verdict**: [Action | Skip | Clarify]
-    - **Action** - Valid and valuable; implement (or with modifications)
-    - **Skip** - Not applicable, over-engineered, or incorrect
-    - **Clarify** - Need more information before deciding
+<structure>
+🐰 CodeRabbit Review: [Terse title for comment]
 
-3. **Reasoning**: Why this verdict (2-3 sentences)
+📋 Summary: [Explain the comment, 2-4 simple sentences]
 
-## Output Format
+🏷️ Verdict: [Action | Skip | Clarify]
+- **Action** - Valid and valuable; implement (or with modifications)
+- **Skip** - Not applicable, over-engineered, or incorrect
+- **Clarify** - Need more information before deciding
 
-Well structured, use emojis, if using tables keep width <100 chars for readability.
+💬 Reasoning: [Why this verdict, 2-3 simple sentences]
+</structure>
 
-## Replying to CodeRabbit on GitHub
+**Output Format:** Well structured, use emojis, if using tables keep width <100 chars for readability.
 
-When you recommend skipping a fix, ask whether the user would like to reply to CodeRabbit.
+Ask for confirmation before proceeding with the verdict.
 
-To reply to a PR review comment, use `in_reply_to` on the pull comments endpoint:
+## 4. Reply To CodeRabbit and Resolve
+
+After actioning or skipping, offer to reply to CodeRabbit **and** resolve the thread. Reply first, then resolve. Never do either without user confirmation.
+
+<reply>
+Keep replies concise. State reason for action or skip.
 
 ```bash
 gh api repos/OWNER/REPO/pulls/PULL_NUMBER/comments \
   -f body="@coderabbitai ..." \
   -F in_reply_to=COMMENT_ID
 ```
+</reply>
 
-Never reply to a CodeRabbit comment unless confirmed by the user.
+<resolve>
+Resolve thread:
+
+```bash
+gh api graphql -f query='{
+  repository(owner: "OWNER", name: "REPO") {
+    pullRequest(number: PULL_NUMBER) {
+      reviewThreads(first: 50) {
+        nodes {
+          id
+          comments(first: 1) { nodes { databaseId } }
+        }
+      }
+    }
+  }
+}' --jq '.data.repository.pullRequest.reviewThreads.nodes[]
+  | select(.comments.nodes[0].databaseId == COMMENT_ID) | .id' \
+| xargs -I{} gh api graphql -f query='mutation {
+  resolveReviewThread(input: { threadId: "{}" }) {
+    thread { isResolved }
+  }
+}' --jq '.data.resolveReviewThread.thread.isResolved'
+```
+</resolve>
+
+## 5. Wrap-up
+
+Clean up: `rm x_coderabbit_COMMENT_ID.md`
+
+State final summary, in 4-10 words and emoji.
