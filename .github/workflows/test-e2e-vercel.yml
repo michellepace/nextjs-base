@@ -89,7 +89,7 @@ jobs:
       # to the original commit SHA so the PR's required check is satisfied
       - name: Report status to PR
         if: always()
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const state = '${{ job.status }}' === 'cancelled' ? 'error' : '${{ job.status }}';
