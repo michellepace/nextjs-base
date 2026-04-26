@@ -12,7 +12,7 @@ npx @next/codemod@latest agents-md
 npx heroui-cli@latest agents-md --react
 ```
 
-**SOURCE:** <https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals> — published `2026-01-17`
+**SOURCE:** https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals — published `2026-01-17`
 
 ## Introduction
 
