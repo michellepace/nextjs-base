@@ -19,6 +19,7 @@
 git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
 cd YOUR-REPO
 npm install   # Install dependencies
+npm install -g typescript-language-server typescript   # For Claude Code typescript-lsp plugin
 npm run dev   # Open http://localhost:3000 to see app running
 ```
 

@@ -60,15 +60,24 @@
     "deny": ["Read(**/.env)", "Read(**/.envrc)"],
     "ask": []
   },
+  "enabledPlugins": {
+    "git-utils@my-claude-marketplace": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": false,
+    "feature-dev@claude-plugins-official": false
+  },
   "extraKnownMarketplaces": {
     "my-claude-marketplace": {
       "source": {
         "source": "github",
         "repo": "michellepace/my-claude-marketplace"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
-  },
-  "enabledPlugins": {
-    "git-utils@my-claude-marketplace": true
   }
 }
