@@ -191,7 +191,7 @@ The agent knows where to find docs without having full content in context. When 
 
 One command sets this up for your Next.js project:
 
-`npx @next/codemod@canary agents-md`
+`npx @next/codemod@latest agents-md`
 
 This functionality is part of the official [`@next/codemod` package](https://github.com/vercel/next.js/pull/88961).
 
@@ -221,4 +221,4 @@ That said, for general framework knowledge, passive context currently outperform
 
 The goal is to shift agents from pre-training-led reasoning to retrieval-led reasoning. `AGENTS.md` turns out to be the most reliable way to make that happen.
 
-_Research and evals by_ [_Jude Gao_](https://x.com/gao_jude)_. CLI available at_ _`npx @next/codemod@canary agents-md`_
+_Research and evals by_ [_Jude Gao_](https://x.com/gao_jude)_. CLI available at_ _`npx @next/codemod@latest agents-md`_
