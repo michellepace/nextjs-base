@@ -18,6 +18,7 @@
   "files.exclude": {
     "**/.next": true, // Hide Next.js build output
     "**/node_modules": true, // Hide npm installed dependencies
+    "**/.ruff_cache": true, // Hide Ruff linter cache
     "next-env.d.ts": true, // Hide Next.js file (uneditable)
     "tsconfig.tsbuildinfo": true // Hide TypeScript build info file
   },

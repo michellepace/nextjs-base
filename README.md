@@ -1,10 +1,10 @@
-![Next.js 16 - a modern template repo](x_docs/images/github-social-thin.jpg)
+![Next.js 16 - a modern template repo](.xdocs/images/nextjs-hero.png)
 
 *A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main. Assumes Claude Code.*
 
 <div align="center">
-  <a href="x_docs/images/app_screenshot.jpg" target="_blank">
-    <img src="x_docs/images/app_screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
+  <a href=".xdocs/images/app_screenshot.jpg" target="_blank">
+    <img src=".xdocs/images/app_screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
   </a>
   <p><em>Template homepage with light/dark mode setup — UI component library still needed</em></p>
 </div>
@@ -19,14 +19,15 @@
 git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
 cd YOUR-REPO
 npm install   # Install dependencies
+npm install -g typescript-language-server typescript   # For Claude Code typescript-lsp plugin
 npm run dev   # Open http://localhost:3000 to see app running
 ```
 
 **(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [extensions.json](.vscode/extensions.json)
 
-**(3) GitHub + Vercel Setup.** Follow [x_docs/project-setup.md](x_docs/project-setup.md) to set up GitHub and Vercel.
+**(3) GitHub + Vercel Setup.** Follow [.xdocs/project-setup.md](.xdocs/project-setup.md) to set up GitHub and Vercel.
 
-**(4) Housekeeping.** Recommended to remove [x_docs/](x_docs/) (these are my working files). Modify [CLAUDE.md](.claude/CLAUDE.md), [.mcp.json](.mcp.json), and [commands/](.claude/commands) as preferred.
+**(4) Housekeeping.** Recommended to remove [.xdocs/](.xdocs/) (these are my working files). Modify [CLAUDE.md](.claude/CLAUDE.md) and [.mcp.json](.mcp.json) as preferred.
 
 **(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
 
@@ -40,7 +41,7 @@ For exact list see [package.json](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
-| Framework | [Next.js 16.2.1](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
+| Framework | [Next.js 16.2.4](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
 | Language | [TypeScript 6](https://www.typescriptlang.org) | Static type checking with strict mode enabled |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
 | | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |
@@ -65,7 +66,7 @@ When starting a new project from this template, you'll typically add:
 - Authentication (NextAuth.js, Clerk, or Supabase Auth)
 - Database/ORM (Neon or Supabase with Prisma or Drizzle. Or try Convex!)
 
-![Explained banner](x_docs/images/template-explained.png)
+![Explained banner](.xdocs/images/template-explained.png)
 
 ## Next.js Installation Explained
 
@@ -95,10 +96,9 @@ npm install                 # Install updated versions
 | :----- | :----- | :------------------ |
 | ▢ [.gitattributes](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
 | ▢ [.gitignore](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
-| ▢ [.markdownlint.yaml](.markdownlint.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing |
+| ▢ [.markdownlint-cli2.yaml](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
 | ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Write commits, evaluate CodeRabbit comments, post-merge cleanup |
 | 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
 | 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
 | 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Playwright MCP for browser testing, Ref MCP for docs search |
@@ -236,7 +236,7 @@ Key CI Takeaways
 - Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
-![Quick rough notes](x_docs/images/rough-notes.png)
+![Quick rough notes](.xdocs/images/rough-notes.png)
 
 ## Quick Notes
 
@@ -258,6 +258,6 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(3) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [x_docs/project-setup.md](x_docs/project-setup.md).
+(3) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
 
-(4) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [x_docs/project-setup.md](x_docs/project-setup.md).
+(4) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [.xdocs/project-setup.md](.xdocs/project-setup.md).

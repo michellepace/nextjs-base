@@ -8,10 +8,11 @@ A starter template repository — not a product. Clone it, add a UI component li
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router, React Compiler, TypeScript strict)
-- **Styling**: Tailwind CSS v4
-- **Testing**: Vitest + Testing Library (unit), Playwright (E2E)
-- **Quality**: Biome (lint + format, replaces ESLint/Prettier), Lefthook (git hooks)
+- **Framework**: Next.js 16.2 (React 19, App Router, React Compiler, TypeScript 6)
+- **Styling**: Tailwind CSS 4.2
+- **Testing**: Vitest 4.1 + Testing Library (unit), Playwright 1.59 (E2E)
+- **Quality**: Biome 2.4 (lint + format, replaces ESLint/Prettier)
+- **Git Hooks**: Lefthook 2.1
 - **Deployment**: Vercel (Preview on PR, Production on merge)
 
 ## Breaking Changes (Next.js 16 / Tailwind 4)
