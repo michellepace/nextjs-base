@@ -27,7 +27,7 @@ npm run dev   # Open http://localhost:3000 to see app running
 
 **(3) GitHub + Vercel Setup.** Follow [.xdocs/project-setup.md](.xdocs/project-setup.md) to set up GitHub and Vercel.
 
-**(4) Housekeeping.** Recommended to remove [.xdocs/](.xdocs/) (these are my working files). Modify [CLAUDE.md](.claude/CLAUDE.md), [.mcp.json](.mcp.json), and [commands/](.claude/commands) as preferred.
+**(4) Housekeeping.** Recommended to remove [.xdocs/](.xdocs/) (these are my working files). Modify [CLAUDE.md](.claude/CLAUDE.md) and [.mcp.json](.mcp.json) as preferred.
 
 **(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
 
@@ -99,7 +99,6 @@ npm install                 # Install updated versions
 | ▢ [.markdownlint-cli2.yaml](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
 | ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| 🌺 [.claude/commands/](.claude/commands) | Claude Code repeatable prompts | Write commits, evaluate CodeRabbit comments, post-merge cleanup |
 | 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
 | 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
 | 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Playwright MCP for browser testing, Ref MCP for docs search |

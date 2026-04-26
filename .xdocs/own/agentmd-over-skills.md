@@ -1,4 +1,4 @@
-# Vercel: `Agents.md`outperforms skills in our agent evals
+# Vercel: `AGENTS.md` outperforms skills in our agent evals
 
 ## Quick Start
 
@@ -12,7 +12,7 @@ npx @next/codemod@latest agents-md
 npx heroui-cli@latest agents-md --react
 ```
 
-**SOURCE:** <https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals> - published `2026-17-01`
+**SOURCE:** <https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals> — published `2026-01-17`
 
 ## Introduction
 
