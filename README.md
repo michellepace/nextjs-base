@@ -40,7 +40,7 @@ For exact list see [package.json](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
-| Framework | [Next.js 16.2.2](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
+| Framework | [Next.js 16.2.4](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
 | Language | [TypeScript 6](https://www.typescriptlang.org) | Static type checking with strict mode enabled |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
 | | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |

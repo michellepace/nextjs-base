@@ -1,9 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-
   "permissions": {
-    "deny": ["Read(**/.env)", "Read(**/.envrc)"],
-    "ask": [],
     "allow": [
       "Bash(cat *)",
       "Bash(claude mcp get *)",
@@ -59,6 +56,19 @@
       "mcp__playwright__browser_tabs",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_wait_for"
-    ]
+    ],
+    "deny": ["Read(**/.env)", "Read(**/.envrc)"],
+    "ask": []
+  },
+  "extraKnownMarketplaces": {
+    "my-claude-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "michellepace/my-claude-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "git-utils@my-claude-marketplace": true
   }
 }
