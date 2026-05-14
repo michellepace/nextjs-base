@@ -38,5 +38,5 @@ yarn-error.log*
 next-env.d.ts
 
 # Playwright
-.playwright/
-.playwright-mcp/
+.playwright/*
+!.playwright/cli.config.json

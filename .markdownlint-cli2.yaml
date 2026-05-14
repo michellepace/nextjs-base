@@ -3,6 +3,7 @@
 
 ignores:
   - "node_modules/**"
+  - ".claude/skills/**"  # Vendor skill content, not ours to lint
 
 # Disable only the rules that interfere with practical markdown writing
 config:
@@ -15,3 +16,4 @@ config:
   MD041: false  # First line doesn't need to be h1
   MD060: false  # Table column style (compact tables are fine)
   MD032: false  # Lists in templates don't need surrounding blank lines
+  MD034: false  # Allow bare URLs (don't auto-wrap in angle brackets)

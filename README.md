@@ -18,9 +18,21 @@
 ```bash
 git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
 cd YOUR-REPO
-npm install   # Install dependencies
-npm install -g typescript-language-server typescript   # For Claude Code typescript-lsp plugin
-npm run dev   # Open http://localhost:3000 to see app running
+
+# Install dependencies
+npm install
+
+# For Claude Code typescript-lsp plugin
+npm install -g typescript-language-server typescript
+
+# Claude Code uses for browser exploration (Global chosen)
+npm install -g @playwright/cli@latest
+
+# Ensure latest Playwright CLI skill
+playwright-cli install --skills
+
+# Open http://localhost:3000 to see app running
+npm run dev
 ```
 
 **(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [extensions.json](.vscode/extensions.json)
@@ -101,7 +113,7 @@ npm install                 # Install updated versions
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
 | 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
-| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Playwright MCP for browser testing, Ref MCP for docs search |
+| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
 | 🌺 [.claude/CLAUDE.md](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
 | 🅽 [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
 | 🅽 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
