@@ -3,6 +3,7 @@
 
 ignores:
   - "node_modules/**"
+  - ".claude/skills/**"  # Vendor skill content, not ours to lint
 
 # Disable only the rules that interfere with practical markdown writing
 config:
