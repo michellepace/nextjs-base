@@ -1,0 +1,11 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "launchOptions": { "channel": "chrome", "headless": true },
+    "contextOptions": { "viewport": { "width": 390, "height": 844 } }
+  },
+  "outputDir": ".playwright/cli-output",
+  "codegen": "typescript",
+  "console": { "level": "warning" },
+  "timeouts": { "navigation": 60000, "action": 5000 }
+}

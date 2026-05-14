@@ -19,6 +19,7 @@
       "Bash(npx @biomejs/biome *)",
       "Bash(npx lefthook *)",
       "Bash(npx playwright *)",
+      "Bash(playwright-cli *)",
       "Bash(tree *)",
       "Bash(vercel --help)",
       "Bash(vercel env --help)",
@@ -30,9 +31,7 @@
       "Bash(vercel project ls *)",
       "Bash(vercel whoami)",
       "Bash(wc *)",
-      "mcp__ide__getDiagnostics",
-      "mcp__playwright__browser_*",
-      "mcp__playwright__browser_run_code"
+      "mcp__ide__getDiagnostics"
     ],
     "deny": ["Read(**/.env*)", "Read(**/.envrc)"],
     "ask": []

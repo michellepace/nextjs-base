@@ -1,10 +1,5 @@
 {
   "mcpServers": {
-    "playwright": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["@playwright/mcp@latest", "--device", "iPhone 11"]
-    },
     "Ref": {
       "type": "http",
       "url": "https://api.ref.tools/mcp",
