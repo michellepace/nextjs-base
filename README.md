@@ -1,10 +1,12 @@
-![Next.js 16 - a modern template repo](.xdocs/images/nextjs-hero.png)
+# Next.js 16 Template
+
+![Next.js 16 - a modern template repo](xdocs/images/nextjs-hero.png)
 
 *A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main. Assumes Claude Code.*
 
 <div align="center">
-  <a href=".xdocs/images/app_screenshot.jpg" target="_blank">
-    <img src=".xdocs/images/app_screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
+  <a href="xdocs/images/app-screenshot.jpg" target="_blank">
+    <img src="xdocs/images/app-screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
   </a>
   <p><em>Template homepage with light/dark mode setup — UI component library still needed</em></p>
 </div>
@@ -37,9 +39,9 @@ npm run dev
 
 **(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [`.vscode/extensions.json`](.vscode/extensions.json)
 
-**(3) GitHub + Vercel Setup.** Follow [`.xdocs/project-setup.md`](.xdocs/project-setup.md) to set up GitHub and Vercel.
+**(3) GitHub + Vercel Setup.** Follow [`xdocs/project-setup.md`](xdocs/project-setup.md) to set up GitHub and Vercel.
 
-**(4) Housekeeping.** Recommended to remove [`.xdocs/`](.xdocs/) (these are my working files). Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) as preferred — note the latter installs my plugins and marketplaces into your clone, manage them with `/plugins`.
+**(4) Housekeeping.** Recommended to remove [`xdocs/`](xdocs/) (these are my working files). Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) as preferred — note the latter installs my plugins and marketplaces into your clone, manage them with `/plugins`.
 
 **(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
 
@@ -78,7 +80,7 @@ When starting a new project from this template, you'll typically add:
 - Authentication (NextAuth.js, Clerk, or Supabase Auth)
 - Database/ORM (Neon or Supabase with Prisma or Drizzle. Or try Convex!)
 
-![Explained banner](.xdocs/images/template-explained.png)
+![Explained banner](xdocs/images/template-explained.png)
 
 ## Next.js Installation Explained
 
@@ -248,7 +250,7 @@ Key CI Takeaways
 - Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
-![Quick rough notes](.xdocs/images/rough-notes.png)
+![Quick rough notes](xdocs/images/rough-notes.png)
 
 ## Quick Notes
 
@@ -262,8 +264,8 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [`.xdocs/project-setup.md`](.xdocs/project-setup.md).
+(2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [`xdocs/project-setup.md`](xdocs/project-setup.md).
 
-(3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [`.xdocs/project-setup.md`](.xdocs/project-setup.md).
+(3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [`xdocs/project-setup.md`](xdocs/project-setup.md).
 
 (4) Claude Code Plugins - Declared under `enabledPlugins` in [`.claude/settings.json`](.claude/settings.json). A plugin set to `false` is installed but switched off — deliberate, not broken. Switch one on via `/plugin` only when you actually need it, since every enabled plugin adds always-on context to each session (`claude plugin details <name>@<marketplace>` shows the token cost).

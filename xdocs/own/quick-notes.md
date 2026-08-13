@@ -1,3 +1,4 @@
+# Quick Notes
 
 ## 🍑 Browser caching on CI?
 

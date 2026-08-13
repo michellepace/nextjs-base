@@ -15,7 +15,7 @@
 - ✅ Keep: Understand what Tailwind resets, debug browser behaviour, see browser-specific fixes.
 
 | Need | Check | Then |
-|------|-------|------|
+| ------ | ------- | ------ |
 | "Why does X look weird?" | `preflight.css` | See what Tailwind reset |
 | "What colours are available?" | `default.theme.css` lines 5-246 | Pick from palette or customise |
 | "What text sizes exist?" | `default.theme.css` lines 268-293 | Use defaults or override |

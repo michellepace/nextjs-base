@@ -25,6 +25,12 @@ pre-commit:
       run: npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true
 
+    markdown-lint:
+    # config: .markdownlint-cli2.yaml
+      glob: "**/*.md"
+      run: npx markdownlint-cli2 --fix {staged_files}
+      stage_fixed: true
+
     type-check:
     # TypeScript type checking (every commit)
     # config: tsconfig.json

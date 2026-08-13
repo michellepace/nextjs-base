@@ -34,7 +34,7 @@ Use Zustand's persist middleware with sessionStorage to implement client-side se
 🎯 Key Improvements
 
 | Issue | Fix |
-|:---|:---|
+| :--- | :--- |
 | "Represent database" | → "Define data model/schema" |
 | "Easier than a database" | → "Easier than database migrations" |
 | "Play with application" | → "Interactive prototype" or "functional development" |

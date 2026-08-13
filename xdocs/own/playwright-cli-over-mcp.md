@@ -127,7 +127,7 @@ The snapshot file is the same accessibility tree you'd get from the MCP — but 
 ## ⚖️ Side-by-side comparison
 
 | Dimension | 🌐 Playwright MCP | 💻 Playwright CLI |
-|---|---|---|
+| --- | --- | --- |
 | **Best for** | Specialised agentic loops, exploratory automation, chat clients | Coding agents (Claude Code, Copilot) on large codebases |
 | **Calling convention** | LLM invokes structured MCP tools | Agent runs shell commands via Bash |
 | **Token cost** | Higher — tool schemas + every snapshot live in context | Lower — concise CLI output, snapshots on disk, skills loaded on demand |
@@ -149,7 +149,7 @@ The snapshot file is the same accessibility tree you'd get from the MCP — but 
 Here's the misconception worth dispelling head-on. The CLI is **not** a screenshot-and-snapshot toy. Comparing the official command/tool inventories:
 
 | Capability area | MCP has it? | CLI has it? |
-|---|:-:|:-:|
+| --- | :-: | :-: |
 | Navigation (goto, back, forward, reload) | ✅ | ✅ |
 | Click / type / fill / check / hover / drag | ✅ | ✅ |
 | Form filling (multi-field) | ✅ | ✅ (via fill loop or `run-code`) |
@@ -199,7 +199,7 @@ The CLI flips this: the agent sees `### Snapshot [path/to/file.yml]`, decides wh
 Given exactly how you described your usage — "Claude Code uses MCP first, then writes E2E tests against my Next.js apps" — here's the decision tree I'd run:
 
 | Task | Recommended surface | Why |
-|---|---|---|
+| --- | --- | --- |
 | Iterating on a component, "look at this and tell me what's wrong" | **CLI** (`--headed`) | Token-light, daemon stays warm across many small commands |
 | Generating E2E tests after a feature is done | **CLI** | Locator-string selectors translate directly into `*.spec.ts`; skills include explicit "test generation" guidance |
 | Network mocking during dev (e.g. forcing an API error state) | **CLI** | `route` / `unroute` / `route-list` are first-class; cheap to repeat |

@@ -84,7 +84,7 @@ Outputs CSS variables to paste into globals.css.
 ## Premium Marketplaces
 
 | Marketplace | Notes |
-|-------------|-------|
+| ------------- | ------- |
 | **Tailkits** | 250+ templates, UI kits, components. Free & premium, v4-ready. |
 | **ThemeForest** | Tailwind templates, $9–29 |
 | **Envato Elements** | Subscription-based, includes Tailwind v4 templates |
@@ -101,7 +101,7 @@ Tailwind CSS v4 drastically simplifies defining themable CSS variables. You can 
 ## Recommendations
 
 | Use Case | Best Option |
-|----------|-------------|
+| ---------- | ------------- |
 | shadcn/ui style theming | **tweakcn** or **themecn** |
 | Complete semantic system with many themes | **daisyUI** |
 
@@ -117,7 +117,7 @@ Tailwind CSS v4 drastically simplifies defining themable CSS variables. You can 
 ## Summary Table
 
 | Category | Resource | Price | Best For |
-|----------|----------|-------|----------|
+| ---------- | ---------- | ------- | ---------- |
 | 🎨 **Official** | shadcn/ui Themes | 🆓 Free | Quick copy-paste themes |
 | ✏️ **Editor** | tweakcn | 🆓 Free | Interactive v4 editing |
 | ✏️ **Editor** | themecn | 🆓 Free | Importing existing CSS |

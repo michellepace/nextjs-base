@@ -1,19 +1,22 @@
-# Configuration for markdownlint-cli2 and VSCode/Cursor extension
-# Extension: davidanson.vscode-markdownlint
+gitignore: true
 
 ignores:
-  - "node_modules/**"
-  - ".claude/skills/**"  # Vendor skill content, not ours to lint
+  - ".claude/skills/playwright-cli/**"  # Not ours to lint
 
-# Disable only the rules that interfere with practical markdown writing
 config:
-  MD013: false  # Line length (inappropriate for markdown)
-  MD024: false  # Allow duplicate headings ("### Example", "### Example")
-  MD033: false  # Allow inline HTML (<details>, <tags>, etc.)
-  MD036: false  # Allow emphasis (bold/italic) without treating it as heading
-  MD040: false  # Fenced code blocks don't need language specified
-  MD028: false  # Allow blank lines between blockquotes (attributed quotes)
-  MD041: false  # First line doesn't need to be h1
-  MD060: false  # Table column style (compact tables are fine)
-  MD032: false  # Lists in templates don't need surrounding blank lines
-  MD034: false  # Allow bare URLs (don't auto-wrap in angle brackets)
+  default: true # Enable all rules by default
+
+  # false == RULE OFF
+  MD013: false  # enforce a maximum line length
+  MD024: false  # forbid duplicate heading content
+  MD028: false  # forbid blank lines inside blockquotes
+  MD031: false  # require blank lines around code blocks
+  MD032: false  # require blank lines around lists
+  MD033: false  # forbid inline HTML
+  MD034: false  # forbid bare URLs
+  MD036: false  # forbid emphasis instead of a heading
+  MD040: false  # require language on fenced code blocks
+  MD059: false  # require descriptive link text
+
+  MD060:        # enforce a consistent table column style
+    style: compact  # single space around cell content
