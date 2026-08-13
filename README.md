@@ -55,7 +55,7 @@ For exact list see [`package.json`](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
-| Runtime | [Node.js 24 LTS](https://nodejs.org) | Minimum version enforced via `engines` in [`package.json`](package.json) |
+| Runtime | [Node.js 24 LTS](https://nodejs.org) | Pinned via [`.nvmrc`](.nvmrc); `engines` in [`package.json`](package.json) bounds it to the 24 line |
 | Framework | [Next.js 16.3](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
 | Language | [TypeScript 7](https://www.typescriptlang.org) | Static type checking with strict mode enabled — native Go compiler, ~5x faster |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
@@ -112,6 +112,7 @@ npm install                 # Install updated versions
 | ▢ [`.gitattributes`](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
 | ▢ [`.gitignore`](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
 | ▢ [`.markdownlint-cli2.yaml`](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
+| ▢ [`.nvmrc`](.nvmrc) | Node.js version pin | Single source for the Node major — CI reads it via `node-version-file`, `nvm use` reads it locally |
 | ▢ [`.vscode/extensions.json`](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [`.vscode/settings.json`](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | 🌺 [`.claude/rules/`](.claude/rules/) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
@@ -169,20 +170,20 @@ This diagram shows how CI automation integrates into a typical development workf
   │
   ├─ 🤖 Workflow 1: Lint & Type (biome, tsc)
   │  ├─ Checkout code
-  │  ├─ Setup Node.js LTS
+  │  ├─ Setup Node.js (from .nvmrc)
   │  ├─ Install dependencies (npm ci)
   │  ├─ Run Biome checks                        ✅ Pass
   │  └─ Run TypeScript checks                   ✅ Pass
   │
   ├─ 🤖 Workflow 2: Unit Tests (vitest)
   │  ├─ Checkout code
-  │  ├─ Setup Node.js LTS
+  │  ├─ Setup Node.js (from .nvmrc)
   │  ├─ Install dependencies (npm ci)
   │  └─ Run Vitest tests                        ✅ Pass
   │
   └─ 🤖 Workflow 3: E2E Tests (playwright)
      ├─ Checkout code
-     ├─ Setup Node.js LTS
+     ├─ Setup Node.js (from .nvmrc)
      ├─ Install dependencies (npm ci)
      ├─ Install Playwright browsers
      ├─ Build Next.js production

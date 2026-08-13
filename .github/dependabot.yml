@@ -14,10 +14,8 @@ updates:
       interval: "weekly"
       day: "sunday"
     ignore:
-      # @types/node major versions track Node.js major versions. Keep this on
-      # the Node LTS line declared in package.json "engines" (currently 24) —
-      # a major bump would type-check against a Node we do not run, letting
-      # code call APIs missing at runtime. Raise deliberately at the next LTS.
+      # Pin @types/node to the Node line in .nvmrc — newer types type-check
+      # against APIs the runtime lacks. Raise .nvmrc, engines and this together.
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
     groups:
