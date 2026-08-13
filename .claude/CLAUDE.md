@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+@../AGENTS.md
+
 A GitHub template repository, see `README.md` for template details.
 
 ## Tech Stack
