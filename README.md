@@ -55,8 +55,9 @@ For exact list see [`package.json`](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
-| Framework | [Next.js 16.2.4](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
-| Language | [TypeScript 6](https://www.typescriptlang.org) | Static type checking with strict mode enabled |
+| Runtime | [Node.js 24 LTS](https://nodejs.org) | Minimum version enforced via `engines` in [`package.json`](package.json) |
+| Framework | [Next.js 16.3](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
+| Language | [TypeScript 7](https://www.typescriptlang.org) | Static type checking with strict mode enabled — native Go compiler, ~5x faster |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
 | | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |
 | Linting | [Biome](https://biomejs.dev) | Fast linter and formatter (replaces ESLint + Prettier) |

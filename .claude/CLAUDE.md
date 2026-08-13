@@ -6,20 +6,31 @@ A GitHub template repository, see `README.md` for template details.
 
 ## Tech Stack
 
-- **Framework**: Next.js 16.2 (React 19, App Router, React Compiler, TypeScript 6)
+Exact versions live in `package.json`. Numbers appear below only where the
+version changes how you write code — a stale number here misleads, so do not
+add precision that has to be maintained.
+
+- **Runtime**: Node.js 24 LTS (floor set by `engines` in `package.json`)
+- **Framework**: Next.js 16.3 (React 19, App Router, React Compiler, TypeScript 7)
 - **Styling**: Tailwind CSS 4.3 (centralised theme `app/globals.css`)
-- **Testing**: Vitest 4.1 + Testing Library (unit), Playwright 1.60 (E2E)
-- **Quality**: Biome 2.4
-- **Git Hooks**: Lefthook 2.1
+- **Testing**: Vitest + Testing Library (unit), Playwright (E2E)
+- **Quality**: Biome
+- **Git Hooks**: Lefthook
 - **Deployment**: Vercel
 
-## Breaking Changes (Next.js 16 / Tailwind 4)
+## Traps Tooling Does Not Catch
 
-- Tailwind v4: `@import "tailwindcss"` syntax (not `@tailwind` directives)
-- Dynamic route `params` is a Promise - must await: `{ params }: { params: Promise<{ id: string }> }`
-- Middleware renamed to Proxy: `proxy.ts` (not `middleware.ts`)
-- `cacheComponents` enabled: uncached async data must be in `<Suspense>` or marked `"use cache"`
-- `cacheComponents` enabled: route segment configs deprecated (`dynamic`, `revalidate`, `fetchCache`)
+Only mistakes that survive lint, typecheck and build are listed — everything
+else already fails with an actionable message and needs no note. Ground truth
+is the version-matched docs in `node_modules/next/dist/docs/` (see `AGENTS.md`).
+
+- **Dynamic route `params` is a Promise**: `{ params }: { params: Promise<{ slug: string }> }`, then `await` it. The old sync form type-checks clean, builds clean, and renders `undefined` at runtime. Nothing catches it.
+- **Tailwind v4 uses `@import "tailwindcss"`**, not `@tailwind` directives. This one does fail the build, but the error reads `Cannot apply unknown utility class` and points at an unrelated line, so it wastes time unless you know.
+
+Verified against Next.js 16.3 by testing each case. Removed from this list
+because the build already reports them clearly: route segment configs under
+`cacheComponents`, uncached data outside `<Suspense>`, and `middleware.ts`
+(deprecated in favour of `proxy.ts`, warns at build with a codemod command).
 
 ## Code Conventions
 
@@ -40,14 +51,16 @@ npm run test        # All tests (unit + e2e)
 npm run test:unit   # Vitest only
 npm run test:e2e    # Playwright only
 
-# Vercel
-vercel --help       # All Vercel CLI commands
-vercel list         # Recent deployments
-vercel env ls       # Check env vars
-
 # Browser Automation (use playwright-cli skill)
 playwright-cli open http://localhost:3000
 
-# Utilities
-fuser -k 3000/tcp 2>/dev/null; rm -f .next/dev/lock  # Kill stuck dev server
+# Kill stuck dev server
+fuser -k 3000/tcp 2>/dev/null; rm -f .next/dev/lock
+
+# Vercel
+vercel list           # Recent deployments
+vercel inspect <url>  # Deployment details, build output
+vercel logs <url>     # Runtime logs for a deployment
+vercel build          # Local production build
+vercel env ls         # Env vars
 ```
