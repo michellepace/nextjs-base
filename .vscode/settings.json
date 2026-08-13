@@ -13,8 +13,8 @@
   },
 
   // TAILWIND
-  "files.associations": { "*.css": "tailwindcss" }, // recommended by tailwind
-  "editor.quickSuggestions": { "strings": "on" }, // recommended by tailwind
+  "files.associations": { "*.css": "tailwindcss" }, // tailwind recommends
+  "editor.quickSuggestions": { "strings": "on" }, // tailwind recommends
   "files.exclude": {
     "**/.next": true, // Hide Next.js build output
     "**/node_modules": true, // Hide npm installed dependencies
