@@ -35,21 +35,21 @@ playwright-cli install --skills
 npm run dev
 ```
 
-**(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [extensions.json](.vscode/extensions.json)
+**(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [`.vscode/extensions.json`](.vscode/extensions.json)
 
-**(3) GitHub + Vercel Setup.** Follow [.xdocs/project-setup.md](.xdocs/project-setup.md) to set up GitHub and Vercel.
+**(3) GitHub + Vercel Setup.** Follow [`.xdocs/project-setup.md`](.xdocs/project-setup.md) to set up GitHub and Vercel.
 
-**(4) Housekeeping.** Recommended to remove [.xdocs/](.xdocs/) (these are my working files). Modify [.claude/CLAUDE.md](.claude/CLAUDE.md), [.mcp.json](.mcp.json), and [.claude/settings.json](.claude/settings.json) as preferred — note the latter installs my plugins and marketplaces into your clone, manage them with `/plugins`.
+**(4) Housekeeping.** Recommended to remove [`.xdocs/`](.xdocs/) (these are my working files). Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) as preferred — note the latter installs my plugins and marketplaces into your clone, manage them with `/plugins`.
 
 **(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
 
 **(6) Decide on Icons.** Each UI library above ships with icons — shadcn/ui uses [Lucide React](https://lucide.dev/guide/react/), Tailwind Plus (Catalyst) uses [Heroicons](https://heroicons.com/), HeroUI uses [Iconify](https://iconify.design/). All three let you swap to a different icon library.
 
-**(7) Replace Template Files.** Replace `page.tsx`, `layout.tsx`, `counter.tsx`, `button.tsx`, `globals.css`, (centralised theming), `fonts.ts`, and `theme-toggle.tsx` (use an icon).
+**(7) Replace Template Files.** Replace [`app/page.tsx`](app/page.tsx), [`app/layout.tsx`](app/layout.tsx), [`components/button.tsx`](components/button.tsx), [`app/globals.css`](app/globals.css) (centralised theming), [`app/fonts.ts`](app/fonts.ts), and [`components/theme-toggle.tsx`](components/theme-toggle.tsx) (use an icon).
 
 ## What's Installed?
 
-For exact list see [package.json](package.json)
+For exact list see [`package.json`](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
@@ -106,30 +106,30 @@ npm install                 # Install updated versions
 
 | File | What | Generally In This Project Template |
 | :----- | :----- | :------------------ |
-| ▢ [.gitattributes](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
-| ▢ [.gitignore](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
-| ▢ [.markdownlint-cli2.yaml](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
-| ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
-| ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
-| 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions + plugins | Allow/Deny permissions, plus enabled plugins and marketplaces |
-| 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
-| 🌺 [.claude/CLAUDE.md](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
-| 🅽 [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
-| 🅽 [package.json](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
-| 🅽 [postcss.config.mjs](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
-| 🧪 [biome.json](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
-| 🧪 [lefthook.yml](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and build + E2E tests on push |
-| 🧪 [tsconfig.json](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
-| 🧪 [playwright.config.ts](playwright.config.ts) | Playwright E2E test runner configuration | Sets test browsers (desktop + mobile), parallel execution, and base URLs |
-| 🧪 [.playwright/](.playwright/) | Playwright test outputs (custom organisation) | Contains test artifacts in `test-results/` and HTML `playwright-report/` (all Playwright outputs nested under `/.playwright/` for clean structure) |
-| 🧪 [vitest.config.ts](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references [vitest.setup.ts](vitest.setup.ts) |
-| 🧪 [vitest.setup.ts](vitest.setup.ts) | Global test setup | Adds helpful test assertions like `expect(element).toBeVisible()` |
-| 🚀 [.github/dependabot.yml](.github/dependabot.yml) | Dependabot config | Automated dependency update PRs weekly (npm + GitHub Actions) |
-| 🚀 [.github/workflows/check-lint-type.yml](.github/workflows/check-lint-type.yml) | GitHub Actions CI workflow | Runs Biome linting/formatting checks and TypeScript type checking on PRs |
-| 🚀 [.github/workflows/test-e2e.yml](.github/workflows/test-e2e.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests on PRs (builds production, tests browsers, uploads reports) |
-| 🚀 [.github/workflows/test-e2e-vercel.yml](.github/workflows/test-e2e-vercel.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests against Vercel Preview deployments (triggered by Vercel) |
-| 🚀 [.github/workflows/test-unit.yml](.github/workflows/test-unit.yml) | GitHub Actions CI workflow | Runs Vitest unit tests on PRs (uses jsdom environment, React Testing Library) |
+| ▢ [`.gitattributes`](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
+| ▢ [`.gitignore`](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
+| ▢ [`.markdownlint-cli2.yaml`](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
+| ▢ [`.vscode/extensions.json`](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
+| ▢ [`.vscode/settings.json`](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
+| 🌺 [`.claude/rules/`](.claude/rules/) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
+| 🌺 [`.claude/settings.json`](.claude/settings.json) | Claude Code permissions + plugins | Allow/Deny permissions, plus enabled plugins and marketplaces |
+| 🌺 [`.mcp.json`](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
+| 🌺 [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
+| 🅽 [`next.config.ts`](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
+| 🅽 [`package.json`](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
+| 🅽 [`postcss.config.mjs`](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
+| 🧪 [`biome.json`](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
+| 🧪 [`lefthook.yml`](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and build + E2E tests on push |
+| 🧪 [`tsconfig.json`](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
+| 🧪 [`playwright.config.ts`](playwright.config.ts) | Playwright E2E test runner configuration | Sets test browsers (desktop + mobile), parallel execution, and base URLs |
+| 🧪 [`.playwright/`](.playwright/) | Playwright test outputs (custom organisation) | Contains test artifacts in `test-results/` and HTML `playwright-report/` (all Playwright outputs nested under `.playwright/` for clean structure) |
+| 🧪 [`vitest.config.ts`](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references [`vitest.setup.ts`](vitest.setup.ts) |
+| 🧪 [`vitest.setup.ts`](vitest.setup.ts) | Global test setup | Adds helpful test assertions like `expect(element).toBeVisible()` |
+| 🚀 [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot config | Automated dependency update PRs weekly (npm + GitHub Actions) |
+| 🚀 [`.github/workflows/check-lint-type.yml`](.github/workflows/check-lint-type.yml) | GitHub Actions CI workflow | Runs Biome linting/formatting checks and TypeScript type checking on PRs |
+| 🚀 [`.github/workflows/test-e2e.yml`](.github/workflows/test-e2e.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests on PRs (builds production, tests browsers, uploads reports) |
+| 🚀 [`.github/workflows/test-e2e-vercel.yml`](.github/workflows/test-e2e-vercel.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests against Vercel Preview deployments (triggered by Vercel) |
+| 🚀 [`.github/workflows/test-unit.yml`](.github/workflows/test-unit.yml) | GitHub Actions CI workflow | Runs Vitest unit tests on PRs (uses jsdom environment, React Testing Library) |
 
 ---
 
@@ -262,6 +262,8 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
+(2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [`.xdocs/project-setup.md`](.xdocs/project-setup.md).
 
-(3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
+(3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [`.xdocs/project-setup.md`](.xdocs/project-setup.md).
+
+(4) Claude Code Plugins - Declared under `enabledPlugins` in [`.claude/settings.json`](.claude/settings.json). A plugin set to `false` is installed but switched off — deliberate, not broken. Switch one on via `/plugin` only when you actually need it, since every enabled plugin adds always-on context to each session (`claude plugin details <name>@<marketplace>` shows the token cost).
