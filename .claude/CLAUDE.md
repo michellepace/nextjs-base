@@ -1,10 +1,6 @@
 # CLAUDE.md
 
-The project uses British English - strictly.
-
-## Project Overview
-
-A starter template repository — not a product. Clone it, add a UI component library, and build from there.
+A GitHub template repository, see `README.md` for template details.
 
 ## Tech Stack
 
