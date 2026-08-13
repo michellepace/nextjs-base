@@ -39,7 +39,7 @@ npm run dev
 
 **(3) GitHub + Vercel Setup.** Follow [.xdocs/project-setup.md](.xdocs/project-setup.md) to set up GitHub and Vercel.
 
-**(4) Housekeeping.** Recommended to remove [.xdocs/](.xdocs/) (these are my working files). Modify [CLAUDE.md](.claude/CLAUDE.md) and [.mcp.json](.mcp.json) as preferred.
+**(4) Housekeeping.** Recommended to remove [.xdocs/](.xdocs/) (these are my working files). Modify [.claude/CLAUDE.md](.claude/CLAUDE.md), [.mcp.json](.mcp.json), and [.claude/settings.json](.claude/settings.json) as preferred — note the latter installs my plugins and marketplaces into your clone, manage them with `/plugins`.
 
 **(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
 
@@ -112,7 +112,7 @@ npm install                 # Install updated versions
 | ▢ [.vscode/extensions.json](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
 | ▢ [.vscode/settings.json](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | 🌺 [.claude/rules/](.claude/rules) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
-| 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions | Allow/Deny permissions for files, commands, websearch etc |
+| 🌺 [.claude/settings.json](.claude/settings.json) | Claude Code permissions + plugins | Allow/Deny permissions, plus enabled plugins and marketplaces |
 | 🌺 [.mcp.json](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
 | 🌺 [.claude/CLAUDE.md](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
 | 🅽 [next.config.ts](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
@@ -252,15 +252,7 @@ Key CI Takeaways
 
 ## Quick Notes
 
-(1) Use Ngrok to Test App From Phone
-
-```markdown
-1. Sign up and follow https://dashboard.ngrok.com/get-started/setup/linux
-2. Then: (Terminal 1: `npm run dev`) + (Terminal 2: `ngrok http 3000`)
-3. Ngrok gives a URL to connect from phone (shareable)
-```
-
-(2) How Vitest Pieces Work Together
+(1) How Vitest Pieces Work Together
 
 ```markdown
 1. When you run npm test, Vitest loads vitest.config.ts
@@ -270,6 +262,6 @@ Key CI Takeaways
 5. React components are compiled with React Compiler (matching prod)
 ```
 
-(3) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
+(2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
 
-(4) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
+(3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [.xdocs/project-setup.md](.xdocs/project-setup.md).
