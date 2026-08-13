@@ -13,6 +13,13 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
+    ignore:
+      # @types/node major versions track Node.js major versions. Keep this on
+      # the Node LTS line declared in package.json "engines" (currently 24) —
+      # a major bump would type-check against a Node we do not run, letting
+      # code call APIs missing at runtime. Raise deliberately at the next LTS.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       npm-dependencies:
         applies-to: version-updates
