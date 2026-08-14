@@ -4,7 +4,7 @@ paths:
   - "app/**/*.tsx"
 ---
 
-## UI Components Rules
+# UI Components Rules
 
 **Build small, compose big, customise last.**
 

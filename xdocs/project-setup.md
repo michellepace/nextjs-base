@@ -112,7 +112,7 @@ Go to **Settings** → **Rules** → **Rulesets** → **New ruleset** → **New 
 Configure as follows:
 
 | Setting | Value |
-|---------|-------|
+| --------- | ------- |
 | Ruleset name | `Protect main branch` |
 | Enforcement status | `Active` |
 | Target branches | Add target → Include default branch (i.e. main) |

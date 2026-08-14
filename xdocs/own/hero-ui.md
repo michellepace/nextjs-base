@@ -15,7 +15,7 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 ## 📊 Table 1: Stack Compatibility
 
 | Requirement | HeroUI v3 | shadcn/ui | Notes |
-|---|:---:|:---:|---|
+| --- | :---: | :---: | --- |
 | React 19 | ✅ | ✅ | HeroUI built *for* React 19; shadcn fully updated |
 | Next.js 16 (App Router) | ✅ | ✅ | Both provide Next.js integration examples |
 | Tailwind CSS v4 | ✅ Full | ✅ Full | Both use `@theme`, CSS variables, OKLCH colours |
@@ -32,7 +32,7 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 ## 📊 Table 2: Feature Comparison
 
 | Feature | HeroUI v3 | shadcn/ui |
-|---|---|---|
+| --- | --- | --- |
 | **Architecture** | npm package ("living library") — install, import, use | CLI copies code into your project — you own it entirely |
 | **Underlying primitives** | React Aria Components (Adobe) | Radix UI (+ Base UI option since CLI v4) |
 | **Component count** | ~50–75 (+ 220 in paid Pro tier) | ~50+ (community registries add more) |
@@ -54,7 +54,7 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 ## 📊 Table 3: AI Tooling
 
 | AI Feature | HeroUI v3 | shadcn/ui |
-|---|---|---|
+| --- | --- | --- |
 | **LLMs.txt** | ✅ Multiple files: full docs, components-only, patterns-only | ❌ No dedicated llms.txt (docs are open though) |
 | **MCP Server** | 🔜 Coming soon (announced) | ✅ Available since Aug 2025 |
 | **Agent Skills** | ✅ `heroui-react` skill with scripts (`list_components`, `get_docs`, `get_theme`, etc.) | ✅ `shadcn/skills` covering both Radix and Base UI |
@@ -70,7 +70,7 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 ## 📊 Table 4: Ecosystem & Community
 
 | Metric | HeroUI v3 | shadcn/ui |
-|---|---|---|
+| --- | --- | --- |
 | **npm weekly downloads** | ~81K–120K | ~560K+ |
 | **GitHub stars** | ~24K–27K | ~104K+ |
 | **Website adoption** | ~39 sites (BuiltWith) | ~14,900 sites (BuiltWith) |
@@ -181,7 +181,7 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 ## ⚠️ Known Issues & Risks (HeroUI v3)
 
 | Issue | Severity | Status |
-|---|---|---|
+| --- | --- | --- |
 | Table component performance degrades at 50+ rows (missing `React.memo`) | 🟡 Medium | Open on GitHub; wasn't an issue in v2 |
 | Chrome: Modal/AlertDialog opened from Dropdown leaves popover stuck | 🟡 Medium | Reported; Chrome-specific |
 | Input text cursor jumps to end after mid-text deletion | 🟢 Low | Reported |
@@ -196,7 +196,7 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 **Both are viable for this starter template.** The choice comes down to philosophy:
 
 | If you value... | Choose |
-|---|---|
+| --- | --- |
 | Beautiful defaults with minimal effort | 🦸 HeroUI |
 | Full code ownership and transparency | 🎨 shadcn/ui |
 | Automatic bug fixes and updates | 🦸 HeroUI |

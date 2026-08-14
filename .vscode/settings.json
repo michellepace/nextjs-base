@@ -12,9 +12,22 @@
     }
   },
 
+  // TYPESCRIPT
+  // Do NOT set "typescript.tsdk", and do NOT run "TypeScript: Select TypeScript
+  // Version" -> "Use Workspace Version". TypeScript 7 ships no tsserver (its bin
+  // is `tsc` only), so pointing VS Code at the workspace copy kills IntelliSense.
+  //
+  // Leaving this unset is deliberate: VS Code's bundled tsserver loads the
+  // Next.js language-service plugin declared in tsconfig.json ("plugins":
+  // [{ "name": "next" }]), which powers typedRoutes and 'use client' checks.
+  // `next build` and `npm run typecheck` use the native TS 7 `tsc` separately.
+  //
+  // The Next.js docs still say "Use Workspace Version" - that predates TS 7.
+  // https://nextjs.org/docs/app/api-reference/config/typescript
+
   // TAILWIND
-  "files.associations": { "*.css": "tailwindcss" }, // recommended by tailwind
-  "editor.quickSuggestions": { "strings": "on" }, // recommended by tailwind
+  "files.associations": { "*.css": "tailwindcss" }, // tailwind recommends
+  "editor.quickSuggestions": { "strings": "on" }, // tailwind recommends
   "files.exclude": {
     "**/.next": true, // Hide Next.js build output
     "**/node_modules": true, // Hide npm installed dependencies

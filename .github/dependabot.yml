@@ -13,6 +13,11 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
+    ignore:
+      # Pin @types/node to the Node line in .nvmrc — newer types type-check
+      # against APIs the runtime lacks. Raise .nvmrc, engines and this together.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       npm-dependencies:
         applies-to: version-updates
