@@ -11,7 +11,7 @@
   <p><em>Template homepage with light/dark mode setup — UI component library still needed</em></p>
 </div>
 
----
+*See this template live — https://nextjs-base-hello.vercel.app*
 
 ## 🎯 Use This Template
 
