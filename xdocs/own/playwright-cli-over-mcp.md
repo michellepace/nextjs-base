@@ -105,7 +105,7 @@ playwright-cli screenshot
 
 After every command, the CLI prints a tiny header and a *path to a snapshot file*:
 
-```
+```text
 ### Page
 - Page URL: http://localhost:3000/todos
 - Page Title: My App
@@ -218,6 +218,8 @@ If you've been on the MCP for a year, your muscle memory is solid. Switching loo
 5. Add `.playwright-cli/` to `.gitignore`.
 
 > 💡 **Tip:** Adding a sentence to `CLAUDE.md` is more powerful than it looks. Without it, Claude Code may default to whatever it sees first (the MCP if it's still configured, or `Bash` with `curl` for HTTP-only checks). One line nudges every future session.
+
+<!-- -->
 
 > ⚠️ **Watch out:** Element refs are valid only until the next page change. A `goto`, a route transition, or a re-render after a state change all invalidate them. Both surfaces share this rule — but with the CLI it bites slightly more often because you're typically firing off more, smaller commands. The fix is mechanical: re-snapshot after navigation. The skills file calls this out too.
 

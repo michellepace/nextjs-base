@@ -63,7 +63,7 @@ This isn't unique to our setup. Agents not reliably using available tools is a [
 
 We tried adding explicit instructions to `AGENTS.md` telling the agent to use the skill.
 
-```
+```text
 Before writing code, first explore the project structure, 
 then invoke the nextjs-doc skill for documentation.
 ```

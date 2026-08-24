@@ -134,28 +134,21 @@ HeroUI v3 is a **feasible alternative** to shadcn/ui. It ships polished, accessi
 
 ### Positive Sentiment (majority of independent sources)
 
-> *"Well-designed and intuitive API for beginner and advanced developers"*
-> — Shipped.club (ranked HeroUI #6 of 11 best React libraries)
-
-> *"Beautiful websites regardless of your design experience... gorgeous defaults"*
-> — Product Hunt reviews (unanimously 5-star)
-
-> *"Over 120,000 downloads on npm each week with strong growth"*
-> — DEV Community
-
-> *"Reduces cognitive load for beginners by offering ready-to-use components"*
-> — LinkedIn developer testimonial
+> *"Well-designed and intuitive API for beginner and advanced developers"* — Shipped.club (ranked HeroUI #6 of 11 best React libraries)
+>
+> *"Beautiful websites regardless of your design experience... gorgeous defaults"* — Product Hunt reviews (unanimously 5-star)
+>
+> *"Over 120,000 downloads on npm each week with strong growth"* — DEV Community
+>
+> *"Reduces cognitive load for beginners by offering ready-to-use components"* — LinkedIn developer testimonial
 
 ### Critical Sentiment (minority but substantive)
 
-> *"Being a newer library, the community is smaller compared to more established options"*
-> — Untitled UI (ranked HeroUI #11 of 14 libraries)
-
-> *"HeroUI is only React-dependent... 208 third-party dependencies create security and maintenance risk"*
-> — daisyUI comparison analysis
-
-> *"More complex pieces still need client components despite v3 improvements"*
-> — Product Hunt reviewer on RSC support
+> *"Being a newer library, the community is smaller compared to more established options"* — Untitled UI (ranked HeroUI #11 of 14 libraries)
+>
+> *"HeroUI is only React-dependent... 208 third-party dependencies create security and maintenance risk"* — daisyUI comparison analysis
+>
+> *"More complex pieces still need client components despite v3 improvements"* — Product Hunt reviewer on RSC support
 
 ### Comparison Consensus
 

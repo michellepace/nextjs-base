@@ -1,22 +1,19 @@
 gitignore: true
 
 ignores:
-  - ".claude/skills/playwright-cli/**"  # Not ours to lint
+  # Managed by `playwright-cli install --skills`
+  - ".claude/skills/playwright-cli/**"
 
 config:
-  default: true # Enable all rules by default
+  default: true     # Enable all rules by default
 
   # false == RULE OFF
-  MD013: false  # enforce a maximum line length
-  MD024: false  # forbid duplicate heading content
-  MD028: false  # forbid blank lines inside blockquotes
-  MD031: false  # require blank lines around code blocks
-  MD032: false  # require blank lines around lists
-  MD033: false  # forbid inline HTML
-  MD034: false  # forbid bare URLs
-  MD036: false  # forbid emphasis instead of a heading
-  MD040: false  # require language on fenced code blocks
-  MD059: false  # require descriptive link text
+  MD013: false      # enforce a maximum line length
+  MD024: false      # forbid duplicate heading content
+  MD033: false      # forbid inline HTML
+  MD034: false      # forbid bare URLs
+  MD036: false      # forbid emphasis instead of a heading
+  MD059: false      # require descriptive link text
 
-  MD060:        # enforce a consistent table column style
+  MD060:            # enforce consistent table style
     style: compact  # single space around cell content
