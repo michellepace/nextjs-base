@@ -15,8 +15,10 @@
       "Bash(vercel env --help)",
       "Bash(vercel env ls *)",
       "Bash(vercel git --help)",
+      "Bash(vercel inspect *)",
       "Bash(vercel integration --help)",
       "Bash(vercel list *)",
+      "Bash(vercel logs *)",
       "Bash(vercel open)",
       "Bash(vercel project ls *)",
       "Bash(vercel whoami)"
