@@ -592,7 +592,7 @@ For truly mimicking a backend API:
 
 Your plan to use TypeScript interfaces as the foundation is excellent:
 
-```
+```text
 Phase 1 (Current): Mock Data in sessionStorage
 ├─ Define TypeScript interfaces (User, Product, etc.)
 ├─ Create Zustand stores with dummy data
