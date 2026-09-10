@@ -117,7 +117,7 @@ npm install                 # Install updated versions
 | ▢ [`.vscode/settings.json`](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | 🌺 [`.claude/rules/`](.claude/rules/) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
 | 🌺 [`.claude/settings.json`](.claude/settings.json) | Claude Code permissions + plugins | Allow/Deny permissions, plus enabled plugins and marketplaces |
-| 🌺 [`.mcp.json`](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
+| 🌺 [`.mcp.json`](.mcp.json) | Claude Code MCP config | Next.js DevTools MCP (dev-server errors, routes, on-demand route compile) + Ref MCP for docs search |
 | 🌺 [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack for Claude Code (customise!) |
 | 🅽 [`next.config.ts`](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
 | 🅽 [`package.json`](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |

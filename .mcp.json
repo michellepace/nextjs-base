@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+    "next-devtools": {
+      "command": "npx",
+      "args": ["-y", "next-devtools-mcp@latest"]
+    },
     "Ref": {
       "type": "http",
       "url": "https://api.ref.tools/mcp",
