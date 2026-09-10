@@ -37,7 +37,7 @@
       }
     },
     "domains": {
-      "next": "recommended",
+      "next": "all",
       "react": "recommended"
     }
   },
