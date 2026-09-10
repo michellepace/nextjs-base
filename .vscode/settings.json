@@ -12,6 +12,23 @@
     }
   },
 
+  // NEXT.JS APP ROUTER
+  // App Router names files by convention, so every open tab reads "page.tsx".
+  // Label two folders deep so dynamic routes stay distinct: without ${dirname(1)}
+  // every blog/[id]/page.tsx and docs/[id]/page.tsx collapses to the same "[id]".
+  // JetBrains IDEs do this automatically; VS Code 1.88+ / Cursor need this setting.
+  // https://nextjs.org/docs/app/getting-started/installation#set-up-your-editor
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname(1)}/${dirname} - page.tsx",
+    "**/app/**/layout.tsx": "${dirname(1)}/${dirname} - layout.tsx",
+    "**/app/**/loading.tsx": "${dirname(1)}/${dirname} - loading.tsx",
+    "**/app/**/error.tsx": "${dirname(1)}/${dirname} - error.tsx",
+    "**/app/**/not-found.tsx": "${dirname(1)}/${dirname} - not-found.tsx",
+    "**/app/**/template.tsx": "${dirname(1)}/${dirname} - template.tsx",
+    "**/app/**/default.tsx": "${dirname(1)}/${dirname} - default.tsx",
+    "**/app/**/route.ts": "${dirname(1)}/${dirname} - route.ts"
+  },
+
   // TYPESCRIPT
   // Do NOT set "typescript.tsdk", and do NOT run "TypeScript: Select TypeScript
   // Version" -> "Use Workspace Version". TypeScript 7 ships no tsserver (its bin
