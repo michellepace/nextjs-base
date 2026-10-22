@@ -259,10 +259,10 @@ Key CI Takeaways
 (1) How Vitest Pieces Work Together
 
 ```markdown
-1. When you run npm test, Vitest loads vitest.config.ts
+1. When you run `npm run test:unit`, Vitest loads vitest.config.ts
 2. The config tells Vitest to use jsdom and load `vitest.setup.ts`
 3. Your test files can use global test functions and extended matchers
-4. The @/* import alias works in tests thanks to `vite-tsconfig-paths`
+4. The @/* import alias works in tests thanks to `resolve.tsconfigPaths` in the config
 5. React components are compiled with React Compiler (matching prod)
 ```
 
