@@ -51,7 +51,7 @@
     "lefthook": "^2.2.2",
     "markdownlint-cli2": "^0.24.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.12"
   }
 }

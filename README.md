@@ -24,8 +24,8 @@ cd YOUR-REPO
 # Install dependencies
 npm install
 
-# For Claude Code typescript-lsp plugin
-npm install -g typescript-language-server typescript
+# For Claude Code typescript-lsp plugin (uses the project's TypeScript)
+npm install -g typescript-language-server
 
 # Claude Code uses for browser exploration (Global chosen)
 npm install -g @playwright/cli@latest
@@ -37,7 +37,7 @@ playwright-cli install --skills
 npm run dev
 ```
 
-**(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [`.vscode/extensions.json`](.vscode/extensions.json)
+**(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [`.vscode/extensions.json`](.vscode/extensions.json). When VS Code asks to use the workspace TypeScript version, click Allow — this turns on the Next.js editor checks.
 
 **(3) GitHub + Vercel Setup.** Follow [`xdocs/project-setup.md`](xdocs/project-setup.md) to set up GitHub and Vercel.
 
@@ -57,7 +57,7 @@ For exact list see [`package.json`](package.json)
 | :------- | :--- | :----------- |
 | Runtime | [Node.js 24 LTS](https://nodejs.org) | Pinned via [`.nvmrc`](.nvmrc); `engines` in [`package.json`](package.json) bounds it to the 24 line |
 | Framework | [Next.js 16.4](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
-| Language | [TypeScript 7](https://www.typescriptlang.org) | Static type checking with strict mode enabled — native Go compiler, ~5x faster |
+| Language | [TypeScript 6](https://www.typescriptlang.org) | Static type checking with strict mode enabled — not 7 yet, which can't run the Next.js editor plugin |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
 | | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |
 | Linting | [Biome](https://biomejs.dev) | Fast linter and formatter (replaces ESLint + Prettier) |
