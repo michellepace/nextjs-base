@@ -56,7 +56,7 @@ For exact list see [`package.json`](package.json)
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
 | Runtime | [Node.js 24 LTS](https://nodejs.org) | Pinned via [`.nvmrc`](.nvmrc); `engines` in [`package.json`](package.json) bounds it to the 24 line |
-| Framework | [Next.js 16.3](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
+| Framework | [Next.js 16.4](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
 | Language | [TypeScript 7](https://www.typescriptlang.org) | Static type checking with strict mode enabled — native Go compiler, ~5x faster |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
 | | [next-themes](https://github.com/pacocoursey/next-themes) | Light/dark mode theming provider |

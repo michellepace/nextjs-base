@@ -21,23 +21,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step: Checkout code
-    - uses: actions/checkout@v7
+      # Step: Checkout code
+      - uses: actions/checkout@v7
 
-    # Step: Setup Node.js
-    - uses: actions/setup-node@v7
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'npm'
+      # Step: Setup Node.js
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
 
-    # Step: Install dependencies
-    - name: Install dependencies
-      run: npm ci
+      # Step: Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
-    # Step: Run Biome checks
-    - name: Run Biome lint & format check
-      run: npx @biomejs/biome ci --error-on-warnings
+      # Step: Run Biome checks
+      - name: Run Biome lint & format check
+        run: npx @biomejs/biome ci --error-on-warnings
 
-    # Step: Run TypeScript checks
-    - name: Run TypeScript type check
-      run: npx tsc --noEmit --pretty
+      # Step: Run TypeScript checks
+      - name: Run TypeScript type check
+        run: npx tsc --noEmit --pretty

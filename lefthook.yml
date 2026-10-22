@@ -8,36 +8,35 @@ pre-commit:
   parallel: false # Sequential: type-check and tests must run on biome-fixed code
 
   skip:
-  # Skip pre-commit hooks in these situations
-    - merge   # Merge commits combine already-tested code
-    - rebase  # Commits are replayed during rebase, already tested
+    # Skip pre-commit hooks in these situations
+    - merge # Merge commits combine already-tested code
+    - rebase # Commits are replayed during rebase, already tested
 
   commands:
-
     npm-install:
-    # Sync and add package-lock.json (when package.json changes)
+      # Sync and add package-lock.json (when package.json changes)
       glob: "package.json"
       run: npm install && git add package-lock.json
 
     biome-check:
-    # Biome: lint, format, imports, apply safe fixes (every commit)
-    # config: biome.json
+      # Biome: lint, format, imports, apply safe fixes (every commit)
+      # config: biome.json
       run: npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true
 
     markdown-lint:
-    # config: .markdownlint-cli2.yaml
+      # config: .markdownlint-cli2.yaml
       glob: "**/*.md"
       run: npx markdownlint-cli2 --fix {staged_files}
       stage_fixed: true
 
     type-check:
-    # TypeScript type checking (every commit)
-    # config: tsconfig.json
+      # TypeScript type checking (every commit)
+      # config: tsconfig.json
       run: npx tsc --noEmit --pretty
 
     unit-tests:
-    # Vitest: run unit tests (when matching files change)
+      # Vitest: run unit tests (when matching files change)
       glob:
         - "**/*.{ts,tsx}" # code in folders
         - "!e2e/**/*" # Exclude e2e tests
@@ -50,11 +49,11 @@ pre-push:
 
   commands:
     build:
-    # Production build catches static generation errors (e.g. missing Suspense)
+      # Production build catches static generation errors (e.g. missing Suspense)
       run: npm run build
 
     playwright-tests:
-    # Playwright: E2E tests (when matching files change).
+      # Playwright: E2E tests (when matching files change).
       glob:
         - "**/*.{ts,tsx,css}" # code in folders
         - "!**/*.{test,spec}.{ts,tsx}" # Exclude unit tests

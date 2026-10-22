@@ -11,7 +11,7 @@ version changes how you write code — a stale number here misleads, so do not
 add precision that has to be maintained.
 
 - **Runtime**: Node.js 24 LTS (pinned by `.nvmrc`; `engines` bounds it to the 24 line)
-- **Framework**: Next.js 16.3 (React 19, App Router, React Compiler, TypeScript 7)
+- **Framework**: Next.js 16.4 (React 19, App Router, React Compiler, TypeScript 7)
 - **Styling**: Tailwind CSS 4.3 (centralised theme `app/globals.css`)
 - **Testing**: Vitest + Testing Library (unit), Playwright (E2E)
 - **Quality**: Biome
