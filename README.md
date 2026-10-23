@@ -97,7 +97,10 @@ Would you like to use React Compiler?  ✔️ Yes
 Would you like to use Tailwind CSS?    ✔️ Yes
 Would you like your code inside a src/ directory?  ❌ No
 Would you like to use App Router? (recommended)    ✔️ Yes
+Would you like to use Cache Components?            ✔️ Yes
 Would you like to customise the import alias (@/* by default)? ❌ No
+Would you like to include AGENTS.md to guide coding agents?    ✔️ Yes
+Would you like to help improve Next.js by letting agents prepare anonymised feedback?  ❌ No
 
 # Update all dependencies to latest versions
 npm outdated                # Check outdated packages (2025-11-20)
