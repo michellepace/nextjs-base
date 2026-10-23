@@ -5,7 +5,7 @@
   "window.commandCenter": true,
   "editor.colorDecorators": true,
 
-  // Markdownlint: Markdown linting (matches CodeRabbit)
+  // Markdownlint
   "[markdown]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": "explicit"
@@ -23,13 +23,9 @@
   "files.exclude": {
     "**/.next": true, // Hide Next.js build output
     "**/node_modules": true, // Hide npm installed dependencies
-    "**/.ruff_cache": true, // Hide Ruff linter cache
     "next-env.d.ts": true, // Hide Next.js file (uneditable)
     "tsconfig.tsbuildinfo": true // Hide TypeScript build info file
   },
-  // Tailwind CSS IntelliSense
-  "tailwindCSS.experimental.configFile": "app/globals.css", // required
-  "tailwindCSS.validate": true, // linting
 
   // Biome: formatting, linting, import organisation
   "editor.defaultFormatter": "biomejs.biome",
