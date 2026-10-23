@@ -39,6 +39,9 @@
       },
       "suspicious": {
         "noUnknownAtRules": "off"
+      },
+      "nursery": {
+        "useReactCompiler": "error"
       }
     },
     "domains": {
