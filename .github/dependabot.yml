@@ -1,8 +1,5 @@
-# Dependabot: Automated updates
-# - npm:
-#     Version-updates: Weekly on Sundays, minor/patch grouped, major individual
-#     Security-updates: Immediate when vulnerabilities detected, grouped
-# - GitHub Actions: Keeps workflow action versions current (e.g., actions/checkout)
+# Majors open as separate PRs. Security updates ignore the schedule and
+# open as soon as a vulnerability is found.
 # Docs: https://docs.github.com/en/code-security/dependabot
 
 version: 2
@@ -17,6 +14,10 @@ updates:
       # Pin @types/node to the Node line in .nvmrc — newer types type-check
       # against APIs the runtime lacks. Raise .nvmrc, engines and this together.
       - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # Hold TypeScript at 6 — 7 ships no tsserver, so editor plugins (Next.js,
+      # typescript-lsp) can't load. Revisit when TypeScript 7 supports plugins.
+      - dependency-name: "typescript"
         update-types: ["version-update:semver-major"]
     groups:
       npm-dependencies:

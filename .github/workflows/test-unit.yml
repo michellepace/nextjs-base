@@ -19,21 +19,21 @@ jobs:
     name: Run Unit Tests
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    
+
     steps:
-    # Step: Checkout code
-    - uses: actions/checkout@v7
+      # Step: Checkout code
+      - uses: actions/checkout@v7
 
-    # Step: Setup Node.js
-    - uses: actions/setup-node@v7
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'npm'
+      # Step: Setup Node.js
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
 
-    # Step: Install dependencies
-    - name: Install dependencies
-      run: npm ci
+      # Step: Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
-    # Step: Run unit tests
-    - name: Run unit tests
-      run: npx vitest run
+      # Step: Run unit tests
+      - name: Run unit tests
+        run: npx vitest run
