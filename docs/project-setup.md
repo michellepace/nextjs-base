@@ -90,7 +90,7 @@ Create a test PR to trigger all workflows. This ensures status check names exist
    - `Run E2E Tests on Preview` (triggered by Vercel, so it appears last)
 3. Vercel → project overview → click "Deployment" URL to verify preview. Or ask Claude Code: `vercel list — find the most recent Preview deployment URL`
 4. GitHub → Merge the pull request (or again ask Claude Code)
-5. Now run `/gg-merge-cleanup` to ensure clean Git / GitHub status (from the `git-utils` plugin enabled in [`.claude/settings.json`](../.claude/settings.json))
+5. Tidy up Git / GitHub after the merge: run `/gg-merge-cleanup` if you have the `git-utils` plugin, or just ask Claude Code to "clean up after the merged PR"
 6. Vercel → project overview → click "Domains" URL to verify production. Or ask Claude Code: `vercel list — find the most recent Production deployment URL`
 
 ---

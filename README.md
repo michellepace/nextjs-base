@@ -4,7 +4,7 @@
 
 *A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main. Assumes Claude Code.*
 
-<div align="center">
+<div align="left">
   <a href="docs/images/app-screenshot.jpg" target="_blank">
     <img src="docs/images/app-screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
   </a>
@@ -41,13 +41,38 @@ npm run dev
 
 **(3) GitHub + Vercel Setup.** Follow [`docs/project-setup.md`](docs/project-setup.md) to set up GitHub and Vercel.
 
-**(4) Housekeeping.** Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) as preferred — note the latter installs my plugins and marketplaces into your clone, manage them with `/plugins`.
+**(4) Housekeeping.** Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) as preferred — note the latter lists my plugins and marketplaces, see [Claude Code Plugins](#-claude-code-plugins) to install them.
 
 **(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
 
 **(6) Decide on Icons.** Each UI library above ships with icons — shadcn/ui uses [Lucide React](https://lucide.dev/guide/react/), Tailwind Plus (Catalyst) uses [Heroicons](https://heroicons.com/), HeroUI uses [Iconify](https://iconify.design/). All three let you swap to a different icon library.
 
 **(7) Replace Template Files.** Replace [`app/page.tsx`](app/page.tsx), [`app/layout.tsx`](app/layout.tsx), [`components/button.tsx`](components/button.tsx), [`app/globals.css`](app/globals.css) (centralised theming), [`app/fonts.ts`](app/fonts.ts), and [`components/theme-toggle.tsx`](components/theme-toggle.tsx) (use an icon).
+
+## 🧩 Claude Code Plugins
+
+When you first open the repo, Claude Code asks you to trust it, then offers to install the plugins in [`.claude/settings.json`](.claude/settings.json). If you skipped that, run these once inside your project folder:
+
+```bash
+# Add the two plugin marketplaces
+claude plugin marketplace add anthropics/claude-plugins-official --scope project
+claude plugin marketplace add michellepace/my-claude-marketplace --scope project
+
+# Install the plugins
+claude plugin install typescript-lsp@claude-plugins-official --scope project
+claude plugin install alwayson-misc@my-claude-marketplace --scope project
+claude plugin install git-utils@my-claude-marketplace --scope project
+claude plugin install mattpocock-skills@claude-plugins-official --scope project
+
+# Disable Matt Pocock's skills for now
+claude plugin disable mattpocock-skills@claude-plugins-official --scope project
+# To enable it when you need it:
+# claude plugin enable mattpocock-skills@claude-plugins-official --scope project
+```
+
+**mattpocock-skills** is disabled because there are many skills that pepper the context window and can trigger when you don't want them. Enable the plugin when you want it.
+
+**[git-utils](https://github.com/michellepace/my-claude-marketplace/tree/main/plugins/git-utils)** is my own plugin and optional. Ask Claude to either remove it or disable it.
 
 ## What's Installed?
 
@@ -272,5 +297,3 @@ Key CI Takeaways
 (2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [`docs/project-setup.md`](docs/project-setup.md).
 
 (3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [`docs/project-setup.md`](docs/project-setup.md).
-
-(4) Claude Code Plugins - Declared under `enabledPlugins` in [`.claude/settings.json`](.claude/settings.json). A plugin set to `false` is installed but switched off — deliberate, not broken. Switch one on via `/plugin` only when you actually need it, since every enabled plugin adds always-on context to each session (`claude plugin details <name>@<marketplace>` shows the token cost).
