@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Button } from "@/components/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+const prose = "text-lg leading-8 text-muted-foreground";
+
 export default function Home() {
   return (
     <main className="flex flex-col gap-12">
@@ -18,110 +20,99 @@ export default function Home() {
       </header>
 
       <article className="flex flex-col gap-6">
-        <h1 className="leading-10 tracking-tight text-foreground">
-          Choose a UI Library
-        </h1>
+        <h1 className="leading-10 tracking-tight">Choose a UI Library</h1>
 
-        <p className="text-lg leading-8 text-muted-foreground">
-          This template still needs a UI component library. Choose one like{" "}
-          <a
-            href="https://ui.shadcn.com/docs/installation/next"
-            className="font-medium text-foreground underline"
-          >
-            shadcn/ui
+        <p className={prose}>
+          <strong className="text-foreground">
+            This template is plain Tailwind CSS, with no UI components yet.
+          </strong>{" "}
+          Its colours in <code>globals.css</code> are semantic tokens (
+          <code>--background</code>, <code>--primary</code>,{" "}
+          <code>--muted</code>, etc.): plain CSS variables named after
+          shadcn/ui&apos;s convention, each with an <code>oklch</code> colour
+          for light mode and another for dark. If you want{" "}
+          <em className="text-foreground">centralised theming</em>, shadcn/ui
+          and HeroUI are the easiest, as both are built on semantic tokens. What
+          you do with the template&apos;s tokens depends on which library you
+          pick.
+        </p>
+
+        <h2 className="mt-4">
+          <a href="https://ui.shadcn.com/docs/installation/next">shadcn/ui</a>
+        </h2>
+        <p className={prose}>
+          <strong className="text-foreground">Keep the tokens:</strong>{" "}
+          shadcn/ui uses the same names, so its components and your existing
+          classes share one set of colours. Once shadcn/ui is installed, change
+          a colour by editing its values under <code>:root</code> (light mode)
+          and <code>.dark</code> (dark mode) in <code>globals.css</code>, and
+          every component follows. The{" "}
+          <a href="https://ui.shadcn.com/docs/theming">theming docs</a> list
+          what each token controls, such as <code>--primary</code> for buttons
+          and <code>--accent</code> for hover states.
+        </p>
+
+        <h2 className="mt-4">
+          <a href="https://heroui.com/en/docs/react/getting-started">
+            HeroUI v3
           </a>
-          ,{" "}
-          <a
-            href="https://heroui.com/docs/react/getting-started"
-            className="font-medium text-foreground underline"
-          >
-            HeroUI
-          </a>{" "}
-          or{" "}
-          <a
-            href="https://tailwindcss.com/plus"
-            className="font-medium text-foreground underline"
-          >
-            Tailwind Plus
-          </a>
-          . The theme in <code>globals.css</code> uses shadcn&apos;s semantic
-          colour naming convention. Your choice affects how to proceed.
+        </h2>
+        <p className={prose}>
+          <strong className="text-foreground">Replace the tokens:</strong>{" "}
+          HeroUI brings its own, and some shared names mean different things.
+          Its <code>--accent</code>, for example, is your brand colour, not a
+          hover state. Give Claude Code this prompt, then choose colours with
+          the <a href="https://heroui.com/en/themes">Theme Builder</a> and paste
+          its CSS into <code>globals.css</code>.
         </p>
+        <pre className="wrap-break-word whitespace-pre-wrap">
+          <code>{`Set up HeroUI v3 in this project, following its current docs at https://heroui.com/en/docs/react/getting-started. Replace the shadcn tokens in app/globals.css with HeroUI's, update every class that used them, and put dark mode colours under .dark, which the theme toggle sets.`}</code>
+        </pre>
 
-        <h2 className="mt-4 text-foreground">shadcn/ui</h2>
-        <p className="text-lg leading-8 text-muted-foreground">
-          You&apos;re ready to go. The colour variables in{" "}
-          <code>globals.css</code> already match shadcn&apos;s naming (
-          <code>--background</code>, <code>--foreground</code>,{" "}
-          <code>--primary</code>, <code>--muted</code>, etc.), so installed
-          components inherit your theme automatically. To customise colours,
-          change the values in <code>:root</code> and <code>.dark</code>
-          —all components update instantly.
+        <h2 className="mt-4">
+          <a href="https://tailwindcss.com/plus">Tailwind Plus</a>
+        </h2>
+        <p className={prose}>
+          <strong className="text-foreground">
+            Colours live in each component:
+          </strong>{" "}
+          For centralised theming, shadcn/ui and HeroUI are easier. Tailwind
+          Plus UI Blocks and Catalyst (the UI kit) write Tailwind&apos;s
+          built-in colours into each component, such as{" "}
+          <code className="whitespace-nowrap">
+            bg-indigo-600 dark:bg-indigo-500
+          </code>
+          . Copy the light-and-dark version of a block so it follows the theme
+          toggle, and install its dependencies (such as Headless UI and
+          Heroicons). Put Catalyst in <code>components/ui</code> and follow{" "}
+          <a href="https://catalyst.tailwindui.com/docs">its docs</a> to set it
+          up.
         </p>
-
-        <h2 className="mt-4 text-foreground">HeroUI</h2>
-        <p className="text-lg leading-8 text-muted-foreground">
-          HeroUI brings its own theme. Add{" "}
-          <code>@import &quot;@heroui/styles&quot;</code> to{" "}
-          <code>globals.css</code> and remove the shadcn colour variables — some
-          names clash with different meanings. HeroUI&apos;s{" "}
-          <code>--accent</code> is your brand colour (shadcn&apos;s{" "}
-          <code>--primary</code>), and it uses <code>--surface</code> and{" "}
-          <code>--danger</code> where shadcn uses <code>--card</code> and{" "}
-          <code>--destructive</code>. Dark mode works with the existing{" "}
-          <code>.dark</code> class. Build your colours with the{" "}
-          <a
-            href="https://heroui.com/themes"
-            className="font-medium text-foreground underline"
-          >
-            Theme Builder
-          </a>
-          .
+        <p className={prose}>
+          Before pasting your first block, give Claude Code this prompt so your
+          own code uses the same built-in colours:
         </p>
-
-        <h2 className="mt-4 text-foreground">Tailwind Plus</h2>
-        <p className="text-lg leading-8 text-muted-foreground">
-          Tailwind Plus includes UI Kit (Catalyst) and UI Blocks. The UI Kit
-          typically goes into <code>components/ui</code>, whilst blocks go into{" "}
-          <code>page.tsx</code> or <code>components/sections/</code>. Both use
-          Tailwind&apos;s default palette (<code>zinc</code>, <code>gray</code>,{" "}
-          <code>indigo</code>, etc.) rather than semantic names.
-        </p>
-        <p className="text-lg leading-8 text-muted-foreground">
-          To theme them, either find-replace palette classes with semantic ones
-          (<code>bg-zinc-900</code> → <code>bg-background</code>
-          ), or override the palette in <code>@theme</code>
-          —for example, <code>--color-zinc-900: oklch(...)</code>. Note that
-          Blocks are often light-mode only.
-        </p>
-
-        <p className="text-lg leading-8 text-muted-foreground">
-          With any of them, colours remain centralised. For Tailwind Plus, the{" "}
-          <code>@theme</code> override method requires no code changes;
-          find-replace gives full control over naming but requires editing
-          files.
-        </p>
-
-        <h3 className="mt-4 text-foreground">Advanced: Palette Remapping</h3>
-        <p className="text-lg leading-8 text-muted-foreground">
-          Instead of directly overriding <code>--color-zinc-900</code>, you can
-          define your brand palette first, then remap Tailwind&apos;s colours to
-          it:
+        <pre className="wrap-break-word whitespace-pre-wrap">
+          <code>{`I'm using Tailwind Plus, so remove the semantic colour tokens from app/globals.css. Switch their uses to Tailwind's built-in colours with dark: variants, keep @custom-variant dark (the theme toggle needs it), and update .claude/rules/tailwind.md to match. Skip app/page.tsx; I'll replace it.`}</code>
+        </pre>
+        <p className={prose}>
+          To change a colour, swap it in each component (<code>indigo</code> →{" "}
+          <code>emerald</code>). Or, in <code>globals.css</code>, override every
+          shade the components use, or add your own brand colour and switch
+          components to it (<code>bg-indigo-600</code> →{" "}
+          <code>bg-brand-600</code>):
         </p>
         <pre>
           <code>{`@theme {
-  --color-brand-600: oklch(0.51 0.24 280);
-}
-:root {
-  --color-indigo-600: var(--color-brand-600);
-  --color-blue-600: var(--color-brand-600);  /* both now use your brand */
+  /* override indigo with green */
+  --color-indigo-500: oklch(0.72 0.22 150);
+  --color-indigo-600: oklch(0.63 0.19 149);
+
+  /* or add your own pink */
+  --color-brand-500: oklch(0.66 0.24 354);
+  --color-brand-600: oklch(0.59 0.25 1);
 }`}</code>
         </pre>
-        <p className="text-lg leading-8 text-muted-foreground">
-          Benefits: define colours once with meaningful names, remap multiple
-          Tailwind palettes to the same brand colour, clearer separation between
-          your palette and Tailwind&apos;s naming.
-        </p>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row">
           <Button
