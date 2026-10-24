@@ -3,7 +3,6 @@
     "biomejs.biome", // Fast formatter and linter for JS/TS/JSON
     "anthropic.claude-code", // Anthropic Claude Code
     "davidanson.vscode-markdownlint", // Markdown linter
-    "ms-playwright.playwright", // Playwright Test for VS Code
     "bradlc.vscode-tailwindcss" // Tailwind CSS IntelliSense
   ]
 }
