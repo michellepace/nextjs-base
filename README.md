@@ -139,31 +139,31 @@ npm install                 # Install updated versions
 
 | File | What | Generally In This Project Template |
 | :----- | :----- | :------------------ |
-| 🌺 [`.claude/rules/`](.claude/rules/) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
+| 🌺 [`.claude/rules/`](.claude/rules/) | Claude Code rules | Auto-injected when editing matching file paths |
 | 🌺 [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | Claude Code project context | Documents tech stack (customise!) |
-| 🌺 [`.claude/settings.json`](.claude/settings.json) | Claude Code permissions + plugins | Allow/Deny permissions, plus enabled plugins and marketplaces |
+| 🌺 [`.claude/settings.json`](.claude/settings.json) | Claude Code project settings | Allow/Deny permissions, plus enabled plugins and marketplaces |
 | 🚀 [`.github/workflows/check-lint-type.yml`](.github/workflows/check-lint-type.yml) | GitHub Actions CI workflow | Runs Biome linting/formatting checks and TypeScript type checking on PRs |
 | 🚀 [`.github/workflows/test-e2e-vercel.yml`](.github/workflows/test-e2e-vercel.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests against Vercel Preview deployments (triggered by Vercel) |
 | 🚀 [`.github/workflows/test-e2e.yml`](.github/workflows/test-e2e.yml) | GitHub Actions CI workflow | Runs Playwright E2E tests on PRs (builds production, tests browsers, uploads reports) |
 | 🚀 [`.github/workflows/test-unit.yml`](.github/workflows/test-unit.yml) | GitHub Actions CI workflow | Runs Vitest unit tests on PRs (uses jsdom environment, React Testing Library) |
 | 🚀 [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot config | Automated dependency update PRs weekly (npm + GitHub Actions) |
-| 🧪 [`.playwright/`](.playwright/) | Playwright project folder | Playwright test outputs `test-results/` and `playwright-report/` (moved from root). Plus `cli.config.json` for playwright-cli (its default location) |
+| 🧪 [`.playwright/`](.playwright/) | Playwright outputs + CLI settings | Playwright test outputs `test-results/` and `playwright-report/` (moved from root). Plus `cli.config.json` for playwright-cli (its default location) |
 | 🧪 `.playwright-cli/` | playwright-cli output | Page snapshots and screenshots Claude takes |
 | [`.vscode/extensions.json`](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
-| [`.vscode/settings.json`](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
+| [`.vscode/settings.json`](.vscode/settings.json) | VS Code workspace settings | Enables auto-formatting and configures Biome and Tailwind extensions |
 | [`.gitattributes`](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
 | [`.gitignore`](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
-| 🧪 [`.markdownlint-cli2.yaml`](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
+| 🧪 [`.markdownlint-cli2.yaml`](.markdownlint-cli2.yaml) | Markdown linter config | Disables strict linting rules for practical writing; supports file ignores |
 | 🌺 [`.mcp.json`](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
 | [`.nvmrc`](.nvmrc) | Node.js version pin | Single source for the Node major — CI reads it via `node-version-file`, `nvm use` reads it locally |
-| 🧪 [`biome.json`](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
-| 🧪 [`lefthook.yml`](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and build + E2E tests on push |
-| 🅽 [`next.config.ts`](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
+| 🧪 [`biome.json`](biome.json) | Biome lint + format config | Sets linting rules, formatting style, and import organisation |
+| 🧪 [`lefthook.yml`](lefthook.yml) | Git hooks config | Automates code quality checks on commit and build + E2E tests on push |
+| 🅽 [`next.config.ts`](next.config.ts) | Next.js config | Enables React Compiler and customises Next.js build settings |
 | 🅽 [`package.json`](package.json) | Project dependencies and npm scripts | Defines project dependencies, scripts, and npm package metadata |
-| 🧪 [`playwright.config.ts`](playwright.config.ts) | Playwright E2E test runner configuration | Sets test browsers (desktop + mobile), parallel execution, and base URLs |
-| 🅽 [`postcss.config.mjs`](postcss.config.mjs) | PostCSS plugins config for CSS processing | Enables Tailwind CSS v4 processing via PostCSS plugin |
+| 🧪 [`playwright.config.ts`](playwright.config.ts) | Playwright E2E test config | Sets test browsers (desktop + mobile), parallel execution, and base URLs |
+| 🅽 [`postcss.config.mjs`](postcss.config.mjs) | CSS processing config | Enables Tailwind CSS v4 processing via PostCSS plugin |
 | 🧪 [`tsconfig.json`](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
-| 🧪 [`vitest.config.ts`](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references [`vitest.setup.ts`](vitest.setup.ts) |
+| 🧪 [`vitest.config.ts`](vitest.config.ts) | Vitest unit test config | Sets up React component testing environment and references [`vitest.setup.ts`](vitest.setup.ts) |
 | 🧪 [`vitest.setup.ts`](vitest.setup.ts) | Global test setup | Adds helpful test assertions like `expect(element).toBeVisible()` |
 
 ---
