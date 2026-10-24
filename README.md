@@ -135,6 +135,8 @@ npm install                 # Install updated versions
 
 ## Config Files Explained
 
+*Key: 🌺 Claude Code · 🅽 Next.js · 🧪 Checks and tests · 🚀 GitHub CI/CD*
+
 | File | What | Generally In This Project Template |
 | :----- | :----- | :------------------ |
 | 🌺 [`.claude/rules/`](.claude/rules/) | Claude Code context-aware rules | Auto-injected when editing matching file paths |
@@ -147,13 +149,13 @@ npm install                 # Install updated versions
 | 🚀 [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot config | Automated dependency update PRs weekly (npm + GitHub Actions) |
 | 🧪 [`.playwright/`](.playwright/) | Playwright project folder | Playwright test outputs `test-results/` and `playwright-report/` (moved from root). Plus `cli.config.json` for playwright-cli (its default location) |
 | 🧪 `.playwright-cli/` | playwright-cli output | Page snapshots and screenshots Claude takes |
-| ▢ [`.vscode/extensions.json`](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
-| ▢ [`.vscode/settings.json`](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
-| ▢ [`.gitattributes`](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
-| ▢ [`.gitignore`](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
-| ▢ [`.markdownlint-cli2.yaml`](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
+| [`.vscode/extensions.json`](.vscode/extensions.json) | VS Code extension recommendations | Useful extensions to use in this Next.js project |
+| [`.vscode/settings.json`](.vscode/settings.json) | VS Code editor and formatting settings | Enables auto-formatting and configures Biome and Tailwind extensions |
+| [`.gitattributes`](.gitattributes) | Git line ending and file type handling | Normalises line endings across platforms for consistent Git diffs |
+| [`.gitignore`](.gitignore) | Files and directories Git should ignore | Prevents build outputs and dependencies from being committed |
+| 🧪 [`.markdownlint-cli2.yaml`](.markdownlint-cli2.yaml) | Markdownlint configuration | Disables strict linting rules for practical writing; supports file ignores |
 | 🌺 [`.mcp.json`](.mcp.json) | Claude Code MCP config | Ref MCP for docs search |
-| ▢ [`.nvmrc`](.nvmrc) | Node.js version pin | Single source for the Node major — CI reads it via `node-version-file`, `nvm use` reads it locally |
+| [`.nvmrc`](.nvmrc) | Node.js version pin | Single source for the Node major — CI reads it via `node-version-file`, `nvm use` reads it locally |
 | 🧪 [`biome.json`](biome.json) | Biome linter and formatter | Sets linting rules, formatting style, and import organisation |
 | 🧪 [`lefthook.yml`](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and build + E2E tests on push |
 | 🅽 [`next.config.ts`](next.config.ts) | Next.js framework configuration | Enables React Compiler and customises Next.js build settings |
