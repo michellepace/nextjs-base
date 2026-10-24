@@ -154,7 +154,8 @@ npm install                 # Install updated versions
 | 🧪 [`lefthook.yml`](lefthook.yml) | Git hooks manager | Automates code quality checks on commit and build + E2E tests on push |
 | 🧪 [`tsconfig.json`](tsconfig.json) | TypeScript compiler settings | Configures TypeScript compiler options and module resolution behaviour |
 | 🧪 [`playwright.config.ts`](playwright.config.ts) | Playwright E2E test runner configuration | Sets test browsers (desktop + mobile), parallel execution, and base URLs |
-| 🧪 [`.playwright/`](.playwright/) | Playwright test outputs (custom organisation) | Contains test artifacts in `test-results/` and HTML `playwright-report/` (all Playwright outputs nested under `.playwright/` for clean structure) |
+| 🧪 [`.playwright/`](.playwright/) | Playwright project folder | Playwright test outputs `test-results/` and `playwright-report/` (moved from root). Plus `cli.config.json` for playwright-cli (its default location) |
+| 🧪 `.playwright-cli/` | playwright-cli output | Page snapshots and screenshots Claude takes |
 | 🧪 [`vitest.config.ts`](vitest.config.ts) | Vitest test runner config | Sets up React component testing environment and references [`vitest.setup.ts`](vitest.setup.ts) |
 | 🧪 [`vitest.setup.ts`](vitest.setup.ts) | Global test setup | Adds helpful test assertions like `expect(element).toBeVisible()` |
 | 🚀 [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot config | Automated dependency update PRs weekly (npm + GitHub Actions) |
