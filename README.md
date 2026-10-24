@@ -237,7 +237,7 @@ npm install                 # Install updated versions
 
   git checkout -b feature/add-dark-mode
   │
-  ├─ Commit 1: Add light/dark mode          ⚡ pre-commit hook runs (3s)
+  ├─ Commit 1: Add light/dark mode          ⚡ pre-commit hook runs
   │  ├─ 🎨 Biome lint and format                ✅ Auto-fixed & staged
   │  ├─ 🔍 TypeScript type check                ✅ Pass
   │  └─ 🧪 Vitest unit tests                    ✅ Pass
@@ -250,12 +250,12 @@ npm install                 # Install updated versions
   (optional) /simplify, /code-review, /security-review before pushing
              see docs/project-setup.md § Checking Quality
 
-  git push origin feature/add-dark-mode     ⚡ pre-PUSH hook runs (~20s)
+  git push origin feature/add-dark-mode     ⚡ pre-PUSH hook runs
      ├─ 🏗️  Next.js production build             ✅ Pass
      └─ 🎭 Playwright E2E tests                 ✅ Pass (then pushed to GH)
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ ☁️  GITHUB: Workflows kickoff on GitHub machines when PR is created
+│ ☁️  GITHUB: Workflows kick off on GitHub machines when PR is created
 └─────────────────────────────────────────────────────────────────────────────┘
 
   Create Pull Request → GitHub Actions triggered automatically
@@ -313,7 +313,7 @@ Key CI Takeaways
 - Local Hooks — Catch issues before commit or reaching GitHub
 - GitHub Actions — Validate every PR with fresh environment (reproducible CI)
 - GitHub Ruleset — Prevents merging broken code (all checks must pass)
-- Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
+- Fast Feedback — Pre-commit catches most issues locally
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
 </details>
