@@ -11,15 +11,15 @@ Manual setup for [README](../README.md) step 5. GitHub settings, secrets and Ver
 3. Click **Deploy** → wait for deploy
 4. Click **Continue to Dashboard**: enable Analytics and Speed Insights (the template already renders both in [`app/layout.tsx`](../app/layout.tsx))
 
-### 1.2 Set Up E2E Tests on Vercel Previews
+### 1.2 Set Up E2E Tests on Vercel Deployments
 
-Vercel protects preview deployments behind a login by default. The workflow [`.github/workflows/test-e2e-vercel.yml`](../.github/workflows/test-e2e-vercel.yml) passes a bypass secret to Playwright so it can reach the preview.
+Vercel puts every deployment URL behind a login by default; only your production domain stays public. The workflow [`.github/workflows/test-e2e-vercel.yml`](../.github/workflows/test-e2e-vercel.yml) tests each deployment's own URL, Preview and Production, so it passes a bypass secret to Playwright.
 
 **Step A: Create bypass secret in Vercel**
 
 1. Vercel → Project → **Settings** → **Deployment Protection**
 2. Scroll to **Protection Bypass for Automation**
-3. Click **Add Secret**, add note: `Playwright E2E tests (preview)`
+3. Click **Add Secret**, add note: `Playwright E2E tests (GitHub Actions)`
 4. Copy the secret name (`VERCEL_AUTOMATION_BYPASS_SECRET`) and value
 
 **Step B: Add secret to GitHub**
@@ -107,7 +107,7 @@ Configure as follows:
     - `Run Unit Tests`
     - `Run E2E Tests`
     - `Vercel` (Preview deployment must succeed)
-    - `Run E2E Tests on Preview`
+    - `Run E2E Tests on Preview` (not `Run E2E Tests on Production`, which only runs after merge)
 - ✅ **Block force pushes**
 
 Click **Create** to save.

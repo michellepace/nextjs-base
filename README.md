@@ -2,7 +2,7 @@
 
 ![Next.js 16 - a modern template repo](docs/images/nextjs-hero.png)
 
-*A Next.js 16.4 template. Linting, formatting, type checks and tests run locally via Lefthook and on every PR via GitHub Actions. Vercel deploys a Preview per PR (E2E-tested) and Production from `main`. Dependabot keeps dependencies current. Set up for Claude Code, plugins included. [You choose the rest](#you-choose-the-rest) like UI components, database, etc.*
+*A Next.js 16.4 template. Lint, format, type and unit-test checks run on every commit, and end-to-end tests on every push. Every PR repeats these checks on GitHub and adds end-to-end tests against a Vercel Preview. A branch ruleset ([one-time setup](docs/project-setup.md)) blocks merging to `main` until they pass. Merging deploys to Vercel Production, where the end-to-end tests run again. Dependabot keeps dependencies current. Claude Code is set up, plugins included. [You choose the rest](#you-choose-the-rest): UI components, database, etc.*
 
 <div align="left">
   <a href="https://nextjs-base-hello.vercel.app" target="_blank">
@@ -202,7 +202,7 @@ npm install                 # Install updated versions
 | 🌺 [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | Claude Code project instructions: tech stack, conventions, traps and commands (customise!) |
 | 🌺 [`.claude/settings.json`](.claude/settings.json) | Claude Code project settings: allow/deny permissions, enabled plugins and marketplaces |
 | 🚀 [`.github/workflows/check-lint-type.yml`](.github/workflows/check-lint-type.yml) | CI workflow: runs Biome and TypeScript checks on every PR; must pass to merge |
-| 🚀 [`.github/workflows/test-e2e-vercel.yml`](.github/workflows/test-e2e-vercel.yml) | CI workflow: runs Playwright E2E tests against the live Vercel Preview once it deploys, to catch what only breaks on Vercel; must pass to merge |
+| 🚀 [`.github/workflows/test-e2e-vercel.yml`](.github/workflows/test-e2e-vercel.yml) | CI workflow: runs Playwright E2E tests against each live Vercel deploy, to catch what only breaks on Vercel; Preview must pass to merge, Production is checked after merge (can't block) |
 | 🚀 [`.github/workflows/test-e2e.yml`](.github/workflows/test-e2e.yml) | CI workflow: builds for production and runs Playwright E2E tests on every PR; must pass to merge |
 | 🚀 [`.github/workflows/test-unit.yml`](.github/workflows/test-unit.yml) | CI workflow: runs Vitest unit tests on every PR; must pass to merge |
 | 🚀 [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot config: weekly PRs to update npm packages and GitHub Actions |
@@ -219,7 +219,7 @@ npm install                 # Install updated versions
 | 🧪 [`lefthook.yml`](lefthook.yml) | Git hooks config: lint, typecheck and unit tests on commit; build and E2E tests on push, so most problems are caught before CI |
 | 🅽 [`next.config.ts`](next.config.ts) | Next.js config: React Compiler, Cache Components, partial prefetching, typed routes |
 | 🅽 [`package.json`](package.json) | Packages the app uses and the versions each may update to, npm scripts, and the allowed Node versions |
-| 🧪 [`playwright.config.ts`](playwright.config.ts) | Playwright E2E test config: browsers to test in, and the site to test (local server or Vercel Preview) |
+| 🧪 [`playwright.config.ts`](playwright.config.ts) | Playwright E2E test config: browsers to test in, and the site to test (local server or a Vercel deployment) |
 | 🅽 [`postcss.config.mjs`](postcss.config.mjs) | PostCSS config: runs Tailwind on your CSS (the theme lives in `app/globals.css`) |
 | 🧪 [`tsconfig.json`](tsconfig.json) | TypeScript config: strict type checking, and `@/` imports that start from the project root |
 | 🧪 [`vitest.config.ts`](vitest.config.ts) | Vitest unit test config: tests run in a simulated browser (jsdom), with React Compiler on as in the app |
@@ -251,7 +251,7 @@ npm install                 # Install updated versions
              see docs/project-setup.md § Checking Quality
 
   git push origin feature/add-dark-mode     ⚡ pre-PUSH hook runs
-     ├─ 🏗️  Next.js production build             ✅ Pass
+     ├─ 🏗️  Next.js production build            ✅ Pass
      └─ 🎭 Playwright E2E tests                 ✅ Pass (then pushed to GH)
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -287,7 +287,7 @@ npm install                 # Install updated versions
      ├─ ✅ Vercel deployment status check        (required to merge)
      └─ Sends repository_dispatch event to GitHub
 
-  └─ 🤖 Workflow 4: E2E Tests (Vercel Preview)
+  └─ 🤖 Workflow 4: E2E Tests (Vercel)
      ├─ Triggered by Vercel (not PR event)
      ├─ Runs Playwright against live Preview URL
      ├─ Tests real Vercel deployment             ✅ Pass
@@ -306,6 +306,10 @@ npm install                 # Install updated versions
 
   main branch updated (merge commit preserves 3 commits)
   └─ 🚀 Vercel deployment triggered → Production
+
+  └─ 🤖 Workflow 4 again: E2E Tests (Vercel)
+     ├─ Runs Playwright against Production URL   ✅ Pass
+     └─ Reports status to merge commit (can't block, already live)
 ```
 
 Key CI Takeaways

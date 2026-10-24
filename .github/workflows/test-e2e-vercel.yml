@@ -1,20 +1,19 @@
-# E2E Tests against Vercel Preview Deployments
+# E2E Tests against Vercel Deployments
 #
-# This workflow runs Playwright tests against Vercel preview deployments.
-# It is triggered automatically by Vercel when a deployment to preview succeeds.
+# Vercel starts this workflow after each successful deployment. Playwright
+# tests the live deployment, then the result is posted to the deployed commit:
+#   - Preview (push to a non-main branch): "Run E2E Tests on Preview"
+#     A required check in the branch ruleset, so a failure blocks the merge.
+#   - Production (merge to main): "Run E2E Tests on Production"
+#     Can't block anything, because the site is already live.
 #
-# How it works:
-# 1. Vercel deploys your code to a preview URL
-# 2. On success, Vercel sends a repository_dispatch event to GitHub
-# 3. This workflow receives the event with the preview URL in the payload
-# 4. Playwright tests run against the live Vercel preview deployment
-#
-# This provides confidence before merging to main (which triggers production deploy).
+# GitHub runs this file from main, so edits take effect only after merging.
 #
 # Reference:
 # https://vercel.com/kb/guide/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
 
-name: E2E Tests (Vercel Preview)
+name: E2E Tests (Vercel)
+run-name: E2E Tests (Vercel ${{ github.event.client_payload.environment == 'production' && 'Production' || 'Preview' }}) · ${{ github.event.client_payload.git.ref }}
 
 permissions:
   contents: read
@@ -25,6 +24,11 @@ on:
     types:
       - "vercel.deployment.success"
 
+# "Production" if Vercel sends environment "production", otherwise "Preview".
+# run-name and the job name can't read env, so they repeat this expression.
+env:
+  DEPLOY_ENV: ${{ github.event.client_payload.environment == 'production' && 'Production' || 'Preview' }}
+
 # A newer deployment of the same branch cancels the older run.
 # Keyed on git.ref, not the deployment URL, which is unique per deploy.
 concurrency:
@@ -32,8 +36,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  e2e-preview:
-    name: Run E2E Tests on Preview
+  e2e-vercel:
+    name: Run E2E Tests on ${{ github.event.client_payload.environment == 'production' && 'Production' || 'Preview' }}
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
@@ -66,24 +70,25 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report-vercel-preview
+          name: playwright-report-vercel
           path: .playwright/playwright-report/
           retention-days: 30
 
       # The run is tied to main, so post the result to the deployed commit.
-      # "Run E2E Tests on Preview" must match the ruleset's required check.
-      - name: Report status to PR
+      # The Preview context must match the ruleset's required check name.
+      - name: Report status to commit
         if: always()
         uses: actions/github-script@v9
         with:
           script: |
+            const deployEnv = process.env.DEPLOY_ENV;
             const state = '${{ job.status }}' === 'cancelled' ? 'error' : '${{ job.status }}';
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: '${{ github.event.client_payload.git.sha }}',
               state: state,
-              context: 'Run E2E Tests on Preview',
-              description: 'E2E tests against Vercel preview',
+              context: `Run E2E Tests on ${deployEnv}`,
+              description: `E2E tests against Vercel ${deployEnv.toLowerCase()}`,
               target_url: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
             });

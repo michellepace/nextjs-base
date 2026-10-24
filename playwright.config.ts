@@ -9,7 +9,7 @@ import { defineConfig, devices } from "@playwright/test";
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const PORT = process.env.PORT || 3000;
-/* BASE_URL is set when testing a Vercel preview deployment */
+/* BASE_URL is set when testing a Vercel deployment (Preview or Production) */
 const baseURL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 /* All Playwright outputs nested under .playwright/ */
@@ -44,7 +44,7 @@ export default defineConfig({
     trace: "on-first-retry",
     screenshot: "only-on-failure",
 
-    /* Bypass Vercel Deployment Protection on preview deployments (secret set in CI).
+    /* Bypass Vercel Deployment Protection (secret set in CI).
      * See https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation */
     ...(process.env.VERCEL_AUTOMATION_BYPASS_SECRET && {
       extraHTTPHeaders: {

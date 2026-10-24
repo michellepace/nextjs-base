@@ -13,7 +13,7 @@ on:
   # 2. Required to pass before PR can be merged to main (enforced by branch ruleset)
   #
   # Note: This workflow tests against localhost (built from source).
-  # For E2E tests against Vercel preview deployments, see: test-e2e-vercel.yml
+  # For E2E tests against Vercel deployments, see: test-e2e-vercel.yml
   pull_request:
     branches: [main]
 
