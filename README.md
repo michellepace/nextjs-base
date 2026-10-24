@@ -32,6 +32,7 @@ git clone https://github.com/michellepace/nextjs-base.git my-app
 cd my-app
 git remote remove origin
 gh repo create my-app --public --source . --push
+git remote set-head origin --auto  # record main as default, as a clone does
 ```
 
 Keep `--public` unless you have GitHub Pro — free accounts can't protect `main` on private repos.
