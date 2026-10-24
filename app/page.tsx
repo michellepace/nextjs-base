@@ -29,6 +29,13 @@ export default function Home() {
             className="font-medium text-foreground underline"
           >
             shadcn/ui
+          </a>
+          ,{" "}
+          <a
+            href="https://heroui.com/docs/react/getting-started"
+            className="font-medium text-foreground underline"
+          >
+            HeroUI
           </a>{" "}
           or{" "}
           <a
@@ -52,6 +59,26 @@ export default function Home() {
           —all components update instantly.
         </p>
 
+        <h2 className="mt-4 text-foreground">HeroUI</h2>
+        <p className="text-lg leading-8 text-muted-foreground">
+          HeroUI brings its own theme. Add{" "}
+          <code>@import &quot;@heroui/styles&quot;</code> to{" "}
+          <code>globals.css</code> and remove the shadcn colour variables — some
+          names clash with different meanings. HeroUI&apos;s{" "}
+          <code>--accent</code> is your brand colour (shadcn&apos;s{" "}
+          <code>--primary</code>), and it uses <code>--surface</code> and{" "}
+          <code>--danger</code> where shadcn uses <code>--card</code> and{" "}
+          <code>--destructive</code>. Dark mode works with the existing{" "}
+          <code>.dark</code> class. Build your colours with the{" "}
+          <a
+            href="https://heroui.com/themes"
+            className="font-medium text-foreground underline"
+          >
+            Theme Builder
+          </a>
+          .
+        </p>
+
         <h2 className="mt-4 text-foreground">Tailwind Plus</h2>
         <p className="text-lg leading-8 text-muted-foreground">
           Tailwind Plus includes UI Kit (Catalyst) and UI Blocks. The UI Kit
@@ -69,7 +96,7 @@ export default function Home() {
         </p>
 
         <p className="text-lg leading-8 text-muted-foreground">
-          With either library, colours remain centralised. The{" "}
+          With any of them, colours remain centralised. For Tailwind Plus, the{" "}
           <code>@theme</code> override method requires no code changes;
           find-replace gives full control over naming but requires editing
           files.

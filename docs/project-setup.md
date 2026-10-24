@@ -1,33 +1,17 @@
 # 🛠️ Project Setup Steps
 
-This guide documents the manual configuration required after creating a repo from the `nextjs-base` template. GitHub settings, secrets, and Vercel connections don't transfer with templates.
+Manual setup for [README](../README.md) step 5. GitHub settings, secrets and Vercel connections don't come with the code.
 
-## 📦 Part 1: Clone `nextjs-base` repo
+## 🚀 Part 1: Vercel Setup
 
-If you skipped the "Use this template" step in the [README](../README.md) and want your new project called "my-project", run:
-
-```bash
-gh repo create my-project --template michellepace/nextjs-base --clone --public
-```
-
-What does this do?
-
-- Creates `my-project` repo on GitHub (from the template)
-- Clones the repo locally to your machine in folder `my-project`
-- Initial commit with template in it
-
-Then `cd my-project` and continue with the install commands in [README](../README.md) step (1).
-
-## 🚀 Part 2: Vercel Setup
-
-### 2.1 Create Vercel Project
+### 1.1 Create Vercel Project
 
 1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import the `my-project` repository (default settings)
+2. Import the `my-app` repository (default settings)
 3. Click **Deploy** → wait for deploy
 4. Click **Continue to Dashboard**: enable Analytics and Speed Insights (the template already renders both in [`app/layout.tsx`](../app/layout.tsx))
 
-### 2.2 Set Up E2E Tests on Vercel Previews
+### 1.2 Set Up E2E Tests on Vercel Previews
 
 Vercel protects preview deployments behind a login by default. The workflow [`.github/workflows/test-e2e-vercel.yml`](../.github/workflows/test-e2e-vercel.yml) passes a bypass secret to Playwright so it can reach the preview.
 
@@ -45,7 +29,7 @@ Vercel protects preview deployments behind a login by default. The workflow [`.g
 
 Alternatively run: `gh secret set VERCEL_AUTOMATION_BYPASS_SECRET`
 
-### 2.3 Link Vercel CLI (optional)
+### 1.3 Link Vercel CLI (optional)
 
 Install the [Vercel CLI](https://vercel.com/docs/cli) globally and link it to your project:
 
@@ -60,7 +44,7 @@ vercel list # See deployments for linked project
 
 ---
 
-## ⚙️ Part 3: GitHub Repository Settings
+## ⚙️ Part 2: GitHub Repository Settings
 
 Go to **Settings** → **General** on your GitHub repo.
 
@@ -77,7 +61,7 @@ Dependabot will only open PRs — it never merges them. You still review and mer
 
 ---
 
-## 🧪 Part 4: Trigger Initial Workflows
+## 🧪 Part 3: Trigger Initial Workflows
 
 Create a test PR to trigger all workflows. This ensures status check names exist in GitHub before configuring the branch ruleset.
 
@@ -95,7 +79,7 @@ Create a test PR to trigger all workflows. This ensures status check names exist
 
 ---
 
-## 🔒 Part 5: Branch Ruleset
+## 🔒 Part 4: Branch Ruleset
 
 Now that all workflows have run, their check names are available in GitHub.
 
@@ -143,12 +127,12 @@ Use `gh api` to get the exact check names from the most recent PR's head commit
 - non_fast_forward (block force pushes)
 
 Verify by fetching the rulesets list afterwards. Then double check against:
-`docs/project-setup.md` § Part 5: Branch Ruleset
+`docs/project-setup.md` § Part 4: Branch Ruleset
 ```
 
 ---
 
-## 🐰 Part 6: Checking Quality
+## 🐰 Part 5: Checking Quality
 
 Claude Code ships these [built-in commands](https://code.claude.com/docs/en/commands), listed in the order you reach for them:
 

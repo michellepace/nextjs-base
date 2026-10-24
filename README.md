@@ -2,77 +2,129 @@
 
 ![Next.js 16 - a modern template repo](docs/images/nextjs-hero.png)
 
-*A Next.js 16 template with modern tooling and CI/CD automation. Code quality checks (linting, formatting, type checking, testing) run via Lefthook locally and GitHub Actions on PRs. Dependency updates automated via Dependabot. Deployments handled by Vercel: Preview for PRs, Production for main. Assumes Claude Code.*
+*A Next.js 16.4 template. Linting, formatting, type checks and tests run locally via Lefthook and on every PR via GitHub Actions. Vercel deploys a Preview per PR (E2E-tested) and Production from `main`. Dependabot keeps dependencies current. Set up for Claude Code, plugins included. [You choose the rest](#you-choose-the-rest) like UI components, database, etc.*
 
 <div align="left">
-  <a href="docs/images/app-screenshot.jpg" target="_blank">
-    <img src="docs/images/app-screenshot.jpg" alt="Homepage in light and dark modes with UI library guidance" width="750">
+  <a href="https://nextjs-base-hello.vercel.app" target="_blank">
+    <img src="docs/images/app-screenshot.jpg" alt="Template homepage in light and dark mode" width="400">
   </a>
-  <p><em>Template homepage with light/dark mode setup — UI component library still needed</em></p>
+  <p><em><a href="https://nextjs-base-hello.vercel.app">Template homepage</a> — deployed on Vercel</em></p>
 </div>
-
-*See this template live — https://nextjs-base-hello.vercel.app*
 
 ## 🎯 Use This Template
 
-**(1) Get This Repo.** Click "Use this template" → creates a new repository on your GitHub with no commit history — a fresh start. Then clone it locally:
+You need Git, [Node.js 24](https://nodejs.org), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Claude Code](https://code.claude.com). Swap `my-app` for your project name.
+
+<details>
+<summary>(1) Get the Code — fresh start or keep history</summary>
+
+Pick one:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
-cd YOUR-REPO
-
-# Install dependencies
-npm install
-
-# For Claude Code typescript-lsp plugin (uses the project's TypeScript)
-npm install -g typescript-language-server
-
-# Claude Code uses for browser exploration (Global chosen)
-npm install -g @playwright/cli@latest
-
-# Ensure latest Playwright CLI skill
-playwright-cli install --skills
-
-# Open http://localhost:3000 to see app running
-npm run dev
+# Fresh start, no template history (same as the "Use this template" button)
+gh repo create my-app --template michellepace/nextjs-base --public --clone
+cd my-app
 ```
 
-**(2) Install Extensions.** In VSCode/Cursor install the extensions shown in [`.vscode/extensions.json`](.vscode/extensions.json). When VS Code asks to use the workspace TypeScript version, click Allow — this turns on the Next.js editor checks.
+```bash
+# Keep history: Claude can read the template's commits to answer "why was this done?"
+git clone https://github.com/michellepace/nextjs-base.git my-app
+cd my-app
+git remote remove origin
+gh repo create my-app --public --source . --push
+```
 
-**(3) GitHub + Vercel Setup.** Follow [`docs/project-setup.md`](docs/project-setup.md) to set up GitHub and Vercel.
+Keep `--public` unless you have GitHub Pro — free accounts can't protect `main` on private repos.
 
-**(4) Housekeeping.** Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) as preferred — note the latter lists my plugins and marketplaces, see [Claude Code Plugins](#-claude-code-plugins) to install them.
+</details>
 
-**(5) Choose UI Library.** Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
-
-**(6) Decide on Icons.** Each UI library above ships with icons — shadcn/ui uses [Lucide React](https://lucide.dev/guide/react/), Tailwind Plus (Catalyst) uses [Heroicons](https://heroicons.com/), HeroUI uses [Iconify](https://iconify.design/). All three let you swap to a different icon library.
-
-**(7) Replace Template Files.** Replace [`app/page.tsx`](app/page.tsx), [`app/layout.tsx`](app/layout.tsx), [`components/button.tsx`](components/button.tsx), [`app/globals.css`](app/globals.css) (centralised theming), [`app/fonts.ts`](app/fonts.ts), and [`components/theme-toggle.tsx`](components/theme-toggle.tsx) (use an icon).
-
-## 🧩 Claude Code Plugins
-
-When you first open the repo, Claude Code asks you to trust it, then offers to install the plugins in [`.claude/settings.json`](.claude/settings.json). If you skipped that, run these once inside your project folder:
+<details>
+<summary>(2) Install and Run — dependencies, test browsers, dev server</summary>
 
 ```bash
-# Add the two plugin marketplaces
+npm install                                         # Dependencies + git hooks
+npx playwright install chromium webkit --with-deps  # Browsers for E2E tests
+npm run dev                                         # Open http://localhost:3000 (Ctrl+C to stop)
+```
+
+</details>
+
+<details>
+<summary>(3) Set Up Claude Code — global tools and plugins</summary>
+
+Install the tools Claude Code's TypeScript plugin and browser skill need:
+
+```bash
+# typescript-lsp plugin runs this; it then uses the project's TypeScript
+npm install -g typescript-language-server
+
+# Browser automation for Claude; refreshes the skill in .claude/skills/playwright-cli/
+npm install -g @playwright/cli@latest
+playwright-cli install --skills
+```
+
+Then run `claude` in the project folder, trust it, and accept the offer to install the plugins in [`.claude/settings.json`](.claude/settings.json). If you skipped the offer, run:
+
+```bash
 claude plugin marketplace add anthropics/claude-plugins-official --scope project
 claude plugin marketplace add michellepace/my-claude-marketplace --scope project
 
-# Install the plugins
 claude plugin install typescript-lsp@claude-plugins-official --scope project
 claude plugin install alwayson-misc@my-claude-marketplace --scope project
 claude plugin install git-utils@my-claude-marketplace --scope project
-claude plugin install mattpocock-skills@claude-plugins-official --scope project
 
-# Disable Matt Pocock's skills for now
-claude plugin disable mattpocock-skills@claude-plugins-official --scope project
-# To enable it when you need it:
-# claude plugin enable mattpocock-skills@claude-plugins-official --scope project
+claude plugin install mattpocock-skills@claude-plugins-official --scope project # enable
+claude plugin disable mattpocock-skills@claude-plugins-official --scope project # disable again
 ```
 
-**mattpocock-skills** is disabled because there are many skills that pepper the context window and can trigger when you don't want them. Enable the plugin when you want it.
+- **mattpocock-skills** is disabled: its many skills fill the context window and trigger when you don't want them. Turn it on with `claude plugin enable mattpocock-skills@claude-plugins-official --scope project`.
+- **[git-utils](https://github.com/michellepace/my-claude-marketplace/tree/main/plugins/git-utils)** is my own plugin and optional. Ask Claude to remove or disable it.
 
-**[git-utils](https://github.com/michellepace/my-claude-marketplace/tree/main/plugins/git-utils)** is my own plugin and optional. Ask Claude to either remove it or disable it.
+</details>
+
+<details>
+<summary>(4) Install Extensions — VS Code / Cursor</summary>
+
+In VS Code or Cursor, install the extensions listed in [`.vscode/extensions.json`](.vscode/extensions.json). When the editor asks to use the workspace TypeScript version, click Allow — this turns on the Next.js editor checks.
+
+Missed it? Open a `.tsx` file, press Ctrl+Shift+P and run **TypeScript: Select TypeScript Version** → **Use Workspace Version**.
+
+</details>
+
+<details>
+<summary>(5) GitHub + Vercel Setup — deploys, CI, branch protection</summary>
+
+Follow [`docs/project-setup.md`](docs/project-setup.md) to set up GitHub and Vercel.
+
+</details>
+
+<details>
+<summary>(6) Housekeeping — make the Claude Code config yours</summary>
+
+Modify [`.claude/CLAUDE.md`](.claude/CLAUDE.md), [`.mcp.json`](.mcp.json), and [`.claude/settings.json`](.claude/settings.json) (permissions and plugins) as preferred.
+
+</details>
+
+<details>
+<summary>(7) Choose UI Library — shadcn/ui, HeroUI or Tailwind Plus</summary>
+
+Choose one that supports Tailwind 4. [shadcn/ui](https://ui.shadcn.com/) (free) and [HeroUI v3](https://heroui.com/) (free) are both LLM friendly and use semantic tokens — which makes theming easy. shadcn is ubiquitous so theme it well to stand out — [tweak-cn](https://tweakcn.com/) and [theme-generator](https://shadcnstudio.com/theme-generator) are helpful. HeroUI is more visually distinct and extremely LLM friendly; it ships with agent skills too. [Tailwind Plus](https://tailwindcss.com/plus) (paid) offers components ([Catalyst](https://tailwindcss.com/plus/ui-kit)), assembled UI blocks, and full site templates, but doesn't include semantic tokens so centralised theming takes more manual work.
+
+</details>
+
+<details>
+<summary>(8) Decide on Icons — each UI library ships its own</summary>
+
+Each UI library above ships with icons — shadcn/ui uses [Lucide React](https://lucide.dev/guide/react/), Tailwind Plus (Catalyst) uses [Heroicons](https://heroicons.com/), HeroUI uses [Iconify](https://iconify.design/). All three let you swap to a different icon library.
+
+</details>
+
+<details>
+<summary>(9) Replace Template Files — your pages, theme and fonts</summary>
+
+Replace [`app/page.tsx`](app/page.tsx), [`app/layout.tsx`](app/layout.tsx), [`components/button.tsx`](components/button.tsx), [`app/globals.css`](app/globals.css) (centralised theming), [`app/fonts.ts`](app/fonts.ts), and [`components/theme-toggle.tsx`](components/theme-toggle.tsx) (use an icon).
+
+</details>
 
 ## What's Installed?
 
@@ -95,20 +147,24 @@ For exact list see [`package.json`](package.json)
 | Analytics | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) | Real user performance metrics viewable on Vercel |
 | | [Vercel Web Analytics](https://vercel.com/docs/analytics) | Privacy-friendly visitor analytics viewable on Vercel |
 
-## Common Additions for New Projects
+## You Choose the Rest
 
-When starting a new project from this template, you'll typically add:
+You'll need:
 
-- UI components (shadcn/ui, HeroUI v3, Tailwind Plus, etc.)
-- State management (Zustand, Jotai, or React Context)
-- Data fetching (React Query, SWR, or native fetch with Server Components)
-- Forms (React Hook Form, Zod for validation)
-- Authentication (NextAuth.js, Clerk, or Supabase Auth)
-- Database/ORM (Neon or Supabase with Prisma or Drizzle. Or try Convex!)
+- UI components (e.g. shadcn/ui, HeroUI v3, Tailwind Plus)
+- Database/ORM (e.g. Neon or Supabase with Prisma or Drizzle. Or Convex - no ORM needed!)
+- Authentication (e.g. Clerk, Supabase Auth, or Better Auth — open source, Vercel-owned)
+- Validation (e.g. Zod, to check form and API data on the server)
 
-![Explained banner](docs/images/template-explained.png)
+Maybe:
 
-## Next.js Installation Explained
+- Forms (e.g. React Hook Form, for complex forms)
+- State management (e.g. Zustand, Jotai, or React Context)
+
+## This Repo Explained
+
+<details>
+<summary><b>Next.js Installation</b> — the <code>create-next-app</code> answers and updates</summary>
 
 This template was initialised with the following options and then updated:
 
@@ -133,7 +189,10 @@ npx npm-check-updates -u    # Rewrite package.json with latest
 npm install                 # Install updated versions
 ```
 
-## Config Files Explained
+</details>
+
+<details>
+<summary><b>Config Files</b> — what each one does</summary>
 
 *Key: 🌺 Claude Code · 🅽 Next.js · 🧪 Checks and tests · 🚀 GitHub CI/CD*
 
@@ -166,11 +225,10 @@ npm install                 # Install updated versions
 | 🧪 [`vitest.config.ts`](vitest.config.ts) | Vitest unit test config: tests run in a simulated browser (jsdom), with React Compiler on as in the app |
 | 🧪 [`vitest.setup.ts`](vitest.setup.ts) | Vitest setup file: runs before each test file; holds shared test setup |
 
----
+</details>
 
-## CI/CD Workflow Explained
-
-This diagram shows how CI automation integrates into a typical development workflow:
+<details>
+<summary><b>CI/CD Workflow</b> — from first commit to production</summary>
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -283,20 +341,4 @@ Key CI Takeaways
 - Fast Feedback — Pre-commit catches 90% of issues locally in ~3s vs ~2min CI wait
 - Quality Gates — Code is validated 2× (local + CI) before reaching production
 
-![Quick rough notes](docs/images/rough-notes.png)
-
-## Quick Notes
-
-(1) How Vitest Pieces Work Together
-
-```markdown
-1. When you run `npm run test:unit`, Vitest loads vitest.config.ts
-2. The config tells Vitest to use jsdom and load `vitest.setup.ts`
-3. Your test files can use global test functions and extended matchers
-4. The @/* import alias works in tests thanks to `resolve.tsconfigPaths` in the config
-5. React components are compiled with React Compiler (matching prod)
-```
-
-(2) GitHub - A branch ruleset to be set up to protect main. Includes checks for GitHub workflow jobs to pass before merging PR to main. See [`docs/project-setup.md`](docs/project-setup.md).
-
-(3) Vercel For Deploys - When you raise a PR it automatically deploys to Vercel Preview and Playwright e2e tests run on that too in addition to GitHub servers. When you merge the PR into main, you are deploying to Vercel prod. See [`docs/project-setup.md`](docs/project-setup.md).
+</details>
