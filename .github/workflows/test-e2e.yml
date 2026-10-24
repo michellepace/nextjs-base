@@ -9,11 +9,11 @@ concurrency:
 
 on:
   # Triggers: PR opened, updated (new commits), or reopened
-  # 1. Runs on remote GitHub Actions server (fresh environment, not local cache)
-  # 2. Required to pass before PR can be merged to main (enforced by branch protection)
+  # 1. Runs on remote GitHub Actions server (fresh environment, not your machine)
+  # 2. Required to pass before PR can be merged to main (enforced by branch ruleset)
   #
   # Note: This workflow tests against localhost (built from source).
-  # For E2E tests against Vercel preview deployments, see: test-e2e-vercel.yml
+  # For E2E tests against Vercel deployments, see: test-e2e-vercel.yml
   pull_request:
     branches: [main]
 
@@ -24,32 +24,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step: Checkout code
       - uses: actions/checkout@v7
 
-      # Step: Setup Node.js
       - uses: actions/setup-node@v7
         with:
           node-version-file: ".nvmrc"
           cache: "npm"
 
-      # Step: Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # Step: Install Playwright Browsers
       - name: Install Playwright Browsers
         run: npx playwright install chromium webkit --with-deps
 
-      # Step: Build production
+      # playwright.config.ts serves this build with `npm start` when CI is set
       - name: Build Next.js production
         run: npx next build
 
-      # Step: Run E2E tests
       - name: Run Playwright tests
         run: npx playwright test
 
-      # Step: Upload test report
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:

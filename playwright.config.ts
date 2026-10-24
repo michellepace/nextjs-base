@@ -8,44 +8,44 @@ import { defineConfig, devices } from "@playwright/test";
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-// Use process.env.PORT by default and fallback to port 3000
 const PORT = process.env.PORT || 3000;
-
-// If BASE_URL env var is set (e.g., Vercel preview URL), use it;
-// otherwise fall back to localhost for local/CI testing
+/* BASE_URL is set when testing a Vercel deployment (Preview or Production) */
 const baseURL = process.env.BASE_URL || `http://localhost:${PORT}`;
+
+/* All Playwright outputs nested under .playwright/ */
+const TEST_RESULTS = ".playwright/test-results";
+const HTML_REPORT = ".playwright/playwright-report";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-
-// Custom: Re-organise Playwright outputs
-const TEST_RESULTS = ".playwright/test-results";
-const HTML_REPORT = ".playwright/playwright-report";
-
 export default defineConfig({
   testDir: "./e2e",
   outputDir: TEST_RESULTS,
-  fullyParallel: true, // Run tests in files in parallel
-  forbidOnly: !!process.env.CI, // Fail CI build of "test.only" found in code
-  retries: process.env.CI ? 2 : 0, // Retry on CI only
-  workers: process.env.CI ? 1 : undefined, // Playwright recommends 1
-
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  // open: "never" prevents blocking terminal; run `npm run test:e2e:report` to view
+  /* open: "never" so the terminal isn't blocked; view with `npm run test:e2e:report` */
   reporter: process.env.CI
     ? [["html", { outputFolder: HTML_REPORT, open: "never" }], ["github"]]
     : [["html", { outputFolder: HTML_REPORT, open: "never" }]],
-
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL, // Base URL to use in actions like `await page.goto('')`.
-    trace: "on-first-retry", // Collect trace on failed test retry https://playwright.dev/docs/trace-viewer
-    screenshot: "only-on-failure", // Capture screenshot after each test failure
+    /* Base URL to use in actions like `await page.goto('')`. */
+    baseURL,
 
-    // Bypass Vercel Deployment Protection for automation (e.g., E2E tests on preview deployments)
-    // Only applied when the bypass secret is available (set in CI for Vercel preview tests)
-    // See: https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+
+    /* Bypass Vercel Deployment Protection (secret set in CI).
+     * See https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation */
     ...(process.env.VERCEL_AUTOMATION_BYPASS_SECRET && {
       extraHTTPHeaders: {
         "x-vercel-protection-bypass":
@@ -67,9 +67,7 @@ export default defineConfig({
     //   use: { ...devices["Desktop Firefox"] },
     // },
 
-    // Desktop Webkit removed - redundant with Mobile Safari for Safari engine coverage.
-    // Mobile Safari tests the same Webkit engine with mobile viewport (iPhone).
-    // Uncomment if you specifically need macOS Desktop Safari testing:
+    /* Off: Mobile Safari below already covers the WebKit engine */
     // {
     //   name: "webkit",
     //   use: { ...devices["Desktop Safari"] },
@@ -77,8 +75,8 @@ export default defineConfig({
 
     /* Test against mobile viewports. */
     // {
-    //   name: "Mobile Chrome",
-    //   use: { ...devices["Pixel 5"] },
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
     // },
     {
       name: "Mobile Safari",
@@ -96,16 +94,13 @@ export default defineConfig({
     // },
   ],
 
-  /* Run local server before starting tests (dev locally, prod build in CI).
-   * When BASE_URL is set (e.g., testing against Vercel preview),
-   * skip starting a local server — we're testing an external deployment.
-   */
+  /* Run your local dev server before starting the tests */
+  /* Prod build on CI; skipped when BASE_URL points at an external deployment */
   webServer: process.env.BASE_URL
-    ? undefined // External URL — no local server needed
+    ? undefined
     : {
         command: process.env.CI ? "npm start" : "npm run dev",
         url: baseURL,
-        timeout: 60 * 1000,
         reuseExistingServer: !process.env.CI,
       },
 });

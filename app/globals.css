@@ -1,3 +1,6 @@
+/* Same order Tailwind declares; add third-party layers between these */
+@layer theme, base, components, utilities;
+
 @import "tailwindcss";
 
 /* Applies dark: styles when element is .dark or inside .dark */
@@ -170,5 +173,10 @@
   pre {
     /* Code blocks (multi-line, typically <pre><code>...</code></pre>) */
     @apply overflow-x-auto rounded-lg bg-muted p-4 text-sm;
+  }
+
+  :where(p) a {
+    /* Links in body text (not buttons or heading links) */
+    @apply text-foreground underline;
   }
 }

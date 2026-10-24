@@ -1,63 +1,47 @@
-# Lefthook configuration for Git hooks
-# https://lefthook.dev/
-
-# Use doublestar glob matcher for standard glob behaviour (** matches 0 or more directories)
-glob_matcher: doublestar
+glob_matcher: doublestar # ** also matches root files
 
 pre-commit:
-  parallel: false # Sequential: type-check and tests must run on biome-fixed code
+  parallel: false # type-check and tests must run on Biome-fixed code
 
   skip:
-    # Skip pre-commit hooks in these situations
-    - merge # Merge commits combine already-tested code
-    - rebase # Commits are replayed during rebase, already tested
+    - merge # commits already checked; CI checks the result
+    - rebase # commits already checked; CI checks the result
 
   commands:
     npm-install:
-      # Sync and add package-lock.json (when package.json changes)
       glob: "package.json"
       run: npm install && git add package-lock.json
 
-    biome-check:
-      # Biome: lint, format, imports, apply safe fixes (every commit)
-      # config: biome.json
+    biome-check: # config: biome.json
       run: npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true
 
-    markdown-lint:
-      # config: .markdownlint-cli2.yaml
+    markdown-lint: # config: .markdownlint-cli2.yaml
       glob: "**/*.md"
       run: npx markdownlint-cli2 --fix {staged_files}
       stage_fixed: true
 
-    type-check:
-      # TypeScript type checking (every commit)
-      # config: tsconfig.json
+    type-check: # config: tsconfig.json
       run: npx tsc --noEmit --pretty
 
-    unit-tests:
-      # Vitest: run unit tests (when matching files change)
+    unit-tests: # config: vitest.config.ts
       glob:
-        - "**/*.{ts,tsx}" # code in folders
-        - "!e2e/**/*" # Exclude e2e tests
-        - "package-lock.json" # Dependency changes
-        - "vitest.config.ts" # Config
+        - "**/*.{ts,tsx}"
+        - "package-lock.json"
+      exclude: "e2e/**/*" # E2E tests run on push
       run: npx vitest run
 
 pre-push:
-  parallel: false # `npm run build` locks, avoid race condition for Playwright
+  parallel: false # build holds a lock; Playwright must wait
 
   commands:
-    build:
-      # Production build catches static generation errors (e.g. missing Suspense)
+    build: # catches static generation errors (e.g. missing Suspense)
       run: npm run build
 
-    playwright-tests:
-      # Playwright: E2E tests (when matching files change).
+    playwright-tests: # config: playwright.config.ts
       glob:
-        - "**/*.{ts,tsx,css}" # code in folders
-        - "!**/*.{test,spec}.{ts,tsx}" # Exclude unit tests
-        - "package-lock.json" # Dependency changes
-        - "postcss.config.mjs" # CSS processing
-        - "playwright.config.ts" # Config
+        - "**/*.{ts,tsx,css}"
+        - "package-lock.json"
+        - "postcss.config.mjs"
+      exclude: "**/*.test.{ts,tsx}" # unit tests run on commit
       run: npx playwright test

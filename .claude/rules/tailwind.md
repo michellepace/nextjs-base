@@ -13,7 +13,7 @@ paths:
    - Never hardcode hex/px/arbitrary values outside the theme
 
 2. **Layer Order** (before imports)
-   - Declare `@layer base, components, utilities;` before `@import "tailwindcss"`
+   - Declare `@layer theme, base, components, utilities;` before `@import "tailwindcss"` (Tailwind's own order; leaving out `theme` moves it last)
    - Required for third-party CSS specificity control
 
 3. **Utility-First**
