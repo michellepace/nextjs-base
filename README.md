@@ -55,7 +55,7 @@ npm run dev                                         # Open http://localhost:3000
 Install the tools Claude Code's TypeScript plugin and browser skill need:
 
 ```bash
-# typescript-lsp plugin runs this; it then uses the project's TypeScript
+# typescript-lsp plugin runs this. It then uses the project's TypeScript
 npm install -g typescript-language-server
 
 # Browser automation for Claude; refreshes the skill in .claude/skills/playwright-cli/
