@@ -247,6 +247,9 @@ npm install                 # Install updated versions
   │
   └─ Commit 3: (some more work here)        ⚡ pre-commit hook runs again
 
+  (optional) /simplify, /code-review, /security-review before pushing
+             see docs/project-setup.md § Checking Quality
+
   git push origin feature/add-dark-mode     ⚡ pre-PUSH hook runs (~20s)
      ├─ 🏗️  Next.js production build             ✅ Pass
      └─ 🎭 Playwright E2E tests                 ✅ Pass (then pushed to GH)
@@ -291,35 +294,7 @@ npm install                 # Install updated versions
      └─ Reports status back to PR commit
 
   GITHUB PR Status: ✅ All checks passed
-
-  🐰 CodeRabbit AI Review Complete
-  └─ 3 nitpick comments posted:
-     ├─ "Consider using const instead of let" (Button.tsx:12)
-     ├─ "Add JSDoc comment" (ThemeContext.tsx:8)
-     └─ "Extract magic string to constant" (utils.ts:45)
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 💻 Back to Laptop (Addressing 1 out of 3 nitpick comments on open PR)
-└─────────────────────────────────────────────────────────────────────────────┘
-
-  ├─ Commit 4: Use const instead of let     ⚡ pre-commit hook runs
-
-  git push origin feature/add-dark-mode     ⚡ pre-push hook runs (~20s)
-     ├─ 🏗️  Next.js production build             ✅ Pass
-     └─ 🎭 Playwright E2E tests                 ✅ Pass (then pushed to GH)
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ ☁️  GITHUB (Workflows kick off again on any PR changes)
-└─────────────────────────────────────────────────────────────────────────────┘
-
-  New commits pushed → GitHub Actions re-run automatically
-  │
-  ├─ 🤖 Lint & Type                             ✅ Pass
-  ├─ 🤖 Unit Tests                              ✅ Pass
-  └─ 🤖 E2E Tests                               ✅ Pass
-
-  PR Status: ✅ All checks passed (1 new commit)
-  🐰 CodeRabbit: "Looks good! 1 issue resolved."
+  (push more commits to the PR and every workflow runs again)
 
   Okay I'm ready! [Merge Pull Request] ← Click! 🎉
 
@@ -329,7 +304,7 @@ npm install                 # Install updated versions
   │ ✅ Branch is up to date with main           │
   └─────────────────────────────────────────────┘
 
-  main branch updated (merge commit preserves 4 commits)
+  main branch updated (merge commit preserves 3 commits)
   └─ 🚀 Vercel deployment triggered → Production
 ```
 

@@ -132,7 +132,7 @@ Verify by fetching the rulesets list afterwards. Then double check against:
 
 ---
 
-## 🐰 Part 5: Checking Quality
+## 🔍 Part 5: Checking Quality
 
 Claude Code ships these [built-in commands](https://code.claude.com/docs/en/commands), listed in the order you reach for them:
 
