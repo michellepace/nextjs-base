@@ -13,12 +13,12 @@
 
 ## 🎯 Use This Template
 
-You need Git, [Node.js 24](https://nodejs.org), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Claude Code](https://code.claude.com). Swap `my-app` for your project name.
+**Prerequisites:** [Claude Code](https://code.claude.com), [Git](https://git-scm.com), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Node.js 24](https://nodejs.org) for Next.js. To check and install them, give Claude Code [this README](https://raw.githubusercontent.com/michellepace/nextjs-base/refs/heads/main/README.md) and ask it to install only the missing prerequisites.
 
 <details>
 <summary>(1) Get the Code — fresh start or keep history</summary>
 
-Pick one:
+Pick one, swapping `my-app` for your new repository name:
 
 ```bash
 # Fresh start, no template history (same as the "Use this template" button)

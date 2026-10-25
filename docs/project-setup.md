@@ -7,7 +7,7 @@ Manual setup for [README](../README.md) step 5. GitHub settings, secrets and Ver
 ### 1.1 Create Vercel Project
 
 1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import the `my-app` repository (default settings)
+2. Import your repository (`my-app` or the name you used) with default settings
 3. Click **Deploy** → wait for deploy
 4. Click **Continue to Dashboard**: enable Analytics and Speed Insights (the template already renders both in [`app/layout.tsx`](../app/layout.tsx))
 
