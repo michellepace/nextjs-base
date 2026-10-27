@@ -1,0 +1,390 @@
+# Frameworks
+
+**Category**: react
+**URL**: https://heroui.com/en/docs/react/getting-started/frameworks
+**Source**: https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/content/docs/en/react/getting-started/(overview)/frameworks.mdx
+> Integrate HeroUI with your framework
+
+## Next.js
+
+### 1. Create a Next.js project
+
+<Tabs items={["App Router", "Pages Router"]}>
+  <Tab value="App Router">
+    ```bash
+    npx heroui-cli@latest init -t app
+    ```
+  </Tab>
+
+  <Tab value="Pages Router">
+    ```bash
+    npx heroui-cli@latest init -t pages
+    ```
+  </Tab>
+</Tabs>
+
+<Callout>
+  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t app -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+</Callout>
+
+### 2. Use your first HeroUI component
+
+<Tabs items={["App Router", "Pages Router"]}>
+  <Tab value="App Router">
+    Example: `app/page.tsx`
+
+    ```tsx
+    import {Button} from "@heroui/react";
+
+    export default function HomePage() {
+      return (
+        <main className="flex min-h-screen items-center justify-center">
+          <Button variant="tertiary">Hello HeroUI</Button>
+        </main>
+      );
+    }
+    ```
+  </Tab>
+
+  <Tab value="Pages Router">
+    Example: `pages/index.tsx`
+
+    ```tsx
+    import {Button} from "@heroui/react";
+
+    export default function HomePage() {
+      return (
+        <main className="flex min-h-screen items-center justify-center">
+          <Button variant="tertiary">Hello HeroUI</Button>
+        </main>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Callout>
+  HeroUI v3 does not require a provider. Components work directly after installation and style import.
+</Callout>
+
+### 3. Locale Setup (Optional)
+
+To integrate with Next.js, ensure the locale on the server matches the client.
+
+In your root layout, determine the user's preferred language and set the `lang` and `dir` attributes on the `<html>` element.
+
+```tsx
+// app/layout.tsx
+import {headers} from 'next/headers';
+import {isRTL} from '@heroui/react';
+import {ClientProviders} from './provider';
+
+export default async function RootLayout({children}) {
+  // Get the user's preferred language from the Accept-Language header.
+  // You could also get this from a database, URL param, etc.
+  const acceptLanguage = (await headers()).get('accept-language');
+  const lang = acceptLanguage?.split(/[,;]/)[0] || 'en-US';
+
+  return (
+    <html lang={lang} dir={isRTL(lang) ? 'rtl' : 'ltr'}>
+      <body>
+        <ClientProviders lang={lang}>
+          {children}
+        </ClientProviders>
+      </body>
+    </html>
+  );
+}
+
+```
+
+Create `app/provider.tsx`. This should render an `I18nProvider` to set the locale used by React Aria.
+
+```tsx
+// app/provider.tsx
+"use client";
+
+import {I18nProvider} from '@heroui/react';
+
+export function ClientProviders({lang, children}) {
+  return (
+    <I18nProvider locale={lang}>
+      {children}
+    </I18nProvider>
+  );
+}
+
+```
+
+If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) (CSP) with a nonce, add a `<meta property="csp-nonce">` tag to your document head, setting the content attribute to the generated nonce value. React Aria automatically reads the nonce from this tag.
+
+## Vite
+
+### 1. Create a Vite project
+
+```bash
+npx heroui-cli@latest init -t vite
+
+```
+
+<Callout>
+  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t vite -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+</Callout>
+
+### 2. Use your first HeroUI component
+
+Example: `src/App.tsx`
+
+```tsx
+import {Button} from "@heroui/react";
+
+function App() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button variant="tertiary">Hello HeroUI</Button>
+    </main>
+  );
+}
+
+export default App;
+
+```
+
+<Callout>
+  HeroUI v3 does not require a provider. Components work directly after installation and style import.
+</Callout>
+
+## React Router
+
+### 1. Create a React Router project
+
+```bash
+npx heroui-cli@latest init -t react-router
+
+```
+
+<Callout>
+  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t react-router -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+</Callout>
+
+### 2. Use your first HeroUI component
+
+Example: `app/routes/_index.tsx`
+
+```tsx
+import {Button} from "@heroui/react";
+
+export default function Index() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button variant="tertiary">Hello HeroUI</Button>
+    </main>
+  );
+}
+
+```
+
+<Callout>
+  The template loads styles with `import "./tailwind.css";` in `app/root.tsx`. HeroUI v3 does not require a provider. Components work directly after installation and style import.
+</Callout>
+
+## Other Frameworks
+
+`@heroui/react` requires React because its behavior is built on React Aria. The design system itself lives in `@heroui/styles` — a package with no React dependency that ships HeroUI's BEM classes and framework-agnostic variant functions. You can use it from Vue, Svelte, Angular, or plain HTML.
+
+<Callout type="warning">
+  This gives you HeroUI's visual design, not its behavior. Keyboard navigation, focus management, and ARIA attributes come from React Aria in `@heroui/react`, so you are responsible for them in your own components.
+</Callout>
+
+### 1. Install the styles package
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles
+    ```
+  </Tab>
+
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles
+    ```
+  </Tab>
+</Tabs>
+
+### 2. Import the styles
+
+<Tabs items={["Tailwind CSS v4", "Prebuilt CSS", "CDN"]}>
+  <Tab value="Tailwind CSS v4">
+    Add to your main CSS file:
+
+    ```css
+    @import "tailwindcss";
+    @import "@heroui/styles";
+    ```
+
+    This is the only option where Tailwind utility classes work alongside HeroUI classes.
+  </Tab>
+
+  <Tab value="Prebuilt CSS">
+    Import the compiled stylesheet from your entry file. No Tailwind build required:
+
+    ```ts
+    import "@heroui/styles/dist/heroui.min.css";
+    ```
+  </Tab>
+
+  <Tab value="CDN">
+    No build step at all:
+
+    ```html
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heroui/styles@3/dist/heroui.min.css" />
+    ```
+  </Tab>
+</Tabs>
+
+<Callout>
+  The prebuilt and CDN bundles contain HeroUI's component classes and theme tokens, but not Tailwind's utility classes. If you also want utilities like `flex` or `gap-4`, use the Tailwind CSS v4 option.
+</Callout>
+
+### 3. Use your first HeroUI component
+
+Apply the BEM classes directly, or generate them with a variant function for type safety.
+
+<Tabs items={["Vue", "Svelte", "Angular", "HTML"]}>
+  <Tab value="Vue">
+    ```vue
+    <script setup lang="ts">
+    import {buttonVariants} from "@heroui/styles";
+
+    const buttonClass = buttonVariants({variant: "primary"});
+    </script>
+
+    <template>
+      <button :class="buttonClass">Hello HeroUI</button>
+
+      <!-- Or with BEM classes directly -->
+      <button class="button button--primary">Hello HeroUI</button>
+    </template>
+    ```
+  </Tab>
+
+  <Tab value="Svelte">
+    ```svelte
+    <script lang="ts">
+      import {buttonVariants} from "@heroui/styles";
+
+      const buttonClass = buttonVariants({variant: "primary"});
+    </script>
+
+    <button class={buttonClass}>Hello HeroUI</button>
+
+    <!-- Or with BEM classes directly -->
+    <button class="button button--primary">Hello HeroUI</button>
+    ```
+  </Tab>
+
+  <Tab value="Angular">
+    ```ts
+    import {Component} from "@angular/core";
+    import {buttonVariants} from "@heroui/styles";
+
+    @Component({
+      selector: "app-example",
+      standalone: true,
+      template: `
+        <button [class]="buttonClass">Hello HeroUI</button>
+
+        <!-- Or with BEM classes directly -->
+        <button class="button button--primary">Hello HeroUI</button>
+      `,
+    })
+    export class ExampleComponent {
+      buttonClass = buttonVariants({variant: "primary"});
+    }
+    ```
+  </Tab>
+
+  <Tab value="HTML">
+    ```html
+    <button class="button button--primary">Hello HeroUI</button>
+    <button class="button button--secondary button--sm">Small</button>
+    <button class="button button--danger" disabled>Delete</button>
+    ```
+  </Tab>
+</Tabs>
+
+Every component follows the same [BEM](https://getbem.com/) convention: a block class, `--` modifiers for variants and sizes, and `__` elements for child parts. For `button`, the variants are `.button--primary`, `--secondary`, `--tertiary`, `--ghost`, `--outline`, `--danger`, and `--danger-soft`; the sizes are `.button--sm`, `--md`, and `--lg`; and `.button--icon-only` and `.button--full-width` are modifiers.
+
+See [Composition](/docs/react/getting-started/composition) for more on variant functions and applying HeroUI styles to arbitrary elements.
+
+### 4. Interactive states
+
+HeroUI's CSS targets both native pseudo-classes and `data-*` attributes, so semantic HTML elements pick up hover, press, focus, and disabled styling with no JavaScript:
+
+```css
+/* button.css */
+.button {
+  &:active,
+  &[data-pressed="true"] { ... }
+
+  &:disabled,
+  &[aria-disabled="true"] { ... }
+}
+
+```
+
+States the browser cannot infer must be set by you. The most common are:
+
+| Attribute | Purpose |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| `data-selected="true"` | Selected items in menus, list boxes, and tabs |
+| `data-entering="true"` / `data-exiting="true"` | Enter and exit animations for overlays |
+| `data-placement="top"` | Arrow and offset direction for popovers and tooltips |
+| `data-invalid="true"` | Validation styling on form fields |
+| `data-slot="..."` | Marks child parts of compound components |
+
+<Callout>
+  Stateless components such as button, chip, card, and skeleton work as drop-in markup. Overlays and collections (select, menu, popover, date picker) depend on state you would have to manage yourself — consider keeping those in React, or read the `data-*` selectors in the component's CSS file to see what is required.
+</Callout>
+
+### 5. Theming
+
+Dark mode is driven by a `.dark` class or a `data-theme="dark"` attribute on any ancestor element:
+
+```html
+<html class="dark">...</html>
+
+<!-- or -->
+<html data-theme="dark">...</html>
+
+```
+
+Override the theme by redefining CSS variables:
+
+```css
+:root {
+  --accent: oklch(0.62 0.19 253);
+  --radius: 0.5rem;
+}
+
+```
+
+## Next steps
+
+* [Quick Start](/docs/react/getting-started/quick-start) for the fastest setup path
+* [Themes](/docs/react/getting-started/theming) to customize colors and tokens
+* [Composition](/docs/react/getting-started/composition) for variant functions and polymorphic styling
+* [Components](/docs/react/components) to explore all available components

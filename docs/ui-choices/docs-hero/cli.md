@@ -1,0 +1,607 @@
+# CLI
+
+**Category**: react
+**URL**: https://heroui.com/en/docs/react/getting-started/cli
+**Source**: https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/content/docs/en/react/getting-started/(overview)/cli.mdx
+> Use the CLI to manage HeroUI dependencies and initialize projects.
+
+The CLI offers a comprehensive suite of commands to initialize, manage, and improve your HeroUI projects. Use it to `install`, `uninstall`, or `upgrade` HeroUI packages, read component docs in the terminal, check project health, download documentation for AI coding agents, and more.
+
+## Installation
+
+Requirements:
+
+* [Node.js version 22.22.0 or later](https://nodejs.org/en/)
+
+### Global Installation
+
+To install `heroui-cli` globally, execute one of the following commands in your terminal:
+
+<CodeBlockTabs defaultValue="npm">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="npm">
+      npm
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="pnpm">
+      pnpm
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="yarn">
+      yarn
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="bun">
+      bun
+    </CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+
+  <CodeBlockTab value="npm">
+    ```bash
+    npm install heroui-cli@latest -g
+
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="pnpm">
+    ```bash
+    pnpm add heroui-cli@latest -g
+
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="yarn">
+    ```bash
+    yarn global add heroui-cli@latest
+
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="bun">
+    ```bash
+    bun add heroui-cli@latest --global
+
+    ```
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+### Without Installation
+
+Alternatively, you can use `heroui-cli` without a global installation by running one of the following:
+
+<Tabs items={["pnpm", "npm", "yarn", "bun"]}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx heroui-cli@latest
+    ```
+  </Tab>
+
+  <Tab value="npm">
+    ```bash
+    npx heroui-cli@latest
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash
+    yarn dlx heroui-cli@latest
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```bash
+    bunx heroui-cli@latest
+    ```
+  </Tab>
+</Tabs>
+
+## Quick Start
+
+Once `heroui-cli` is installed, run the following command to display available commands:
+
+```bash
+heroui
+
+```
+
+This will produce the following help output:
+
+```bash
+Usage: heroui [command]
+
+Options:
+  -v, --version                 Output the current version
+  --no-cache                    Disable cache, by default data will be cached for 30m after the first request
+  -d, --debug                   Debug mode will not install dependencies
+  --json                        Output the result as JSON
+  -h, --help                    Display help for command
+
+Commands:
+  init [options] [projectName]  Initializes a new project
+  install [options]             Installs @heroui/react and @heroui/styles in your project
+  upgrade [options]             Upgrades @heroui/react and @heroui/styles to the latest versions
+  uninstall [options]           Uninstalls @heroui/react and @heroui/styles from the project
+  list [options]                Lists installed HeroUI packages (@heroui/react, @heroui/styles)
+  info [options] <component>    Shows the API Reference for a HeroUI React component
+  doc [options] <component>     Shows the documentation for a HeroUI React component
+  env [options]                 Displays debugging information for the local environment
+  doctor [options]              Checks for issues in the project
+  agents-md [options]           Download HeroUI documentation for AI coding agents
+  help [command]                Display help for command
+
+```
+
+## JSON output
+
+`--json` prints one JSON object and skips prompts. `install`, `upgrade`, and `uninstall` continue without asking for confirmation.
+
+`init` and `agents-md` still need the answers a prompt would collect:
+
+```bash
+heroui init my-heroui-app --template app --package pnpm --json
+heroui agents-md --react --output AGENTS.md --json
+
+```
+
+`agents-md --json` also needs `--react`, `--native`, or `--migration` when the project has both `@heroui/react` and `heroui-native`, or neither of them.
+
+## Cache
+
+Registry lookups are cached for 30 minutes in a per-user cache directory:
+
+| Platform | Location |
+| -------- | ----------------------------------------------------- |
+| macOS | `~/Library/Caches/heroui-cli` |
+| Linux | `$XDG_CACHE_HOME/heroui-cli` or `~/.cache/heroui-cli` |
+| Windows | `%LOCALAPPDATA%\heroui-cli\Cache` |
+
+`XDG_CACHE_HOME` is checked on every platform, including macOS and Windows, before the default in the table. Set `HEROUI_CACHE_DIR` to store the cache somewhere else, or pass `--no-cache` to skip it. When no location is writable, the CLI keeps working without caching.
+
+### init
+
+Initialize a new HeroUI project using the `init` command. This sets up your project with the necessary configurations.
+
+```bash
+heroui init [options]
+
+```
+
+**Options:**
+
+* `-t --template [string]` The template to use for the new project e.g. app, pages, vite, react-router
+* `-p --package [string]` The package manager to use for the new project
+
+output:
+
+```bash
+HeroUI CLI <version>
+
+┌  Create a new project
+│
+◇  Select a template (Enter to select)
+│  ● App (A Next.js 16 with app directory template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│  ○ Pages (A Next.js 16 with pages directory template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│  ○ Vite (A Vite template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│  ○ React Router (A React Router template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│
+◇  New project name (Enter to skip with default name)
+│  my-heroui-app
+│
+◇  Select a package manager (Enter to select)
+│  ● npm
+│  ○ yarn
+│  ○ pnpm
+│  ○ bun
+│
+◇  Template created successfully!
+│
+◇  Next steps ───────╮
+│                    │
+│  cd my-heroui-app  │
+│  npm install       │
+│                    │
+├────────────────────╯
+│
+└  🚀 Get started with npm run dev
+
+```
+
+Install the dependencies to start the local server:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    cd my-heroui-app && npm install
+    ```
+  </Tab>
+
+  <Tab value="pnpm">
+    ```bash
+    cd my-heroui-app && pnpm install
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash
+    cd my-heroui-app && yarn install
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```bash
+    cd my-heroui-app && bun install
+    ```
+  </Tab>
+</Tabs>
+
+Start the local server:
+
+<CodeBlockTabs defaultValue="npm">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="npm">
+      npm
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="pnpm">
+      pnpm
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="yarn">
+      yarn
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="bun">
+      bun
+    </CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+
+  <CodeBlockTab value="npm">
+    ```bash
+    npm run dev
+
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="pnpm">
+    ```bash
+    pnpm run dev
+
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="yarn">
+    ```bash
+    yarn dev
+
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="bun">
+    ```bash
+    bun run dev
+
+    ```
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+### Install
+
+Install `@heroui/react` and `@heroui/styles` in your project, along with peer dependencies that are missing or below the required range. If both packages are already installed, the command prints a confirmation and exits.
+
+```bash
+heroui install [options]
+
+```
+
+**Options:**
+
+* `-p --packagePath` \[string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+📦 Packages to be installed:
+╭─────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version        │   Status   │   Docs                 │
+│─────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0          │   stable   │   https://heroui.com   │
+│   @heroui/styles   │   3.0.0          │   stable   │   https://heroui.com   │
+╰─────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────── PeerDependencies ────────────────╮
+│  react@^19.1.0                     latest       │
+│  react-dom@^19.1.0                 latest       │
+│  tailwindcss@^4.1.11               latest       │
+╰─────────────────────────────────────────────────╯
+? Proceed with installation? › - Use arrow-keys. Return to submit.
+❯   Yes
+    No
+
+✅ @heroui/react and @heroui/styles installed successfully
+
+```
+
+### upgrade
+
+Upgrade `@heroui/react` and `@heroui/styles` to the latest versions. An installed peer dependency is included only when it is below the range those packages require. When nothing needs upgrading, the command prints `All packages are up to date` and does not prompt.
+
+```bash
+heroui upgrade [options]
+
+```
+
+**Options:**
+
+* `-p --packagePath` \[string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+╭──────────────────────────── Upgrade ────────────────────────────╮
+│  @heroui/react               ^3.0.0  ->  ^3.1.0                │
+│  @heroui/styles              ^3.0.0  ->  ^3.1.0                │
+╰─────────────────────────────────────────────────────────────────╯
+
+? Would you like to proceed with the upgrade? › - Use arrow-keys. Return to submit.
+❯   Yes
+    No
+
+✅ Upgrade complete
+
+```
+
+### uninstall
+
+Uninstall `@heroui/react` and `@heroui/styles` from your project. Peer dependencies will not be uninstalled.
+
+```bash
+heroui uninstall [options]
+
+```
+
+**Options:**
+
+* `-p --packagePath` \[string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+❗️ Packages slated for uninstallation:
+╭──────────────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version   │   Status   │   Docs                               │
+│──────────────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0     │   stable   │   https://heroui.com                 │
+│   @heroui/styles   │   3.0.0     │   stable   │   https://heroui.com                 │
+╰──────────────────────────────────────────────────────────────────────────────────────╯
+? Confirm uninstallation of these packages: › - Use arrow-keys. Return to submit.
+❯   Yes
+    No
+
+✅ Successfully uninstalled: @heroui/react, @heroui/styles
+
+```
+
+### list
+
+List the installed HeroUI packages (`@heroui/react`, `@heroui/styles`).
+
+```bash
+heroui list [options]
+
+```
+
+**Options:**
+
+* `-p --packagePath` \[string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+Installed HeroUI packages:
+
+╭──────────────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version          │   Status   │   Docs                        │
+│──────────────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0 🚀latest   │   stable   │   https://heroui.com          │
+│   @heroui/styles   │   3.0.0 🚀latest   │   stable   │   https://heroui.com          │
+╰──────────────────────────────────────────────────────────────────────────────────────╯
+
+```
+
+### info
+
+Show the **API Reference** section from the HeroUI React documentation for a component.
+
+```bash
+heroui info <component>
+
+```
+
+**Example:**
+
+```bash
+heroui info button
+
+```
+
+`Button` and `button-group` are accepted. The CLI matches component names case-insensitively and suggests a close match when the name is not found.
+
+### doc
+
+Show the full documentation page for a HeroUI React component.
+
+```bash
+heroui doc <component>
+
+```
+
+**Example:**
+
+```bash
+heroui doc button
+
+```
+
+`Button` and `button-group` are accepted. The command prints the component page as published in the docs.
+
+### doctor
+
+Check for issues in your project.
+
+* Check whether `@heroui/react` and `@heroui/styles` are installed
+* Check peer dependencies resolved from the installed HeroUI packages against their full version ranges; missing optional peers are skipped
+* Check whether Node.js meets the CLI's minimum version requirement
+* Check whether Tailwind CSS is installed, with Tailwind CSS v4 installation guidance when missing
+
+```bash
+heroui doctor [options]
+
+```
+
+**Options:**
+
+* `-p --packagePath` \[string] The path to the package.json file
+
+**Output:**
+
+If there is a problem in your project, the `doctor` command will display the problem information.
+
+```bash
+HeroUI CLI <version>
+
+HeroUI CLI: ❌ Your project has 1 issue that requires attention
+
+❗️Issue 1: missingHeroUIPackages
+
+The following HeroUI packages are not installed:
+- @heroui/styles
+
+Run `heroui install` to install them.
+
+```
+
+Otherwise, the `doctor` command will display the following message.
+
+```bash
+HeroUI CLI <version>
+
+✅ Your project has no detected issues.
+
+```
+
+The command exits with status `1` when it reports an issue, including when the project has no HeroUI packages installed.
+
+### env
+
+Display debug information about the local environment.
+
+```bash
+heroui env
+
+```
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+Environment Info:
+  System:
+    OS: macOS 26.3
+    CPU: (8) arm64 Apple M1 Pro
+  Binaries:
+    Node: 26.8.1
+    Yarn: 1.22.22
+    npm: 11.19.0
+    pnpm: 12.5.1
+    bun: 1.3.12
+  Browsers:
+    Safari: 26.3
+  npmPackages:
+    @heroui/react: 3.2.6
+    @heroui/styles: 3.2.6
+    react-aria-components: 1.21.1
+    tailwindcss: 4.1.11
+
+```
+
+### agents-md
+
+Download HeroUI documentation for AI coding agents (Claude, Cursor, etc.). The command clones the latest docs from the HeroUI repository and injects a compact index into `AGENTS.md` or `CLAUDE.md` so assistants can reference your project's HeroUI setup.
+
+With no library flags, the command inspects the project: only `@heroui/react` selects React docs, and only `heroui-native` selects Native docs. It then asks for the output file unless you pass `--output`. When both packages are installed, or neither is, it asks which docs to download.
+
+```bash
+heroui agents-md [options]
+
+```
+
+**Options:**
+
+* `--react` \[boolean] Include React docs only (one library at a time)
+* `--native` \[boolean] Include Native docs only
+* `--migration` \[boolean] Include HeroUI v2 to v3 migration docs only
+* `--output <files...>` \[string] Target file path(s). Pass more than one path to update several files, for example `AGENTS.md CLAUDE.md`
+* `--ssh` \[boolean] Use SSH instead of HTTPS for git clone
+
+**Examples:**
+
+Run without flags to enter interactive mode:
+
+```bash
+heroui agents-md
+
+```
+
+Download React docs to a specific file:
+
+```bash
+heroui agents-md --react --output AGENTS.md
+
+```
+
+Download Native or migration docs:
+
+```bash
+heroui agents-md --native --output CLAUDE.md
+heroui agents-md --migration --output AGENTS.md
+
+```
+
+Use SSH for cloning when HTTPS fails:
+
+```bash
+heroui agents-md --react --ssh --output AGENTS.md
+
+```
+
+**How it works:**
+
+1. Clones documentation from the `v3` branch using git sparse-checkout
+2. Generates a compact index of doc and demo files
+3. Injects the index into your markdown file between markers (`<!-- HEROUI-REACT-AGENTS-MD-START -->` / `<!-- HEROUI-REACT-AGENTS-MD-END -->`, and similar for Native and Migration)
+4. Adds `.heroui-docs/` to `.gitignore`
+
+Only one of `--react`, `--native`, or `--migration` can be selected at a time.
+
+For more details, see [AGENTS.md](/docs/react/getting-started/agents-md).
+
+<Callout>
+  The `agents-md` command collects anonymous usage data: the selected docs (`react`, `native`, or `migration`), output paths, how many files were written, duration, success or failure (including error messages on failure). Project contents are not collected. Set `HEROUI_ANALYTICS_DISABLED=1` to opt out.
+</Callout>
+
+### Migrating from NextUI
+
+[`@heroui/codemod`](https://github.com/heroui-inc/heroui-cli/tree/main/packages/codemod) renames `@nextui-org/*` packages and APIs to `@heroui/*`. It does not upgrade a project to HeroUI v3. For v3 migration guides, run `heroui agents-md --migration`.
+
+## Reporting issues
+
+If you found a bug, please report it in [heroui-cli Issues](https://github.com/heroui-inc/heroui-cli/issues).
