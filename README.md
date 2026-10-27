@@ -5,15 +5,15 @@
 *A Next.js 16.4 template. Lint, format, type and unit-test checks run on every commit, and end-to-end tests on every push. Every PR repeats these checks on GitHub and adds end-to-end tests against a Vercel Preview. A branch ruleset ([one-time setup](docs/project-setup.md)) blocks merging to `main` until they pass. Merging deploys to Vercel Production, where the end-to-end tests run again. Dependabot keeps dependencies current. Claude Code is set up, plugins included. [You choose the rest](#you-choose-the-rest): UI components, database, etc.*
 
 <div align="left">
-  <a href="https://nextjs-base-hello.vercel.app" target="_blank">
+  <a href="https://nextjs-template-hello.vercel.app" target="_blank">
     <img src="docs/images/app-screenshot.jpg" alt="Template homepage in light and dark mode" width="400">
   </a>
-  <p><em><a href="https://nextjs-base-hello.vercel.app">Template homepage</a> — deployed on Vercel</em></p>
+  <p><em><a href="https://nextjs-template-hello.vercel.app">Template homepage</a> — deployed on Vercel</em></p>
 </div>
 
 ## 🎯 Use This Template
 
-**Prerequisites:** [Claude Code](https://code.claude.com), [Git](https://git-scm.com), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Node.js 24](https://nodejs.org) for Next.js. To check and install them, give Claude Code [this README](https://raw.githubusercontent.com/michellepace/nextjs-base/refs/heads/main/README.md) and ask it to install only the missing prerequisites.
+**Prerequisites:** [Claude Code](https://code.claude.com), [Git](https://git-scm.com), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Node.js 24](https://nodejs.org) for Next.js. To check and install them, give Claude Code [this README](https://raw.githubusercontent.com/michellepace/nextjs-template/refs/heads/main/README.md) and ask it to install only the missing prerequisites.
 
 <details>
 <summary>(1) Get the Code — fresh start or keep history</summary>
@@ -22,13 +22,13 @@ Pick one, swapping `my-app` for your new repository name:
 
 ```bash
 # Fresh start, no template history (same as the "Use this template" button)
-gh repo create my-app --template michellepace/nextjs-base --public --clone
+gh repo create my-app --template michellepace/nextjs-template --public --clone
 cd my-app
 ```
 
 ```bash
 # Keep history: Claude can read the template's commits to answer "why was this done?"
-git clone https://github.com/michellepace/nextjs-base.git my-app
+git clone https://github.com/michellepace/nextjs-template.git my-app
 cd my-app
 git remote remove origin
 gh repo create my-app --public --source . --push
