@@ -3,5 +3,5 @@
 A selection of Next.js UI component choices. Each directory holds a curation of docs.
 
 - HeroUI 3: `docs-hero/`
-- Shadcn/ui: `docs-shad/` (coming soon)
+- Shadcn/ui: `docs-shad/`
 - Tailwind Plus: `docs-tailwind/` (coming soon)
