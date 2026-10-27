@@ -3,6 +3,7 @@ gitignore: true
 ignores:
   - ".claude/skills/playwright-cli/**" # Written by `playwright-cli install --skills`
   - "AGENTS.md" # Written by `next dev`
+  - "docs/ui-choices/docs-*/**"
 
 config:
   default: true # Enable all rules by default
