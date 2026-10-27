@@ -76,9 +76,9 @@ export default function Home() {
           <strong className="text-foreground">
             Colours live in each component:
           </strong>{" "}
-          For centralised theming, shadcn/ui and HeroUI are easier. Tailwind
-          Plus UI Blocks and Catalyst (the UI kit) write Tailwind&apos;s
-          built-in colours into each component, such as{" "}
+          unlike shadcn/ui and HeroUI, there are no shared tokens to edit in one
+          place. Tailwind Plus UI Blocks and Catalyst (the UI kit) write
+          Tailwind&apos;s built-in colours into each component, such as{" "}
           <code className="whitespace-nowrap">
             bg-indigo-600 dark:bg-indigo-500
           </code>
