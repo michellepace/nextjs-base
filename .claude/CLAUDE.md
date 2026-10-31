@@ -10,7 +10,7 @@ Exact versions live in `package.json`. Numbers appear below only where the
 version changes how you write code — a stale number here misleads, so do not
 add precision that has to be maintained.
 
-- **Runtime**: Node.js 24
+- **Runtime**: Node.js 26
 - **Framework**: Next.js 16.4 (React 19, App Router, React Compiler, TypeScript 6 — not 7, which ships no `tsserver` so the Next.js and `typescript-lsp` plugins can't load)
 - **Styling**: Tailwind CSS 4.3 (centralised theme `app/globals.css`)
 - **Testing**: Vitest + Testing Library (unit), Playwright (E2E)

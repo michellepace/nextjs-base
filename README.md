@@ -13,7 +13,7 @@
 
 ## 🎯 Use This Template
 
-**Prerequisites:** [Claude Code](https://code.claude.com), [Git](https://git-scm.com), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Node.js 24](https://nodejs.org) for Next.js. To check and install them, give Claude Code [this README](https://raw.githubusercontent.com/michellepace/nextjs-template/refs/heads/main/README.md) and ask it to install only the missing prerequisites.
+**Prerequisites:** [Claude Code](https://code.claude.com), [Git](https://git-scm.com), [GitHub CLI](https://cli.github.com) (logged in via `gh auth login`) and [Node.js 26](https://nodejs.org) for Next.js. To check and install them, give Claude Code [this README](https://raw.githubusercontent.com/michellepace/nextjs-template/refs/heads/main/README.md) and ask it to install only the missing prerequisites.
 
 <details>
 <summary>(1) Get the Code — fresh start or keep history</summary>
@@ -133,7 +133,7 @@ For exact list see [`package.json`](package.json)
 
 | Category | Tool | What it does |
 | :------- | :--- | :----------- |
-| Runtime | [Node.js 24 LTS](https://nodejs.org) | Pinned via [`.nvmrc`](.nvmrc); `engines` in [`package.json`](package.json) bounds it to the 24 line |
+| Runtime | [Node.js 26 LTS](https://nodejs.org) | Pinned via [`.nvmrc`](.nvmrc); `engines` in [`package.json`](package.json) bounds it to the 26 line |
 | Framework | [Next.js 16.4](https://nextjs.org) | Core webapp foundation — routing, rendering, API routes, optimisation, and builds |
 | Language | [TypeScript 6](https://www.typescriptlang.org) | Static type checking with strict mode enabled — not 7 yet, which can't run the Next.js editor plugin |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS framework for rapid styling |
